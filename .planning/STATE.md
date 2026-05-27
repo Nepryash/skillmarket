@@ -9,13 +9,13 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 
 ## Status
 
-Ready to execute Phase 1.
+Phase 1 implemented; ready for Phase 1 verification/closeout and Phase 2 planning.
 
 ## Current Position
 
 - GSD project initialized from approved Superpowers design spec.
-- Phase 1 plan is being created and executed inline.
+- Phase 1 public marketplace skeleton implemented and build-verified.
 
 ## Last Activity
 
-2026-05-27 - Initialized GSD planning artifacts.
+2026-05-27 - Implemented Phase 1 public marketplace skeleton.

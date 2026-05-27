@@ -14,13 +14,13 @@ Build the first working vertical slice of SkillMarket: a Next.js app with seeded
 
 ## Tasks
 
-- [ ] Scaffold a Next.js TypeScript app with App Router.
-- [ ] Add typed marketplace seed data and query helpers.
-- [ ] Build shared UI components for listings, filters, command blocks, and compatibility/type labels.
-- [ ] Build the homepage with hero, featured listings, search entry, and category preview.
-- [ ] Build the marketplace browse page with search and filters.
-- [ ] Build listing detail pages.
-- [ ] Add local verification scripts and run build.
+- [x] Scaffold a Next.js TypeScript app with App Router.
+- [x] Add typed marketplace seed data and query helpers.
+- [x] Build shared UI components for listings, filters, command blocks, and compatibility/type labels.
+- [x] Build the homepage with hero, featured listings, search entry, and category preview.
+- [x] Build the marketplace browse page with search and filters.
+- [x] Build listing detail pages.
+- [x] Add local verification scripts and run build.
 
 ## Verification
 
