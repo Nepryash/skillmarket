@@ -3,10 +3,22 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   serverExternalPackages: ["sql.js"],
   outputFileTracingIncludes: {
-    "/": ["./data/skillmarket.db"],
-    "/admin/**/*": ["./data/skillmarket.db"],
-    "/api/**/*": ["./data/skillmarket.db"],
-    "/marketplace/**/*": ["./data/skillmarket.db"]
+    "/": [
+      "./data/skillmarket.db",
+      "./node_modules/sql.js/dist/sql-wasm.wasm"
+    ],
+    "/admin/**/*": [
+      "./data/skillmarket.db",
+      "./node_modules/sql.js/dist/sql-wasm.wasm"
+    ],
+    "/api/**/*": [
+      "./data/skillmarket.db",
+      "./node_modules/sql.js/dist/sql-wasm.wasm"
+    ],
+    "/marketplace/**/*": [
+      "./data/skillmarket.db",
+      "./node_modules/sql.js/dist/sql-wasm.wasm"
+    ]
   },
   experimental: {
     serverActions: {
