@@ -1,5 +1,7 @@
 # Vercel Deployment
 
+Vercel is the current deployment target for SkillMarket.
+
 SkillMarket is a Next.js App Router app with full Vercel support, including Server Components, Server Actions, Route Handlers, SSR, and ISR.
 
 ## Build Settings
@@ -15,7 +17,7 @@ The seed command creates `data/skillmarket.db` before `next build`; `next.config
 
 ## Environment Variables
 
-Set these in Vercel Project Settings → Environment Variables, not in source control:
+Set these in Vercel Project Settings -> Environment Variables, not in source control:
 
 | Variable | Required | Notes |
 | --- | --- | --- |
@@ -46,6 +48,7 @@ The current MVP uses a seeded SQLite file through `sql.js`. This is suitable for
 With `SKILLMARKET_READONLY_DB=1`, the site serves seeded listings and avoids write failures. Admin content changes and analytics writes are not durable in this mode.
 
 Before treating admin edits or analytics as production data, migrate persistence to a durable service such as:
+
 - Vercel Postgres
 - Neon
 - Turso/libSQL
@@ -81,20 +84,20 @@ vercel
 
 #### Option 2: Git Integration
 
-1. Push code to GitHub/GitLab/Bitbucket
-2. Import project at https://vercel.com/import
-3. Vercel will auto-detect Next.js configuration
-4. Add environment variables in Project Settings
-5. Deploy
+1. Push code to GitHub, GitLab, or Bitbucket.
+2. Import the project at https://vercel.com/import.
+3. Vercel will auto-detect the Next.js configuration.
+4. Add environment variables in Project Settings.
+5. Deploy.
 
 ### Post-Deploy Checklist
 
-- [ ] Verify build logs show successful database seed
-- [ ] Test marketplace at `/marketplace`
-- [ ] Test admin login at `/admin/login` with `SKILLMARKET_ADMIN_PASSWORD`
-- [ ] Set Telegram webhook (see section above)
-- [ ] Test Telegram API endpoint: `/api/telegram?slug=frontend-app-builder`
-- [ ] Monitor analytics at `/admin/analytics`
+- [ ] Verify build logs show successful database seed.
+- [ ] Test marketplace at `/marketplace`.
+- [ ] Test admin login at `/admin/login` with `SKILLMARKET_ADMIN_PASSWORD`.
+- [ ] Set Telegram webhook using the command above.
+- [ ] Test Telegram API endpoint: `/api/telegram?slug=frontend-app-builder`.
+- [ ] Monitor analytics at `/admin/analytics`.
 
 ## Security Headers
 

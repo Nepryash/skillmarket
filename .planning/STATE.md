@@ -17,11 +17,11 @@ Phase 4 verified and closed out. The v1 MVP roadmap is complete.
 - Phase 1 public marketplace skeleton implemented, build-verified, and localhost-verified.
 - Phase 2 admin content management implemented, build-verified, and localhost-verified.
 - Phase 3 analytics and Telegram handoff implemented, build-verified, and localhost-verified.
-- Phase 4 Netlify config, environment documentation, read-only SQLite deployment caveat, seed, lint, and build verified.
+- Phase 4 Vercel config, environment documentation, read-only SQLite deployment caveat, seed, lint, and build verified.
 
 ## Last Activity
 
-2026-06-04 - Implemented and verified Phase 4 Netlify deployment readiness.
+2026-06-04 - Implemented and verified Phase 4 Vercel deployment readiness.
 2026-06-04 - Implemented and verified Phase 3 analytics and Telegram handoff.
 2026-06-03 - Implemented and verified Phase 2 admin authentication and content management.
 2026-06-02 - Started local dev server, verified Phase 1 routes, and closed out Phase 1 planning status.

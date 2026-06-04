@@ -38,7 +38,7 @@
 
 - [x] **OPS-01**: App runs locally with SQLite-backed seed data.
 - [x] **OPS-02**: Project documents required environment variables.
-- [x] **OPS-03**: Project documents Netlify deployment steps and production database caveat.
+- [x] **OPS-03**: Project documents Vercel deployment steps and production database caveat.
 
 ## v2 Requirements
 
@@ -95,4 +95,4 @@
 
 ---
 *Requirements defined: 2026-05-27*
-*Last updated: 2026-06-04 after Phase 4 Netlify verification*
+*Last updated: 2026-06-04 after Phase 4 Vercel verification*

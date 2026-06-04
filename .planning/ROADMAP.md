@@ -56,7 +56,7 @@
 
 ### Phase 4: Deployment And Hardening
 
-**Goal:** Make the MVP deployable and documented for Netlify while clearly documenting database limitations.
+**Goal:** Make the MVP deployable and documented for Vercel while clearly documenting database limitations.
 **Mode:** mvp
 
 **Requirements:** OPS-02, OPS-03
@@ -64,9 +64,9 @@
 **Success Criteria:**
 
 1. Environment variables are documented.
-2. Netlify deployment steps are documented.
+2. Vercel deployment steps are documented.
 3. SQLite local development and production database caveat are documented.
 4. Build, lint, and seed commands are documented and verified.
 
 ---
-*Last updated: 2026-06-04 after Phase 4 Netlify verification*
+*Last updated: 2026-06-04 after Phase 4 Vercel verification*
