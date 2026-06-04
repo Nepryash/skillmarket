@@ -8,6 +8,5 @@ npm-debug.log
 .eslintcache
 .planning
 docs
-scripts
 *.md
 !docs/deployment-vercel.md
