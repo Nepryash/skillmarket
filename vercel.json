@@ -1,0 +1,28 @@
+{
+  "buildCommand": "npm run db:seed && npm run build",
+  "devCommand": "next dev",
+  "installCommand": "npm install",
+  "env": {
+    "NODE_VERSION": "22.x",
+    "SKILLMARKET_READONLY_DB": "1"
+  },
+  "headers": [
+    {
+      "source": "/:path*",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ]
+}

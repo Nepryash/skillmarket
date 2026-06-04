@@ -49,9 +49,33 @@ Important variables:
 - `TELEGRAM_BOT_USERNAME`: optional, defaults to `skillmarket_bot`.
 - `SKILLMARKET_READONLY_DB`: set to `1` on Netlify until durable database storage is added.
 
-## Netlify Deployment
+## Deployment
 
-This repo includes `netlify.toml`.
+### Vercel
+
+This repo includes `vercel.json` for Vercel deployment.
+
+Vercel build settings:
+
+- Build command: `npm run db:seed && npm run build`
+- Install command: `npm install`
+- Dev command: `next dev`
+- Node version: `22.x`
+
+Full deployment notes are in `docs/deployment-vercel.md`.
+
+#### Quick Deploy
+
+```bash
+npm i -g vercel
+vercel
+```
+
+Or connect your GitHub repo at https://vercel.com/import
+
+### Netlify (Legacy)
+
+This repo includes `netlify.toml` for Netlify deployment.
 
 Netlify build settings:
 

@@ -1,0 +1,13 @@
+.git
+.gitignore
+.env.example
+.env.local
+node_modules
+npm-debug.log
+.next
+.eslintcache
+.planning
+docs
+scripts
+*.md
+!docs/deployment-vercel.md
