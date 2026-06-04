@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { ListingCard } from "@/components/listing-card";
 import { MarketplaceFilters } from "@/components/marketplace-filters";
+import { recordAnalyticsEvent } from "@/lib/analytics";
 import { getCategories, getLabels, getListings } from "@/lib/marketplace";
 import type { Compatibility, ListingFilters, ListingType } from "@/types";
 
@@ -19,9 +21,9 @@ function parseFilters(params: Record<string, string | string[] | undefined>): Li
 
   return {
     query: firstParam(params.q) || undefined,
-    type: type === "skill" || type === "plugin" ? (type as ListingType) : "all",
+    type: type === "skill" || type === "plugin" || type === "model" ? (type as ListingType) : "all",
     compatibility:
-      compatibility === "claude_code" || compatibility === "codex" || compatibility === "both"
+      compatibility === "claude_code" || compatibility === "codex" || compatibility === "both" || compatibility === "local_lm"
         ? (compatibility as Compatibility)
         : "all",
     category: firstParam(params.category) || "all",
@@ -33,21 +35,64 @@ export default async function MarketplacePage({ searchParams }: MarketplacePageP
   const params = await searchParams;
   const filters = parseFilters(params);
   const [categories, labels, listings] = await Promise.all([getCategories(), getLabels(), getListings(filters)]);
+  const path = `/marketplace?${new URLSearchParams(
+    Object.entries(params).flatMap(([key, value]) => {
+      if (!value) return [];
+      return [[key, Array.isArray(value) ? value[0] : value]];
+    })
+  ).toString()}`;
+
+  await recordAnalyticsEvent({
+    eventType: "page_view",
+    path,
+    categorySlug: filters.category !== "all" ? filters.category : undefined,
+    labelSlug: filters.label !== "all" ? filters.label : undefined
+  });
+
+  if (filters.query) {
+    await recordAnalyticsEvent({
+      eventType: listings.length > 0 ? "search" : "no_result_search",
+      searchQuery: filters.query,
+      resultCount: listings.length,
+      categorySlug: filters.category !== "all" ? filters.category : undefined,
+      labelSlug: filters.label !== "all" ? filters.label : undefined,
+      path
+    });
+  }
 
   return (
-    <main className="page-shell">
-      <section className="section">
-        <div className="section-heading">
-          <h2>Marketplace</h2>
-          <p>Search curated skills and plugin packs for Claude Code, Codex, or both agent workflows.</p>
+    <main className="page-shell marketplace-scroll">
+      <section className="market-hero scroll-scene">
+        <div className="scroll-reveal">
+          <span className="section-kicker">Curated catalog</span>
+          <h1>Marketplace</h1>
+          <p>Search curated skills, plugin packs, and downloadable local LMs for Claude Code, Codex, and offline agent workflows.</p>
+        </div>
+        <div className="market-summary scroll-reveal" aria-label="Marketplace summary">
+          <span>{listings.length} matching listings</span>
+          <div className="chip-row">
+            <Link className="chip accent" href="/marketplace?type=skill">Skills</Link>
+            <Link className="chip accent" href="/marketplace?type=plugin">Plugins</Link>
+            <Link className="chip accent" href="/marketplace?type=model">Models</Link>
+            <Link className="chip" href="/marketplace?compatibility=both">Both agents</Link>
+          </div>
         </div>
       </section>
 
-      <section className="market-layout">
+      <nav className="category-strip market-categories scroll-reveal" aria-label="Marketplace categories">
+        <Link className="chip accent" href="/marketplace">All</Link>
+        {categories.map((category) => (
+          <Link className="chip" href={`/marketplace?category=${category.slug}`} key={category.id}>
+            {category.name}
+          </Link>
+        ))}
+      </nav>
+
+      <section className="market-layout scroll-scene">
         <MarketplaceFilters categories={categories} labels={labels} filters={filters} />
         <div>
           {listings.length > 0 ? (
-            <div className="listing-grid">
+            <div className="listing-grid reveal-grid">
               {listings.map((listing) => (
                 <ListingCard key={listing.id} listing={listing} />
               ))}

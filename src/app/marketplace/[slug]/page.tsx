@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ExternalLink, Github, Send } from "lucide-react";
+import { ExternalLink, Send } from "lucide-react";
+import { ListingIcon } from "@/components/listing-icon";
+import { recordAnalyticsEvent, trackedUrl } from "@/lib/analytics";
 import { formatCompatibility, formatListingType } from "@/lib/format";
 import { getListingBySlug } from "@/lib/marketplace";
+import { telegramStartUrl } from "@/lib/telegram";
 
 type ListingDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -18,7 +21,16 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
     notFound();
   }
 
-  const telegramUrl = `https://t.me/skillmarket_bot?start=${encodeURIComponent(listing.slug)}`;
+  await recordAnalyticsEvent({
+    eventType: "listing_view",
+    listingId: listing.id,
+    categorySlug: listing.categorySlug,
+    path: `/marketplace/${listing.slug}`
+  });
+
+  const installUrl = trackedUrl("install_click", listing.installUrl, listing.slug);
+  const sourceUrl = trackedUrl("install_click", listing.githubUrl, listing.slug);
+  const telegramUrl = trackedUrl("telegram_click", telegramStartUrl(listing.slug), listing.slug);
 
   return (
     <main className="page-shell detail-page">
@@ -27,6 +39,9 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
           <span className="chip accent">{formatListingType(listing.type)}</span>
           <span className="chip">{formatCompatibility(listing.compatibility)}</span>
           <span className="chip">{listing.categoryName}</span>
+        </div>
+        <div className="detail-title-row">
+          <ListingIcon icon={listing.icon} title={`${listing.title} icon`} />
         </div>
         <h1>{listing.title}</h1>
         <p className="detail-copy">{listing.description}</p>
@@ -52,11 +67,11 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
       <aside className="side-panel" aria-label="Install actions">
         <h2>Install</h2>
         <p className="detail-copy">Use the source link directly, or send this listing to Telegram for quick reference.</p>
-        <a className="button primary" href={listing.installUrl} target="_blank" rel="noreferrer">
+        <a className="button primary" href={installUrl} target="_blank" rel="noreferrer">
           Install link <ExternalLink size={16} aria-hidden="true" />
         </a>
-        <a className="button" href={listing.githubUrl} target="_blank" rel="noreferrer">
-          GitHub/source <Github size={16} aria-hidden="true" />
+        <a className="button" href={sourceUrl} target="_blank" rel="noreferrer">
+          Source <ExternalLink size={16} aria-hidden="true" />
         </a>
         <a className="button" href={telegramUrl} target="_blank" rel="noreferrer">
           Get via Telegram <Send size={16} aria-hidden="true" />

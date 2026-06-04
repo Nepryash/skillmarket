@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { ArrowUpRight, Send } from "lucide-react";
+import { ListingIcon } from "@/components/listing-icon";
+import { trackedUrl } from "@/lib/analytics";
 import { formatCompatibility, formatListingType } from "@/lib/format";
+import { telegramStartUrl } from "@/lib/telegram";
 import type { Listing } from "@/types";
 
 type ListingCardProps = {
@@ -8,13 +11,17 @@ type ListingCardProps = {
 };
 
 export function ListingCard({ listing }: ListingCardProps) {
-  const telegramUrl = `https://t.me/skillmarket_bot?start=${encodeURIComponent(listing.slug)}`;
+  const telegramUrl = trackedUrl("telegram_click", telegramStartUrl(listing.slug), listing.slug);
 
   return (
-    <article className="listing-card">
+    <article className={`listing-card scroll-card${listing.featured ? " is-featured" : ""}`}>
+      {listing.featured ? <span className="featured-badge">Featured</span> : null}
       <div>
         <div className="card-top">
-          <span className="chip accent">{formatListingType(listing.type)}</span>
+          <div className="card-identity">
+            <ListingIcon icon={listing.icon} title={`${listing.title} icon`} />
+            <span className="chip accent">{formatListingType(listing.type)}</span>
+          </div>
           <span className="chip">{formatCompatibility(listing.compatibility)}</span>
         </div>
         <h3>

@@ -11,7 +11,7 @@ export function MarketplaceFilters({ categories, labels, filters }: MarketplaceF
     <form className="filter-panel" action="/marketplace">
       <label>
         Search
-        <input name="q" placeholder="skill, plugin, command..." defaultValue={filters.query ?? ""} />
+        <input name="q" placeholder="skill, plugin, model, command..." defaultValue={filters.query ?? ""} />
       </label>
 
       <label>
@@ -20,6 +20,7 @@ export function MarketplaceFilters({ categories, labels, filters }: MarketplaceF
           <option value="all">All</option>
           <option value="skill">Skills</option>
           <option value="plugin">Plugins</option>
+          <option value="model">Local models</option>
         </select>
       </label>
 
@@ -30,6 +31,7 @@ export function MarketplaceFilters({ categories, labels, filters }: MarketplaceF
           <option value="claude_code">Claude Code</option>
           <option value="codex">Codex</option>
           <option value="both">Both</option>
+          <option value="local_lm">Local LM</option>
         </select>
       </label>
 

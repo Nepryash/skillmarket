@@ -4,10 +4,10 @@
 
 | Phase | Status | Goal |
 |-------|--------|------|
-| Phase 1 | Pending | Build the public marketplace walking skeleton |
-| Phase 2 | Pending | Add admin authentication and content management |
-| Phase 3 | Pending | Add analytics and Telegram handoff |
-| Phase 4 | Pending | Add deployment documentation and hardening |
+| Phase 1 | Complete | Build the public marketplace walking skeleton |
+| Phase 2 | Complete | Add admin authentication and content management |
+| Phase 3 | Complete | Add analytics and Telegram handoff |
+| Phase 4 | Complete | Add deployment documentation and hardening |
 
 ## Phases
 
@@ -56,7 +56,7 @@
 
 ### Phase 4: Deployment And Hardening
 
-**Goal:** Make the MVP deployable and documented for Vercel while clearly documenting database limitations.
+**Goal:** Make the MVP deployable and documented for Netlify while clearly documenting database limitations.
 **Mode:** mvp
 
 **Requirements:** OPS-02, OPS-03
@@ -64,9 +64,9 @@
 **Success Criteria:**
 
 1. Environment variables are documented.
-2. Vercel deployment steps are documented.
+2. Netlify deployment steps are documented.
 3. SQLite local development and production database caveat are documented.
 4. Build, lint, and seed commands are documented and verified.
 
 ---
-*Roadmap created: 2026-05-27 after GSD initialization*
+*Last updated: 2026-06-04 after Phase 4 Netlify verification*

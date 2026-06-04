@@ -2,11 +2,12 @@ import { getDb } from "@/lib/db";
 import type { QueryExecResult } from "sql.js";
 import type { Category, Command, Label, Listing, ListingFilters } from "@/types";
 
-type ListingRow = {
+export type ListingRow = {
   id: number;
   type: Listing["type"];
   title: string;
   slug: string;
+  icon: string;
   description: string;
   category_id: number;
   category_name: string;
@@ -54,7 +55,7 @@ function mapCommand(row: CommandRow): Command {
   };
 }
 
-function rowsFromExec<T>(result: QueryExecResult[]): T[] {
+export function rowsFromExec<T>(result: QueryExecResult[]): T[] {
   if (!result[0]) return [];
   const { columns, values } = result[0];
   return values.map((valueRow) =>
@@ -95,6 +96,7 @@ async function hydrateListings(rows: ListingRow[]): Promise<Listing[]> {
     type: row.type,
     title: row.title,
     slug: row.slug,
+    icon: row.icon,
     description: row.description,
     categoryId: row.category_id,
     categoryName: row.category_name,
@@ -109,6 +111,35 @@ async function hydrateListings(rows: ListingRow[]): Promise<Listing[]> {
     createdAt: row.created_at,
     updatedAt: row.updated_at
   }));
+}
+
+export async function getAdminListings(): Promise<Listing[]> {
+  const db = await getDb();
+  const rows = rowsFromExec<ListingRow>(
+    db.exec(
+      `SELECT listings.*, categories.name AS category_name, categories.slug AS category_slug
+       FROM listings
+       INNER JOIN categories ON categories.id = listings.category_id
+       ORDER BY listings.updated_at DESC, listings.title ASC`
+    )
+  );
+
+  return hydrateListings(rows);
+}
+
+export async function getAdminListingById(id: number): Promise<Listing | null> {
+  const db = await getDb();
+  const rows = rowsFromExec<ListingRow>(
+    db.exec(
+      `SELECT listings.*, categories.name AS category_name, categories.slug AS category_slug
+       FROM listings
+       INNER JOIN categories ON categories.id = listings.category_id
+       WHERE listings.id = ?`,
+      [id]
+    )
+  );
+
+  return rows[0] ? (await hydrateListings([rows[0]]))[0] : null;
 }
 
 export async function getCategories(): Promise<Category[]> {
@@ -147,8 +178,13 @@ export async function getListings(filters: ListingFilters = {}): Promise<Listing
   }
 
   if (filters.compatibility && filters.compatibility !== "all") {
-    clauses.push("(listings.compatibility = ? OR listings.compatibility = 'both')");
-    params.push(filters.compatibility);
+    if (filters.compatibility === "local_lm") {
+      clauses.push("listings.compatibility = ?");
+      params.push(filters.compatibility);
+    } else {
+      clauses.push("(listings.compatibility = ? OR listings.compatibility = 'both')");
+      params.push(filters.compatibility);
+    }
   }
 
   if (filters.category && filters.category !== "all") {

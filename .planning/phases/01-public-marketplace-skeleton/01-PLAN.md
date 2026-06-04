@@ -1,7 +1,7 @@
 ---
 phase: 1
 name: Public Marketplace Skeleton
-status: ready
+status: complete
 wave: 1
 requirements_addressed: [PUB-01, PUB-02, PUB-03, PUB-04, PUB-05, PUB-06, OPS-01]
 ---
@@ -24,8 +24,10 @@ Build the first working vertical slice of SkillMarket: a Next.js app with seeded
 
 ## Verification
 
-- `npm run build` passes.
-- Homepage renders seeded featured listings.
-- Browse page filters by query, type, compatibility, category, and labels.
-- Detail page shows install URL, GitHub URL, commands, labels, and compatibility.
-- UI uses approved palette.
+- [x] `npm run build` passes.
+- [x] Homepage renders seeded featured listings.
+- [x] Browse page filters by query, type, compatibility, category, and labels.
+- [x] Detail page shows install URL, GitHub URL, commands, labels, and compatibility.
+- [x] UI uses approved palette.
+
+Verified on 2026-06-02.

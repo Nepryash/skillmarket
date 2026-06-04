@@ -16,29 +16,29 @@
 
 ### Content Management
 
-- [ ] **CMS-01**: Admin can log in with a configured admin password.
-- [ ] **CMS-02**: Admin can create and edit skill/plugin listings.
-- [ ] **CMS-03**: Admin can publish, draft, and archive listings.
-- [ ] **CMS-04**: Admin can manage categories and labels.
-- [ ] **CMS-05**: Admin can manage repeatable command rows for each listing.
+- [x] **CMS-01**: Admin can log in with a configured admin password.
+- [x] **CMS-02**: Admin can create and edit skill/plugin listings.
+- [x] **CMS-03**: Admin can publish, draft, and archive listings.
+- [x] **CMS-04**: Admin can manage categories and labels.
+- [x] **CMS-05**: Admin can manage repeatable command rows for each listing.
 
 ### Analytics
 
-- [ ] **ANL-01**: System records page views and listing views anonymously.
-- [ ] **ANL-02**: System records install-link clicks and Telegram handoff clicks.
-- [ ] **ANL-03**: System records search terms and no-result searches.
-- [ ] **ANL-04**: Admin can view top listings, top categories, top labels, click counts, and search terms.
+- [x] **ANL-01**: System records page views and listing views anonymously.
+- [x] **ANL-02**: System records install-link clicks and Telegram handoff clicks.
+- [x] **ANL-03**: System records search terms and no-result searches.
+- [x] **ANL-04**: Admin can view top listings, top categories, top labels, click counts, and search terms.
 
 ### Telegram
 
-- [ ] **TEL-01**: Visitor can click a listing-specific Telegram handoff link.
-- [ ] **TEL-02**: Telegram endpoint can resolve selected listing context and return install links and commands.
+- [x] **TEL-01**: Visitor can click a listing-specific Telegram handoff link.
+- [x] **TEL-02**: Telegram endpoint can resolve selected listing context and return install links and commands.
 
 ### Operations
 
-- [ ] **OPS-01**: App runs locally with SQLite-backed seed data.
-- [ ] **OPS-02**: Project documents required environment variables.
-- [ ] **OPS-03**: Project documents Vercel deployment steps and production database caveat.
+- [x] **OPS-01**: App runs locally with SQLite-backed seed data.
+- [x] **OPS-02**: Project documents required environment variables.
+- [x] **OPS-03**: Project documents Netlify deployment steps and production database caveat.
 
 ## v2 Requirements
 
@@ -66,26 +66,26 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| PUB-01 | Phase 1 | Pending |
-| PUB-02 | Phase 1 | Pending |
-| PUB-03 | Phase 1 | Pending |
-| PUB-04 | Phase 1 | Pending |
-| PUB-05 | Phase 1 | Pending |
-| PUB-06 | Phase 1 | Pending |
-| CMS-01 | Phase 2 | Pending |
-| CMS-02 | Phase 2 | Pending |
-| CMS-03 | Phase 2 | Pending |
-| CMS-04 | Phase 2 | Pending |
-| CMS-05 | Phase 2 | Pending |
-| ANL-01 | Phase 3 | Pending |
-| ANL-02 | Phase 3 | Pending |
-| ANL-03 | Phase 3 | Pending |
-| ANL-04 | Phase 3 | Pending |
-| TEL-01 | Phase 3 | Pending |
-| TEL-02 | Phase 3 | Pending |
-| OPS-01 | Phase 1 | Pending |
-| OPS-02 | Phase 4 | Pending |
-| OPS-03 | Phase 4 | Pending |
+| PUB-01 | Phase 1 | Verified |
+| PUB-02 | Phase 1 | Verified |
+| PUB-03 | Phase 1 | Verified |
+| PUB-04 | Phase 1 | Verified |
+| PUB-05 | Phase 1 | Verified |
+| PUB-06 | Phase 1 | Verified |
+| CMS-01 | Phase 2 | Verified |
+| CMS-02 | Phase 2 | Verified |
+| CMS-03 | Phase 2 | Verified |
+| CMS-04 | Phase 2 | Verified |
+| CMS-05 | Phase 2 | Verified |
+| ANL-01 | Phase 3 | Verified |
+| ANL-02 | Phase 3 | Verified |
+| ANL-03 | Phase 3 | Verified |
+| ANL-04 | Phase 3 | Verified |
+| TEL-01 | Phase 3 | Verified |
+| TEL-02 | Phase 3 | Verified |
+| OPS-01 | Phase 1 | Verified |
+| OPS-02 | Phase 4 | Verified |
+| OPS-03 | Phase 4 | Verified |
 
 **Coverage:**
 
@@ -95,4 +95,4 @@
 
 ---
 *Requirements defined: 2026-05-27*
-*Last updated: 2026-05-27 after GSD initialization*
+*Last updated: 2026-06-04 after Phase 4 Netlify verification*
