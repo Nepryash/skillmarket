@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getListingBySlug } from "@/lib/marketplace";
-import { listingTelegramMessage } from "@/lib/telegram";
+import { listingTelegramMessage, parseTelegramListingSlug, telegramBotToken } from "@/lib/telegram";
 
 async function getListingPayload(slug: string) {
   const listing = await getListingBySlug(slug);
@@ -31,21 +31,27 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   const update = await request.json().catch(() => null);
-  const text = update?.message?.text || "";
-  const chatId = update?.message?.chat?.id;
-  const slug = String(text).startsWith("/start ") ? String(text).slice(7).trim() : "";
+  const text = String(
+    update?.message?.text ||
+    update?.message?.caption ||
+    update?.edited_message?.text ||
+    update?.edited_message?.caption ||
+    ""
+  );
+  const chatId = update?.message?.chat?.id ?? update?.edited_message?.chat?.id;
+  const slug = parseTelegramListingSlug(text);
 
   if (!slug) {
     return NextResponse.json({
       ok: true,
-      message: "Send /start listing-slug to resolve a SkillMarket listing."
+      message: "Send /start listing-slug, or open the bot from a SkillMarket Telegram button."
     });
   }
 
   const payload = await getListingPayload(slug);
   if (!payload) return NextResponse.json({ error: "Listing not found" }, { status: 404 });
 
-  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const token = telegramBotToken();
   if (token && chatId) {
     const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
@@ -57,7 +63,18 @@ export async function POST(request: Request) {
       })
     });
 
+    if (!response.ok) {
+      const body = await response.text().catch(() => "");
+      console.error("Telegram sendMessage failed", response.status, body);
+      return NextResponse.json({ error: "Telegram sendMessage failed", status: response.status }, { status: 502 });
+    }
+
     return NextResponse.json({ ok: response.ok, status: response.status });
+  }
+
+  if (!token && chatId) {
+    console.error("Telegram bot token is not configured");
+    return NextResponse.json({ error: "Telegram bot token is not configured" }, { status: 500 });
   }
 
   return NextResponse.json({

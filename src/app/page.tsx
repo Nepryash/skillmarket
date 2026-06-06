@@ -9,7 +9,9 @@ export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const [featuredListings, categories] = await Promise.all([getFeaturedListings(3), getCategories()]);
-  await recordAnalyticsEvent({ eventType: "page_view", path: "/" });
+  void recordAnalyticsEvent({ eventType: "page_view", path: "/" }).catch((error) => {
+    console.error("Failed to record homepage analytics event", error);
+  });
   const featuredTelegramSlug = featuredListings[0]?.slug;
   const telegramUrl = featuredTelegramSlug
     ? trackedUrl("telegram_click", telegramStartUrl(featuredTelegramSlug), featuredTelegramSlug)

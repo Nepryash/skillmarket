@@ -2,24 +2,40 @@
 
 import { Icon } from "@iconify/react/offline";
 import type { IconifyIcon } from "@iconify/types";
+import blender from "@iconify/icons-simple-icons/blender";
 import figma from "@iconify/icons-simple-icons/figma";
 import google from "@iconify/icons-simple-icons/google";
 import microsoft from "@iconify/icons-simple-icons/microsoft";
 import netlify from "@iconify/icons-simple-icons/netlify";
+import react from "@iconify/icons-simple-icons/react";
+import telegram from "@iconify/icons-simple-icons/telegram";
 import box from "@iconify/icons-tabler/box";
 import brain from "@iconify/icons-tabler/brain";
+import brush from "@iconify/icons-tabler/brush";
+import palette from "@iconify/icons-tabler/palette";
 import layoutDashboard from "@iconify/icons-tabler/layout-dashboard";
+import template from "@iconify/icons-tabler/template";
 import route from "@iconify/icons-tabler/route";
+import video from "@iconify/icons-tabler/video";
+import wand from "@iconify/icons-tabler/wand";
 
 const icons: Record<string, IconifyIcon> = {
+  "simple-icons:blender": blender,
   "simple-icons:figma": figma,
   "simple-icons:google": google,
   "simple-icons:microsoft": microsoft,
   "simple-icons:netlify": netlify,
+  "simple-icons:react": react,
+  "simple-icons:telegram": telegram,
   "tabler:box": box,
   "tabler:brain": brain,
+  "tabler:brush": brush,
+  "tabler:palette": palette,
   "tabler:layout-dashboard": layoutDashboard,
-  "tabler:route": route
+  "tabler:route": route,
+  "tabler:template": template,
+  "tabler:video": video,
+  "tabler:wand": wand
 };
 
 type ListingIconProps = {

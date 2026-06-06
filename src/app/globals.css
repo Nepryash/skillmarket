@@ -276,6 +276,13 @@ textarea {
   color: rgba(255, 255, 255, 0.58);
 }
 
+.hero-search:focus-within {
+  box-shadow:
+    0 0 0 2px rgba(251, 255, 18, 0.72),
+    0 0 0 1px rgba(251, 255, 18, 0.12),
+    var(--soft-shadow);
+}
+
 .hero-search input {
   width: 100%;
   min-width: 0;
@@ -283,6 +290,11 @@ textarea {
   background: transparent;
   color: var(--foreground);
   padding: 0 0.75rem;
+}
+
+.hero-search input:focus-visible,
+.hero-search button:focus-visible {
+  outline: none;
 }
 
 .hero-search input::placeholder {

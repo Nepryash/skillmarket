@@ -42,21 +42,25 @@ export default async function MarketplacePage({ searchParams }: MarketplacePageP
     })
   ).toString()}`;
 
-  await recordAnalyticsEvent({
+  void recordAnalyticsEvent({
     eventType: "page_view",
     path,
     categorySlug: filters.category !== "all" ? filters.category : undefined,
     labelSlug: filters.label !== "all" ? filters.label : undefined
+  }).catch((error) => {
+    console.error("Failed to record marketplace page view", error);
   });
 
   if (filters.query) {
-    await recordAnalyticsEvent({
+    void recordAnalyticsEvent({
       eventType: listings.length > 0 ? "search" : "no_result_search",
       searchQuery: filters.query,
       resultCount: listings.length,
       categorySlug: filters.category !== "all" ? filters.category : undefined,
       labelSlug: filters.label !== "all" ? filters.label : undefined,
       path
+    }).catch((error) => {
+      console.error("Failed to record marketplace search event", error);
     });
   }
 

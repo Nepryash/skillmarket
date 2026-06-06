@@ -105,7 +105,16 @@ const labelIds = new Map<string, number>();
   [
   ["MVP", "mvp", "#FBFF12"],
   ["Planning", "planning", "#FFFFFF"],
+  ["Automation", "automation", "#80727B"],
   ["UI", "ui", "#80727B"],
+  ["Design System", "design-system", "#FBFF12"],
+  ["React", "react", "#80727B"],
+  ["Video", "video", "#FFFFFF"],
+  ["MCP", "mcp", "#FBFF12"],
+  ["Telegram", "telegram", "#80727B"],
+  ["Templates", "templates", "#FFFFFF"],
+  ["Workflow", "workflow", "#FBFF12"],
+  ["Brainstorming", "brainstorming", "#80727B"],
   ["Next.js", "nextjs", "#FBFF12"],
   ["GitHub", "github", "#FFFFFF"],
   ["Vercel", "vercel", "#80727B"],
@@ -192,23 +201,6 @@ const labelIds = new Map<string, number>();
     ]
   },
   {
-    type: "skill",
-    title: "GSD Plan Phase",
-    slug: "gsd-plan-phase",
-    icon: "tabler:route",
-    description: "Create executable phase plans with requirements coverage and verification gates.",
-    category: "automation",
-    compatibility: "both",
-    installUrl: "https://github.com/opengsd/get-shit-done",
-    githubUrl: "https://github.com/opengsd/get-shit-done",
-    featured: 1,
-    labels: ["planning", "mvp"],
-    commands: [
-      ["Plan Phase", "$gsd-plan-phase 1"],
-      ["Execute Phase", "$gsd-execute-phase 1"]
-    ]
-  },
-  {
     type: "plugin",
     title: "Figma Plugin Pack",
     slug: "figma-plugin-pack",
@@ -257,6 +249,164 @@ const labelIds = new Map<string, number>();
     commands: [
       ["Deploy", "netlify deploy"],
       ["Production", "netlify deploy --prod"]
+    ]
+  },
+  {
+    type: "skill",
+    title: "UI/UX Pro Max",
+    slug: "ui-ux-pro-max",
+    icon: "tabler:palette",
+    description: "AI design intelligence for UI/UX planning, color systems, typography, accessibility, and chart guidance.",
+    category: "design",
+    compatibility: "both",
+    installUrl: "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+    githubUrl: "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+    featured: 0,
+    labels: ["design-system", "ui", "planning"],
+    commands: [
+      ["Install CLI", "npm install -g uipro-cli"],
+      ["Claude", "uipro init --ai claude"],
+      ["Codex", "uipro init --ai codex"]
+    ]
+  },
+  {
+    type: "plugin",
+    title: "Remotion",
+    slug: "remotion",
+    icon: "tabler:video",
+    description: "Build videos programmatically with React, then render them through a CLI-first workflow.",
+    category: "frontend",
+    compatibility: "both",
+    installUrl: "https://remotion.dev/docs",
+    githubUrl: "https://github.com/remotion-dev/remotion",
+    featured: 0,
+    labels: ["react", "video", "workflow"],
+    commands: [
+      ["Create Project", "npx create-video@latest"],
+      ["Render", "npx remotion render"]
+    ]
+  },
+  {
+    type: "plugin",
+    title: "Blender MCP",
+    slug: "blender-mcp",
+    icon: "simple-icons:blender",
+    description: "Connect Blender to MCP clients for natural-language 3D scene and automation workflows.",
+    category: "design",
+    compatibility: "both",
+    installUrl: "https://github.com/ahujasid/blender-mcp",
+    githubUrl: "https://github.com/ahujasid/blender-mcp",
+    featured: 0,
+    labels: ["3d", "mcp", "automation"],
+    commands: [
+      ["Install", "uv tool install -U blender-mcp"],
+      ["Run", "blender-mcp"],
+      ["Claude", "claude mcp add blender-mcp uvx blender-mcp"]
+    ]
+  },
+  {
+    type: "skill",
+    title: "Impeccable",
+    slug: "impeccable",
+    icon: "tabler:brush",
+    description: "A frontend design skill for turning rough interfaces into polished, accessible UI.",
+    category: "design",
+    compatibility: "both",
+    installUrl: "https://impeccable.style",
+    githubUrl: "https://github.com/pbakaus/impeccable",
+    featured: 0,
+    labels: ["design-system", "ui", "workflow"],
+    commands: [
+      ["Install", "npx impeccable skills install"],
+      ["Claude", "/plugin marketplace add pbakaus/impeccable"]
+    ]
+  },
+  {
+    type: "plugin",
+    title: "Claude Code Templates",
+    slug: "claude-code-templates",
+    icon: "tabler:template",
+    description: "A template hub for Claude Code with ready-made agents, commands, settings, hooks, and MCP integrations.",
+    category: "automation",
+    compatibility: "both",
+    installUrl: "https://github.com/davila7/claude-code-templates",
+    githubUrl: "https://github.com/davila7/claude-code-templates",
+    featured: 0,
+    labels: ["templates", "workflow", "brainstorming"],
+    commands: [
+      ["Browse", "npx claude-code-templates@latest"],
+      ["Scroll Skill", "npx claude-code-templates@latest --skill creative-design/scroll-experience --yes"],
+      ["Review Agent", "npx claude-code-templates@latest --agent development-tools/code-reviewer --yes"]
+    ]
+  },
+  {
+    type: "skill",
+    title: "React Best Practices",
+    slug: "react-best-practices",
+    icon: "simple-icons:react",
+    description: "A focused React skill for component structure, performance, maintainability, and modern frontend patterns.",
+    category: "frontend",
+    compatibility: "both",
+    installUrl: "https://aitmpl.com/component/skill/web-development/react-best-practices",
+    githubUrl: "https://aitmpl.com/component/skill/web-development/react-best-practices",
+    featured: 0,
+    labels: ["react", "ui", "workflow"],
+    commands: [
+      ["Use Skill", "npx claude-code-templates@latest --skill web-development/react-best-practices --yes"],
+      ["Browse", "npx claude-code-templates@latest"]
+    ]
+  },
+  {
+    type: "skill",
+    title: "Superpowers",
+    slug: "superpowers",
+    icon: "tabler:brain",
+    description: "An agentic skills framework for planning, execution, review, and clean delivery.",
+    category: "automation",
+    compatibility: "both",
+    installUrl: "https://github.com/obra/superpowers",
+    githubUrl: "https://github.com/obra/superpowers",
+    featured: 0,
+    labels: ["planning", "workflow", "brainstorming"],
+    commands: [
+      ["Install", "/plugin marketplace add obra/superpowers"],
+      ["Gemini", "gemini extensions install https://github.com/obra/superpowers"]
+    ]
+  },
+  {
+    type: "skill",
+    title: "Takopi",
+    slug: "takopi",
+    icon: "simple-icons:telegram",
+    description: "A Telegram bridge for AI coding agents with remote task execution, progress streaming, and session resume.",
+    category: "automation",
+    compatibility: "both",
+    installUrl: "https://github.com/banteg/takopi",
+    githubUrl: "https://github.com/banteg/takopi",
+    featured: 0,
+    labels: ["telegram", "workflow", "automation"],
+    commands: [
+      ["Install", "uv tool install -U takopi"],
+      ["Onboard", "takopi --onboard"],
+      ["Doctor", "takopi doctor"]
+    ]
+  },
+  {
+    type: "skill",
+    title: "GSD",
+    slug: "get-shit-done",
+    icon: "tabler:route",
+    description: "A spec-driven workflow for planning, researching, executing, verifying, and shipping software phases.",
+    category: "automation",
+    compatibility: "both",
+    installUrl: "https://github.com/gsd-build/get-shit-done",
+    githubUrl: "https://github.com/gsd-build/get-shit-done",
+    featured: 0,
+    labels: ["planning", "workflow", "mvp"],
+    commands: [
+      ["New Project", "/gsd:new-project"],
+      ["Plan Phase", "/gsd:plan-phase 1"],
+      ["Execute Phase", "/gsd:execute-phase 1"]
     ]
   }
 ] as const;
