@@ -86,8 +86,8 @@ export function AdminListingForm({ categories, labels, listing }: AdminListingFo
 
       <div className="admin-form-grid">
         <label>
-          Install URL
-          <input name="installUrl" type="url" required defaultValue={listing?.installUrl} />
+          Install URL or command
+          <input name="installUrl" required defaultValue={listing?.installUrl} />
         </label>
         <label>
           Source URL

@@ -13,6 +13,15 @@ type ListingDetailPageProps = {
 
 export const dynamic = "force-dynamic";
 
+function isHttpUrl(value: string) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "http:" || url.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
 export default async function ListingDetailPage({ params }: ListingDetailPageProps) {
   const { slug } = await params;
   const listing = await getListingBySlug(slug);
@@ -28,7 +37,7 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
     path: `/marketplace/${listing.slug}`
   });
 
-  const installUrl = trackedUrl("install_click", listing.installUrl, listing.slug);
+  const installUrl = isHttpUrl(listing.installUrl) ? trackedUrl("install_click", listing.installUrl, listing.slug) : null;
   const sourceUrl = trackedUrl("install_click", listing.githubUrl, listing.slug);
   const telegramUrl = trackedUrl("telegram_click", telegramStartUrl(listing.slug), listing.slug);
 
@@ -67,9 +76,16 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
       <aside className="side-panel" aria-label="Install actions">
         <h2>Install</h2>
         <p className="detail-copy">Use the source link directly, or send this listing to Telegram for quick reference.</p>
-        <a className="button primary" href={installUrl} target="_blank" rel="noreferrer">
-          Install link <ExternalLink size={16} aria-hidden="true" />
-        </a>
+        {installUrl ? (
+          <a className="button primary" href={installUrl} target="_blank" rel="noreferrer">
+            Install link <ExternalLink size={16} aria-hidden="true" />
+          </a>
+        ) : (
+          <div className="install-command">
+            <span>Install command</span>
+            <code>{listing.installUrl}</code>
+          </div>
+        )}
         <a className="button" href={sourceUrl} target="_blank" rel="noreferrer">
           Source <ExternalLink size={16} aria-hidden="true" />
         </a>

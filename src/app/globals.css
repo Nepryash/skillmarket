@@ -828,6 +828,28 @@ textarea {
   margin-top: 0.7rem;
 }
 
+.install-command {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.035);
+  padding: 0.85rem;
+}
+
+.install-command span {
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.install-command code {
+  color: var(--foreground);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 .empty-state {
   border: 1px solid var(--border);
   border-radius: var(--radius);
