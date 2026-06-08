@@ -26,7 +26,7 @@ Set these in Vercel Project Settings -> Environment Variables, not in source con
 | `TELEGRAM_BOT_USERNAME` | No | Defaults to `skillmarket_bot`. |
 | `NEXT_PUBLIC_SUPABASE_URL` | Yes | Your Supabase project URL. |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Yes | Public key used for read queries. |
-| `SUPABASE_SERVICE_ROLE_KEY` | Yes for writes | Keep server-side only. Used by admin actions, analytics writes, and seeding. |
+| `SUPABASE_SERVICE_ROLE_KEY` or `SUPABASE_SECRET_KEY` | Yes for writes | Keep server-side only. Used by admin actions, analytics writes, and seeding. |
 
 ## Telegram Webhook
 

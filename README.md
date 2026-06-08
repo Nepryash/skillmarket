@@ -49,7 +49,7 @@ Important variables:
 - `TELEGRAM_BOT_USERNAME`: optional, defaults to `skillmarket_bot`.
 - `NEXT_PUBLIC_SUPABASE_URL`: Supabase project URL.
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: public Supabase key used by server-side read queries.
-- `SUPABASE_SERVICE_ROLE_KEY`: server-only key used for admin writes, seeding, and analytics writes.
+- `SUPABASE_SERVICE_ROLE_KEY` or `SUPABASE_SECRET_KEY`: server-only key used for admin writes, seeding, and analytics writes.
 
 ## Deployment
 
@@ -79,4 +79,4 @@ Or connect your GitHub repo at https://vercel.com/import
 
 SkillMarket now uses Supabase Postgres for persistence. The local seed script populates the remote tables with the curated catalog.
 
-Keep `SUPABASE_SERVICE_ROLE_KEY` server-side only. The browser should only ever see `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+Keep `SUPABASE_SERVICE_ROLE_KEY` / `SUPABASE_SECRET_KEY` server-side only. The browser should only ever see `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
