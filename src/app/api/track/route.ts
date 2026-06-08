@@ -29,12 +29,14 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Invalid redirect target" }, { status: 400 });
   }
 
-  await recordAnalyticsEvent({
+  void recordAnalyticsEvent({
     eventType: event,
     listingId: listing.id,
     categorySlug: listing.categorySlug,
     targetUrl,
     path: url.pathname
+  }).catch((error) => {
+    console.error("Failed to record tracking event", error);
   });
 
   return NextResponse.redirect(targetUrl);

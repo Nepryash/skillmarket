@@ -30,11 +30,13 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
     notFound();
   }
 
-  await recordAnalyticsEvent({
+  void recordAnalyticsEvent({
     eventType: "listing_view",
     listingId: listing.id,
     categorySlug: listing.categorySlug,
     path: `/marketplace/${listing.slug}`
+  }).catch((error) => {
+    console.error("Failed to record listing view", error);
   });
 
   const installUrl = isHttpUrl(listing.installUrl) ? trackedUrl("install_click", listing.installUrl, listing.slug) : null;
