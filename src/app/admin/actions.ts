@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { getDb, saveDb } from "@/lib/db";
+import { getSupabaseAdminClient } from "@/lib/supabase-server";
 import { requireAdmin, signInAdmin, signOutAdmin } from "@/lib/admin-auth";
 import type { Compatibility, ListingStatus, ListingType } from "@/types";
 
@@ -24,6 +24,17 @@ function now() {
   return new Date().toISOString();
 }
 
+async function deleteListingRelations(listingId: number) {
+  const db = getSupabaseAdminClient();
+  const [labelsResult, commandsResult] = await Promise.all([
+    db.from("listing_labels").delete().eq("listing_id", listingId),
+    db.from("commands").delete().eq("listing_id", listingId)
+  ]);
+
+  if (labelsResult.error) throw labelsResult.error;
+  if (commandsResult.error) throw commandsResult.error;
+}
+
 export async function loginAction(formData: FormData) {
   const ok = await signInAdmin(value(formData, "password"));
   if (!ok) redirect("/admin/login?error=1");
@@ -37,56 +48,75 @@ export async function logoutAction() {
 
 export async function upsertListingAction(formData: FormData) {
   await requireAdmin();
-  const db = await getDb();
+  const db = getSupabaseAdminClient();
   const listingId = Number(value(formData, "id"));
   const timestamp = now();
-  const fields = [
-    value(formData, "type") as ListingType,
-    value(formData, "title"),
-    value(formData, "slug"),
-    value(formData, "icon") || "tabler:box",
-    value(formData, "description"),
-    Number(value(formData, "categoryId")),
-    value(formData, "compatibility") as Compatibility,
-    value(formData, "installUrl"),
-    value(formData, "githubUrl"),
-    value(formData, "status") as ListingStatus,
-    formData.get("featured") ? 1 : 0
-  ] as const;
+  const payload = {
+    type: value(formData, "type") as ListingType,
+    title: value(formData, "title"),
+    slug: value(formData, "slug"),
+    icon: value(formData, "icon") || "tabler:box",
+    description: value(formData, "description"),
+    category_id: Number(value(formData, "categoryId")),
+    compatibility: value(formData, "compatibility") as Compatibility,
+    install_url: value(formData, "installUrl"),
+    github_url: value(formData, "githubUrl"),
+    status: value(formData, "status") as ListingStatus,
+    featured: formData.get("featured") ? 1 : 0,
+    updated_at: timestamp
+  };
+
+  let id = listingId;
 
   if (listingId > 0) {
-    db.run(
-      `UPDATE listings
-       SET type = ?, title = ?, slug = ?, icon = ?, description = ?, category_id = ?, compatibility = ?,
-           install_url = ?, github_url = ?, status = ?, featured = ?, updated_at = ?
-       WHERE id = ?`,
-      [...fields, timestamp, listingId]
-    );
-    db.run("DELETE FROM listing_labels WHERE listing_id = ?", [listingId]);
-    db.run("DELETE FROM commands WHERE listing_id = ?", [listingId]);
+    const { error } = await db.from("listings").update(payload).eq("id", listingId);
+    if (error) throw error;
+    await deleteListingRelations(listingId);
   } else {
-    db.run(
-      `INSERT INTO listings (
-        type, title, slug, icon, description, category_id, compatibility, install_url, github_url, status, featured, created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [...fields, timestamp, timestamp]
+    const insertResult = await db.from("listings").insert({
+      ...payload,
+      created_at: timestamp
+    }).select("id").single();
+
+    if (insertResult.error) throw insertResult.error;
+    id = insertResult.data.id;
+  }
+
+  const labelIds = selectedValues(formData, "labelIds")
+    .map((labelId) => Number(labelId))
+    .filter((labelId) => Number.isInteger(labelId) && labelId > 0);
+
+  if (labelIds.length > 0) {
+    const { error } = await db.from("listing_labels").insert(
+      labelIds.map((labelId) => ({
+        listing_id: id,
+        label_id: labelId
+      }))
     );
+    if (error) throw error;
   }
 
-  const id = listingId > 0 ? listingId : Number(db.exec("SELECT last_insert_rowid() AS id")[0].values[0][0]);
-  selectedValues(formData, "labelIds").forEach((labelId) => {
-    db.run("INSERT INTO listing_labels (listing_id, label_id) VALUES (?, ?)", [id, Number(labelId)]);
-  });
+  const commands = Array.from({ length: 4 }, (_, index) => {
+    const row = index + 1;
+    return {
+      label: value(formData, `commandLabel${row}`),
+      command: value(formData, `command${row}`),
+      sort_order: row
+    };
+  }).filter((row) => row.label && row.command);
 
-  for (let index = 1; index <= 4; index += 1) {
-    const label = value(formData, `commandLabel${index}`);
-    const command = value(formData, `command${index}`);
-    if (label && command) {
-      db.run("INSERT INTO commands (listing_id, label, command, sort_order) VALUES (?, ?, ?, ?)", [id, label, command, index]);
-    }
+  if (commands.length > 0) {
+    const { error } = await db.from("commands").insert(
+      commands.map((command) => ({
+        listing_id: id,
+        label: command.label,
+        command: command.command,
+        sort_order: command.sort_order
+      }))
+    );
+    if (error) throw error;
   }
 
-  await saveDb();
   revalidatePath("/");
   revalidatePath("/marketplace");
   revalidatePath("/admin");
@@ -95,39 +125,57 @@ export async function upsertListingAction(formData: FormData) {
 
 export async function archiveListingAction(formData: FormData) {
   await requireAdmin();
-  const db = await getDb();
-  db.run("UPDATE listings SET status = 'archived', updated_at = ? WHERE id = ?", [now(), parseId(formData, "id")]);
-  await saveDb();
+  const db = getSupabaseAdminClient();
+  const { error } = await db
+    .from("listings")
+    .update({ status: "archived", updated_at: now() })
+    .eq("id", parseId(formData, "id"));
+  if (error) throw error;
   revalidatePath("/marketplace");
   revalidatePath("/admin");
 }
 
 export async function upsertCategoryAction(formData: FormData) {
   await requireAdmin();
-  const db = await getDb();
+  const db = getSupabaseAdminClient();
   const id = Number(value(formData, "id"));
-  const params = [value(formData, "name"), value(formData, "slug"), value(formData, "description"), Number(value(formData, "sortOrder"))];
+  const payload = {
+    name: value(formData, "name"),
+    slug: value(formData, "slug"),
+    description: value(formData, "description"),
+    sort_order: Number(value(formData, "sortOrder"))
+  };
+
   if (id > 0) {
-    db.run("UPDATE categories SET name = ?, slug = ?, description = ?, sort_order = ? WHERE id = ?", [...params, id]);
+    const { error } = await db.from("categories").update(payload).eq("id", id);
+    if (error) throw error;
   } else {
-    db.run("INSERT INTO categories (name, slug, description, sort_order) VALUES (?, ?, ?, ?)", params);
+    const { error } = await db.from("categories").insert(payload);
+    if (error) throw error;
   }
-  await saveDb();
+
   revalidatePath("/admin");
   revalidatePath("/marketplace");
 }
 
 export async function upsertLabelAction(formData: FormData) {
   await requireAdmin();
-  const db = await getDb();
+  const db = getSupabaseAdminClient();
   const id = Number(value(formData, "id"));
-  const params = [value(formData, "name"), value(formData, "slug"), value(formData, "color") || "#FBFF12"];
+  const payload = {
+    name: value(formData, "name"),
+    slug: value(formData, "slug"),
+    color: value(formData, "color") || "#FBFF12"
+  };
+
   if (id > 0) {
-    db.run("UPDATE labels SET name = ?, slug = ?, color = ? WHERE id = ?", [...params, id]);
+    const { error } = await db.from("labels").update(payload).eq("id", id);
+    if (error) throw error;
   } else {
-    db.run("INSERT INTO labels (name, slug, color) VALUES (?, ?, ?)", params);
+    const { error } = await db.from("labels").insert(payload);
+    if (error) throw error;
   }
-  await saveDb();
+
   revalidatePath("/admin");
   revalidatePath("/marketplace");
 }

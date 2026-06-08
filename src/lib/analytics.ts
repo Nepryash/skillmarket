@@ -1,5 +1,5 @@
-import { getDb, saveDb } from "@/lib/db";
-import { rowsFromExec } from "@/lib/marketplace";
+import { getSupabaseAdminClient } from "@/lib/supabase-server";
+import { getAdminListings } from "@/lib/marketplace";
 
 export type AnalyticsEventType =
   | "page_view"
@@ -20,130 +20,114 @@ type RecordEventInput = {
   path?: string;
 };
 
+type AnalyticsEventRow = {
+  event_type: AnalyticsEventType;
+  listing_id: number | null;
+  category_slug: string | null;
+  label_slug: string | null;
+  search_query: string | null;
+  result_count: number | null;
+  target_url: string | null;
+  path: string | null;
+  created_at: string;
+};
+
 type MetricRow = {
   label: string;
   value: number;
 };
 
-async function ensureAnalyticsTable() {
-  const db = await getDb();
-  db.run(`
-    CREATE TABLE IF NOT EXISTS analytics_events (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      event_type TEXT NOT NULL,
-      listing_id INTEGER REFERENCES listings(id) ON DELETE SET NULL,
-      category_slug TEXT,
-      label_slug TEXT,
-      search_query TEXT,
-      result_count INTEGER,
-      target_url TEXT,
-      path TEXT,
-      created_at TEXT NOT NULL
-    )
-  `);
+function countBy<T>(items: T[], getKey: (item: T) => string | null | undefined) {
+  const counts = new Map<string, number>();
+
+  for (const item of items) {
+    const key = getKey(item);
+    if (!key) continue;
+    counts.set(key, (counts.get(key) ?? 0) + 1);
+  }
+
+  return counts;
+}
+
+function topMetrics(counts: Map<string, number>, limit = 8): MetricRow[] {
+  return [...counts.entries()]
+    .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
+    .slice(0, limit)
+    .map(([label, value]) => ({ label, value }));
 }
 
 export async function recordAnalyticsEvent(input: RecordEventInput) {
-  await ensureAnalyticsTable();
-  const db = await getDb();
-  db.run(
-    `INSERT INTO analytics_events (
-      event_type, listing_id, category_slug, label_slug, search_query, result_count, target_url, path, created_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    [
-      input.eventType,
-      input.listingId ?? null,
-      input.categorySlug ?? null,
-      input.labelSlug ?? null,
-      input.searchQuery ?? null,
-      input.resultCount ?? null,
-      input.targetUrl ?? null,
-      input.path ?? null,
-      new Date().toISOString()
-    ]
-  );
-  await saveDb();
+  const db = getSupabaseAdminClient();
+  const { error } = await db.from("analytics_events").insert({
+    event_type: input.eventType,
+    listing_id: input.listingId ?? null,
+    category_slug: input.categorySlug ?? null,
+    label_slug: input.labelSlug ?? null,
+    search_query: input.searchQuery ?? null,
+    result_count: input.resultCount ?? null,
+    target_url: input.targetUrl ?? null,
+    path: input.path ?? null,
+    created_at: new Date().toISOString()
+  });
+
+  if (error) throw error;
 }
 
 export async function getAnalyticsSummary() {
-  await ensureAnalyticsTable();
-  const db = await getDb();
+  const db = getSupabaseAdminClient();
+  const [eventsResult, listings] = await Promise.all([
+    db.from("analytics_events").select("*").order("id", { ascending: false }),
+    getAdminListings()
+  ]);
 
-  const totals = rowsFromExec<MetricRow>(
-    db.exec(
-      `SELECT event_type AS label, COUNT(*) AS value
-       FROM analytics_events
-       GROUP BY event_type
-       ORDER BY value DESC`
-    )
+  if (eventsResult.error) throw eventsResult.error;
+
+  const events = (eventsResult.data ?? []) as AnalyticsEventRow[];
+  const listingById = new Map(listings.map((listing) => [listing.id, listing]));
+
+  const totals = topMetrics(countBy(events, (event) => event.event_type), 8);
+
+  const topListings = topMetrics(
+    countBy(events, (event) => (event.listing_id ? listingById.get(event.listing_id)?.title ?? null : null)),
+    8
   );
 
-  const topListings = rowsFromExec<MetricRow>(
-    db.exec(
-      `SELECT listings.title AS label, COUNT(*) AS value
-       FROM analytics_events
-       INNER JOIN listings ON listings.id = analytics_events.listing_id
-       WHERE analytics_events.listing_id IS NOT NULL
-       GROUP BY listings.id
-       ORDER BY value DESC, listings.title ASC
-       LIMIT 8`
-    )
+  const topCategories = topMetrics(
+    countBy(events, (event) => {
+      if (event.category_slug) return event.category_slug;
+      if (!event.listing_id) return null;
+      return listingById.get(event.listing_id)?.categorySlug ?? null;
+    }),
+    8
   );
 
-  const topCategories = rowsFromExec<MetricRow>(
-    db.exec(
-      `SELECT COALESCE(analytics_events.category_slug, categories.slug) AS label, COUNT(*) AS value
-       FROM analytics_events
-       LEFT JOIN listings ON listings.id = analytics_events.listing_id
-       LEFT JOIN categories ON categories.id = listings.category_id
-       WHERE COALESCE(analytics_events.category_slug, categories.slug) IS NOT NULL
-       GROUP BY label
-       ORDER BY value DESC, label ASC
-       LIMIT 8`
-    )
+  const topLabels = topMetrics(
+    (() => {
+      const counts = new Map<string, number>();
+
+      for (const event of events) {
+        const listing = event.listing_id ? listingById.get(event.listing_id) : null;
+        if (!listing) continue;
+        for (const label of listing.labels) {
+          counts.set(label.name, (counts.get(label.name) ?? 0) + 1);
+        }
+      }
+
+      return counts;
+    })(),
+    8
   );
 
-  const topLabels = rowsFromExec<MetricRow>(
-    db.exec(
-      `SELECT labels.name AS label, COUNT(*) AS value
-       FROM analytics_events
-       INNER JOIN listings ON listings.id = analytics_events.listing_id
-       INNER JOIN listing_labels ON listing_labels.listing_id = listings.id
-       INNER JOIN labels ON labels.id = listing_labels.label_id
-       GROUP BY labels.id
-       ORDER BY value DESC, labels.name ASC
-       LIMIT 8`
-    )
-  );
+  const topSearches = topMetrics(countBy(events, (event) => event.search_query), 8);
 
-  const topSearches = rowsFromExec<MetricRow>(
-    db.exec(
-      `SELECT search_query AS label, COUNT(*) AS value
-       FROM analytics_events
-       WHERE search_query IS NOT NULL AND search_query != ''
-       GROUP BY search_query
-       ORDER BY value DESC, search_query ASC
-       LIMIT 8`
-    )
-  );
-
-  const recentEvents = rowsFromExec<{
-    event_type: string;
-    listing_title: string | null;
-    search_query: string | null;
-    target_url: string | null;
-    path: string | null;
-    created_at: string;
-  }>(
-    db.exec(
-      `SELECT analytics_events.event_type, listings.title AS listing_title, analytics_events.search_query,
-              analytics_events.target_url, analytics_events.path, analytics_events.created_at
-       FROM analytics_events
-       LEFT JOIN listings ON listings.id = analytics_events.listing_id
-       ORDER BY analytics_events.id DESC
-       LIMIT 12`
-    )
-  );
+  const recentEvents = events.slice(0, 12).map((event) => ({
+    event_type: event.event_type,
+    listing_title: event.listing_id ? listingById.get(event.listing_id)?.title ?? null : null,
+    search_query: event.search_query,
+    target_url: event.target_url,
+    path: event.path,
+    created_at: event.created_at
+  }));
 
   return { totals, topListings, topCategories, topLabels, topSearches, recentEvents };
 }

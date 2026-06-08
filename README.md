@@ -10,7 +10,7 @@ Install dependencies:
 npm install
 ```
 
-Create the local SQLite database:
+Seed Supabase with the current catalog:
 
 ```bash
 npm run db:seed
@@ -47,7 +47,9 @@ Important variables:
 - `SKILLMARKET_ADMIN_PASSWORD`: required in production.
 - `TELEGRAM_BOT_TOKEN`: required for Telegram webhook replies.
 - `TELEGRAM_BOT_USERNAME`: optional, defaults to `skillmarket_bot`.
-- `SKILLMARKET_READONLY_DB`: set to `1` on Vercel until durable database storage is added.
+- `NEXT_PUBLIC_SUPABASE_URL`: Supabase project URL.
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`: public Supabase key used by server-side read queries.
+- `SUPABASE_SERVICE_ROLE_KEY`: server-only key used for admin writes, seeding, and analytics writes.
 
 ## Deployment
 
@@ -57,7 +59,7 @@ This repo includes `vercel.json` for the current deployment target.
 
 Vercel build settings:
 
-- Build command: `npm run db:seed && npm run build`
+- Build command: `npm run build`
 - Install command: `npm install`
 - Dev command: `next dev`
 - Node version: `22.x`
@@ -75,6 +77,6 @@ Or connect your GitHub repo at https://vercel.com/import
 
 ## Notes
 
-Phase 1 uses `sql.js` to create and read a real SQLite database file at `data/skillmarket.db` without requiring native SQLite compilation on Windows.
+SkillMarket now uses Supabase Postgres for persistence. The local seed script populates the remote tables with the curated catalog.
 
-Vercel preview deployment can serve the seeded SQLite database in read-only mode. Admin edits and analytics writes need a durable database before production use.
+Keep `SUPABASE_SERVICE_ROLE_KEY` server-side only. The browser should only ever see `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`.

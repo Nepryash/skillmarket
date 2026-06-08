@@ -1,10 +1,9 @@
 {
-  "buildCommand": "npm run db:seed && npm run build",
+  "buildCommand": "npm run build",
   "devCommand": "next dev",
   "installCommand": "npm install",
   "env": {
-    "NODE_VERSION": "22.x",
-    "SKILLMARKET_READONLY_DB": "1"
+    "NODE_VERSION": "22.x"
   },
   "headers": [
     {

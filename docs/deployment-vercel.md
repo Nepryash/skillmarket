@@ -8,12 +8,12 @@ SkillMarket is a Next.js App Router app with full Vercel support, including Serv
 
 Use the checked-in `vercel.json`:
 
-- Build command: `npm run db:seed && npm run build`
+- Build command: `npm run build`
 - Install command: `npm install`
 - Dev command: `next dev`
 - Node version: `22.x`
 
-The seed command creates `data/skillmarket.db` before `next build`; `next.config.ts` includes that file in the server output trace so deployed route handlers can read the seeded catalog.
+The app uses Supabase Postgres for persistence. Seed the tables with `npm run db:seed` after configuring your Supabase environment variables.
 
 ## Environment Variables
 
@@ -24,8 +24,9 @@ Set these in Vercel Project Settings -> Environment Variables, not in source con
 | `SKILLMARKET_ADMIN_PASSWORD` | Yes | Use a long random value. Production refuses to use the local `admin` fallback. |
 | `TELEGRAM_BOT_TOKEN` | Yes for webhook replies | Rotate the previously shared token before setting this. |
 | `TELEGRAM_BOT_USERNAME` | No | Defaults to `skillmarket_bot`. |
-| `SKILLMARKET_READONLY_DB` | Recommended | Set to `1` on Vercel until persistent storage is added. |
-| `SKILLMARKET_DB_PATH` | No | Defaults to `data/skillmarket.db`. |
+| `NEXT_PUBLIC_SUPABASE_URL` | Yes | Your Supabase project URL. |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Yes | Public key used for read queries. |
+| `SUPABASE_SERVICE_ROLE_KEY` | Yes for writes | Keep server-side only. Used by admin actions, analytics writes, and seeding. |
 
 ## Telegram Webhook
 
@@ -41,20 +42,12 @@ Verify listing resolution:
 curl "https://YOUR_VERCEL_DOMAIN/api/telegram?slug=frontend-app-builder"
 ```
 
-## SQLite Production Caveat
+## Supabase Setup
 
-The current MVP uses a seeded SQLite file through `sql.js`. This is suitable for a Vercel deployment as a preview/catalog, but Vercel serverless functions do not provide durable writable application storage for this database file.
-
-With `SKILLMARKET_READONLY_DB=1`, the site serves seeded listings and avoids write failures. Admin content changes and analytics writes are not durable in this mode.
-
-Before treating admin edits or analytics as production data, migrate persistence to a durable service such as:
-
-- Vercel Postgres
-- Neon
-- Turso/libSQL
-- Supabase Postgres
-- PlanetScale
-- AWS RDS
+1. Create a Supabase project.
+2. Run `supabase-schema.sql` in the Supabase SQL editor.
+3. Set the environment variables above in Vercel and locally.
+4. Run `npm run db:seed` once to load the curated catalog into Supabase.
 
 ## Quick Start
 
@@ -92,7 +85,7 @@ vercel
 
 ### Post-Deploy Checklist
 
-- [ ] Verify build logs show successful database seed.
+- [ ] Verify the Supabase tables contain the seeded catalog.
 - [ ] Test marketplace at `/marketplace`.
 - [ ] Test admin login at `/admin/login` with `SKILLMARKET_ADMIN_PASSWORD`.
 - [ ] Set Telegram webhook using the command above.

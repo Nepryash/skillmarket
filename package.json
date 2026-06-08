@@ -14,18 +14,18 @@
     "@iconify/icons-simple-icons": "^1.2.74",
     "@iconify/icons-tabler": "^1.2.95",
     "@iconify/react": "^6.0.2",
+    "@supabase/ssr": "^0.10.3",
+    "@supabase/supabase-js": "^2.108.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.468.0",
     "next": "^15.1.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "sql.js": "^1.12.0"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
-    "@types/sql.js": "^1.4.9",
     "eslint": "^9.17.0",
     "eslint-config-next": "^15.1.0",
     "tsx": "^4.19.2",
