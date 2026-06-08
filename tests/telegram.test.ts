@@ -1,6 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { listingTelegramMessage, parseTelegramListingSlug, telegramBotToken } from "../src/lib/telegram";
+import {
+  listingTelegramMessage,
+  parseTelegramListingSlug,
+  telegramBotToken,
+  telegramFallbackMessage,
+  telegramListingNotFoundMessage
+} from "../src/lib/telegram";
 import type { Listing } from "../src/types";
 
 const listing: Listing = {
@@ -75,4 +81,15 @@ test("telegramBotToken ignores placeholder values", () => {
   } finally {
     process.env.TELEGRAM_BOT_TOKEN = previous;
   }
+});
+
+test("telegramFallbackMessage tells the user how to request a listing", () => {
+  const message = telegramFallbackMessage();
+
+  assert.match(message, /Get via Telegram/);
+  assert.match(message, /\/start frontend-app-builder/);
+});
+
+test("telegramListingNotFoundMessage includes the missing slug", () => {
+  assert.match(telegramListingNotFoundMessage("missing-listing"), /missing-listing/);
 });

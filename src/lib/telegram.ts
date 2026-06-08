@@ -14,6 +14,23 @@ export function telegramBotToken() {
   return token;
 }
 
+export function telegramFallbackMessage() {
+  return [
+    "Open a SkillMarket listing and tap Get via Telegram.",
+    "",
+    "You can also send /start followed by a listing slug, for example:",
+    "/start frontend-app-builder"
+  ].join("\n");
+}
+
+export function telegramListingNotFoundMessage(slug: string) {
+  return [
+    `I could not find a SkillMarket listing for "${slug}".`,
+    "",
+    "Open the listing from SkillMarket and tap Get via Telegram again."
+  ].join("\n");
+}
+
 export function telegramStartUrl(listingSlug: string) {
   return `https://t.me/${telegramBotUsername()}?start=${encodeURIComponent(listingSlug)}`;
 }
