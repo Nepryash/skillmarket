@@ -2,6 +2,8 @@ import { AdminListingForm } from "@/components/admin-listing-form";
 import { requireAdmin } from "@/lib/admin-auth";
 import { getCategories, getLabels } from "@/lib/marketplace";
 
+export const dynamic = "force-dynamic";
+
 export default async function NewListingPage() {
   await requireAdmin();
   const [categories, labels] = await Promise.all([getCategories(), getLabels()]);

@@ -62,14 +62,14 @@ export async function upsertListingAction(formData: FormData) {
     install_url: value(formData, "installUrl"),
     github_url: value(formData, "githubUrl"),
     status: value(formData, "status") as ListingStatus,
-    featured: formData.get("featured") ? 1 : 0,
+    featured: Boolean(formData.get("featured")),
     updated_at: timestamp
   };
 
   let id = listingId;
 
   if (listingId > 0) {
-    const { error } = await db.from("listings").update(payload).eq("id", listingId);
+    const { error } = await db.from("listings").update(payload).eq("id", listingId).select("id").single();
     if (error) throw error;
     await deleteListingRelations(listingId);
   } else {
@@ -129,7 +129,9 @@ export async function archiveListingAction(formData: FormData) {
   const { error } = await db
     .from("listings")
     .update({ status: "archived", updated_at: now() })
-    .eq("id", parseId(formData, "id"));
+    .eq("id", parseId(formData, "id"))
+    .select("id")
+    .single();
   if (error) throw error;
   revalidatePath("/marketplace");
   revalidatePath("/admin");
@@ -147,7 +149,7 @@ export async function upsertCategoryAction(formData: FormData) {
   };
 
   if (id > 0) {
-    const { error } = await db.from("categories").update(payload).eq("id", id);
+    const { error } = await db.from("categories").update(payload).eq("id", id).select("id").single();
     if (error) throw error;
   } else {
     const { error } = await db.from("categories").insert(payload);
@@ -169,7 +171,7 @@ export async function upsertLabelAction(formData: FormData) {
   };
 
   if (id > 0) {
-    const { error } = await db.from("labels").update(payload).eq("id", id);
+    const { error } = await db.from("labels").update(payload).eq("id", id).select("id").single();
     if (error) throw error;
   } else {
     const { error } = await db.from("labels").insert(payload);

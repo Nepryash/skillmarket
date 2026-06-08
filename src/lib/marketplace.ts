@@ -1,4 +1,3 @@
-import { cache } from "react";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { getSupabaseClient } from "@/lib/supabase";
 import { getSupabaseAdminClient } from "@/lib/supabase-server";
@@ -120,7 +119,7 @@ async function fetchRows<T>(client: SupabaseClient, table: string, columns = "*"
   return (data ?? []) as T[];
 }
 
-const loadPublicCatalog = cache(async (): Promise<LoadedCatalog> => {
+async function loadPublicCatalog(): Promise<LoadedCatalog> {
   const client = getSupabaseClient();
   const [categories, labels, listings, listingLabels, commands] = await Promise.all([
     fetchRows<CategoryRow>(client, "categories"),
@@ -131,9 +130,9 @@ const loadPublicCatalog = cache(async (): Promise<LoadedCatalog> => {
   ]);
 
   return { categories, labels, listings, listingLabels, commands };
-});
+}
 
-const loadAdminCatalog = cache(async (): Promise<LoadedCatalog> => {
+async function loadAdminCatalog(): Promise<LoadedCatalog> {
   const client = getSupabaseAdminClient();
   const [categories, labels, listings, listingLabels, commands] = await Promise.all([
     fetchRows<CategoryRow>(client, "categories"),
@@ -144,7 +143,7 @@ const loadAdminCatalog = cache(async (): Promise<LoadedCatalog> => {
   ]);
 
   return { categories, labels, listings, listingLabels, commands };
-});
+}
 
 function hydrateListings(rows: ListingRow[], catalog: LoadedCatalog): Listing[] {
   const categoryById = new Map(catalog.categories.map((category) => [category.id, category]));

@@ -7,6 +7,8 @@ type EditListingPageProps = {
   params: Promise<{ id: string }>;
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function EditListingPage({ params }: EditListingPageProps) {
   await requireAdmin();
   const { id } = await params;
