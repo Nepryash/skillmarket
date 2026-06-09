@@ -704,6 +704,11 @@ textarea {
 }
 
 .listing-card p {
+  display: -webkit-box;
+  min-height: 4.23rem;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
   margin: 0;
   color: rgba(255, 255, 255, 0.66);
   line-height: 1.5;
@@ -787,6 +792,33 @@ textarea {
   color: rgba(255, 255, 255, 0.7);
   font-size: 1.12rem;
   line-height: 1.7;
+}
+
+.capability-list {
+  margin-top: 1.6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.035);
+  padding: 1rem;
+}
+
+.capability-list h2 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.25rem;
+}
+
+.capability-list ul {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding-left: 1.15rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.55;
+}
+
+.capability-list li::marker {
+  color: var(--accent);
 }
 
 .command-list {

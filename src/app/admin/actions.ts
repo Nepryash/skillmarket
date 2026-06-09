@@ -1,9 +1,11 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { getSupabaseAdminClient } from "@/lib/supabase-server";
 import { requireAdmin, signInAdmin, signOutAdmin } from "@/lib/admin-auth";
+import { checkRateLimit, clientRateLimitKey } from "@/lib/rate-limit";
 import type { Compatibility, ListingStatus, ListingType } from "@/types";
 
 function value(formData: FormData, key: string) {
@@ -26,16 +28,22 @@ function now() {
 
 async function deleteListingRelations(listingId: number) {
   const db = getSupabaseAdminClient();
-  const [labelsResult, commandsResult] = await Promise.all([
+  const [labelsResult, commandsResult, bulletsResult] = await Promise.all([
     db.from("listing_labels").delete().eq("listing_id", listingId),
-    db.from("commands").delete().eq("listing_id", listingId)
+    db.from("commands").delete().eq("listing_id", listingId),
+    db.from("listing_bullets").delete().eq("listing_id", listingId)
   ]);
 
   if (labelsResult.error) throw labelsResult.error;
   if (commandsResult.error) throw commandsResult.error;
+  if (bulletsResult.error) throw bulletsResult.error;
 }
 
 export async function loginAction(formData: FormData) {
+  const requestHeaders = await headers();
+  const rateLimit = checkRateLimit(clientRateLimitKey(requestHeaders, "admin-login"), 8, 60 * 1000);
+  if (!rateLimit.allowed) redirect("/admin/login?error=rate-limited");
+
   const ok = await signInAdmin(value(formData, "password"));
   if (!ok) redirect("/admin/login?error=1");
   redirect("/admin");
@@ -91,6 +99,25 @@ export async function upsertListingAction(formData: FormData) {
       labelIds.map((labelId) => ({
         listing_id: id,
         label_id: labelId
+      }))
+    );
+    if (error) throw error;
+  }
+
+  const bullets = Array.from({ length: 5 }, (_, index) => {
+    const row = index + 1;
+    return {
+      text: value(formData, `bullet${row}`),
+      sort_order: row
+    };
+  }).filter((row) => row.text);
+
+  if (bullets.length > 0) {
+    const { error } = await db.from("listing_bullets").insert(
+      bullets.map((bullet) => ({
+        listing_id: id,
+        text: bullet.text,
+        sort_order: bullet.sort_order
       }))
     );
     if (error) throw error;

@@ -1,7 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { getSupabaseClient } from "@/lib/supabase";
 import { getSupabaseAdminClient } from "@/lib/supabase-server";
-import type { Category, Command, Label, Listing, ListingFilters } from "@/types";
+import type { Category, Command, Label, Listing, ListingBullet, ListingFilters } from "@/types";
 
 type CategoryRow = {
   id: number;
@@ -23,6 +23,13 @@ type CommandRow = {
   listing_id: number;
   label: string;
   command: string;
+  sort_order: number;
+};
+
+type ListingBulletRow = {
+  id: number;
+  listing_id: number;
+  text: string;
   sort_order: number;
 };
 
@@ -54,6 +61,7 @@ type LoadedCatalog = {
   listings: ListingRow[];
   listingLabels: ListingLabelRow[];
   commands: CommandRow[];
+  listingBullets: ListingBulletRow[];
 };
 
 function mapLabel(row: LabelRow): Label {
@@ -75,11 +83,21 @@ function mapCommand(row: CommandRow): Command {
   };
 }
 
+function mapListingBullet(row: ListingBulletRow): ListingBullet {
+  return {
+    id: row.id,
+    listingId: row.listing_id,
+    text: row.text,
+    sortOrder: row.sort_order
+  };
+}
+
 function toListing(
   row: ListingRow,
   categoryById: Map<number, CategoryRow>,
   labelsByListingId: Map<number, LabelRow[]>,
-  commandsByListingId: Map<number, CommandRow[]>
+  commandsByListingId: Map<number, CommandRow[]>,
+  bulletsByListingId: Map<number, ListingBulletRow[]>
 ): Listing {
   const category = categoryById.get(row.category_id);
   if (!category) {
@@ -88,6 +106,9 @@ function toListing(
 
   const labels = (labelsByListingId.get(row.id) ?? []).slice().sort((left, right) => left.name.localeCompare(right.name));
   const commands = (commandsByListingId.get(row.id) ?? [])
+    .slice()
+    .sort((left, right) => left.sort_order - right.sort_order || left.id - right.id);
+  const bullets = (bulletsByListingId.get(row.id) ?? [])
     .slice()
     .sort((left, right) => left.sort_order - right.sort_order || left.id - right.id);
 
@@ -108,41 +129,45 @@ function toListing(
     featured: Boolean(row.featured),
     labels: labels.map(mapLabel),
     commands: commands.map(mapCommand),
+    bullets: bullets.map(mapListingBullet),
     createdAt: row.created_at,
     updatedAt: row.updated_at
   };
 }
 
-async function fetchRows<T>(client: SupabaseClient, table: string, columns = "*") {
+async function fetchRows<T>(client: SupabaseClient, table: string, columns = "*", allowMissingTable = false) {
   const { data, error } = await client.from(table).select(columns);
+  if (allowMissingTable && (error?.code === "42P01" || error?.code === "PGRST205")) return [] as T[];
   if (error) throw error;
   return (data ?? []) as T[];
 }
 
 async function loadPublicCatalog(): Promise<LoadedCatalog> {
   const client = getSupabaseClient();
-  const [categories, labels, listings, listingLabels, commands] = await Promise.all([
+  const [categories, labels, listings, listingLabels, commands, listingBullets] = await Promise.all([
     fetchRows<CategoryRow>(client, "categories"),
     fetchRows<LabelRow>(client, "labels"),
     fetchRows<ListingRow>(client, "listings"),
     fetchRows<ListingLabelRow>(client, "listing_labels"),
-    fetchRows<CommandRow>(client, "commands")
+    fetchRows<CommandRow>(client, "commands"),
+    fetchRows<ListingBulletRow>(client, "listing_bullets", "*", true)
   ]);
 
-  return { categories, labels, listings, listingLabels, commands };
+  return { categories, labels, listings, listingLabels, commands, listingBullets };
 }
 
 async function loadAdminCatalog(): Promise<LoadedCatalog> {
   const client = getSupabaseAdminClient();
-  const [categories, labels, listings, listingLabels, commands] = await Promise.all([
+  const [categories, labels, listings, listingLabels, commands, listingBullets] = await Promise.all([
     fetchRows<CategoryRow>(client, "categories"),
     fetchRows<LabelRow>(client, "labels"),
     fetchRows<ListingRow>(client, "listings"),
     fetchRows<ListingLabelRow>(client, "listing_labels"),
-    fetchRows<CommandRow>(client, "commands")
+    fetchRows<CommandRow>(client, "commands"),
+    fetchRows<ListingBulletRow>(client, "listing_bullets", "*", true)
   ]);
 
-  return { categories, labels, listings, listingLabels, commands };
+  return { categories, labels, listings, listingLabels, commands, listingBullets };
 }
 
 function hydrateListings(rows: ListingRow[], catalog: LoadedCatalog): Listing[] {
@@ -150,6 +175,7 @@ function hydrateListings(rows: ListingRow[], catalog: LoadedCatalog): Listing[] 
   const labelById = new Map(catalog.labels.map((label) => [label.id, label]));
   const labelsByListingId = new Map<number, LabelRow[]>();
   const commandsByListingId = new Map<number, CommandRow[]>();
+  const bulletsByListingId = new Map<number, ListingBulletRow[]>();
 
   for (const listingLabel of catalog.listingLabels) {
     const label = labelById.get(listingLabel.label_id);
@@ -165,7 +191,13 @@ function hydrateListings(rows: ListingRow[], catalog: LoadedCatalog): Listing[] 
     commandsByListingId.set(command.listing_id, existing);
   }
 
-  return rows.map((row) => toListing(row, categoryById, labelsByListingId, commandsByListingId));
+  for (const bullet of catalog.listingBullets) {
+    const existing = bulletsByListingId.get(bullet.listing_id) ?? [];
+    existing.push(bullet);
+    bulletsByListingId.set(bullet.listing_id, existing);
+  }
+
+  return rows.map((row) => toListing(row, categoryById, labelsByListingId, commandsByListingId, bulletsByListingId));
 }
 
 export async function getCategories(): Promise<Category[]> {

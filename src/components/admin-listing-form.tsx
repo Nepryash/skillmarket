@@ -108,6 +108,22 @@ export function AdminListingForm({ categories, labels, listing }: AdminListingFo
       </fieldset>
 
       <fieldset>
+        <legend>What it can do</legend>
+        {[0, 1, 2, 3, 4].map((index) => {
+          const bullet = listing?.bullets[index];
+          const row = index + 1;
+          return (
+            <input
+              key={row}
+              name={`bullet${row}`}
+              placeholder={`Bullet point ${row}`}
+              defaultValue={bullet?.text}
+            />
+          );
+        })}
+      </fieldset>
+
+      <fieldset>
         <legend>Commands</legend>
         {[0, 1, 2, 3].map((index) => {
           const command = listing?.commands[index];

@@ -1,11 +1,23 @@
 import { NextResponse } from "next/server";
 import { recordAnalyticsEvent, type AnalyticsEventType } from "@/lib/analytics";
 import { getListingBySlug } from "@/lib/marketplace";
+import { checkRateLimit, clientRateLimitKey } from "@/lib/rate-limit";
 import { telegramStartUrl } from "@/lib/telegram";
 
 const allowedEvents = new Set<AnalyticsEventType>(["install_click", "telegram_click"]);
 
 export async function GET(request: Request) {
+  const rateLimit = checkRateLimit(clientRateLimitKey(request.headers, "track"), 60, 60 * 1000);
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { error: "Too many tracking requests" },
+      {
+        status: 429,
+        headers: { "Retry-After": String(rateLimit.retryAfter) }
+      }
+    );
+  }
+
   const url = new URL(request.url);
   const event = url.searchParams.get("event") as AnalyticsEventType | null;
   const targetUrl = url.searchParams.get("to");

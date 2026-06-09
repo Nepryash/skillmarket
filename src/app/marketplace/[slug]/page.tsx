@@ -65,6 +65,17 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
           ))}
         </div>
 
+        {listing.bullets.length > 0 ? (
+          <section className="capability-list" aria-labelledby="capability-heading">
+            <h2 id="capability-heading">What it can do</h2>
+            <ul>
+              {listing.bullets.map((bullet) => (
+                <li key={bullet.id}>{bullet.text}</li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+
         <div className="command-list">
           {listing.commands.map((command) => (
             <div className="command-item" key={command.id}>

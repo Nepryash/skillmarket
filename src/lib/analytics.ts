@@ -1,5 +1,6 @@
 import { getSupabaseAdminClient } from "@/lib/supabase-server";
 import { getAdminListings } from "@/lib/marketplace";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export type AnalyticsEventType =
   | "page_view"
@@ -56,17 +57,35 @@ function topMetrics(counts: Map<string, number>, limit = 8): MetricRow[] {
     .map(([label, value]) => ({ label, value }));
 }
 
+function truncate(value: string | undefined, maxLength: number) {
+  if (!value) return null;
+  return value.slice(0, maxLength);
+}
+
 export async function recordAnalyticsEvent(input: RecordEventInput) {
+  const rateLimitKey = [
+    "analytics",
+    input.eventType,
+    input.listingId ?? "",
+    input.categorySlug ?? "",
+    input.labelSlug ?? "",
+    input.searchQuery ?? "",
+    input.targetUrl ?? "",
+    input.path ?? ""
+  ].join(":");
+  const rateLimit = checkRateLimit(rateLimitKey, 120, 60 * 1000);
+  if (!rateLimit.allowed) return;
+
   const db = getSupabaseAdminClient();
   const { error } = await db.from("analytics_events").insert({
     event_type: input.eventType,
     listing_id: input.listingId ?? null,
-    category_slug: input.categorySlug ?? null,
-    label_slug: input.labelSlug ?? null,
-    search_query: input.searchQuery ?? null,
+    category_slug: truncate(input.categorySlug, 80),
+    label_slug: truncate(input.labelSlug, 80),
+    search_query: truncate(input.searchQuery, 160),
     result_count: input.resultCount ?? null,
-    target_url: input.targetUrl ?? null,
-    path: input.path ?? null,
+    target_url: truncate(input.targetUrl, 500),
+    path: truncate(input.path, 500),
     created_at: new Date().toISOString()
   });
 

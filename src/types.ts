@@ -25,6 +25,13 @@ export type Command = {
   sortOrder: number;
 };
 
+export type ListingBullet = {
+  id: number;
+  listingId: number;
+  text: string;
+  sortOrder: number;
+};
+
 export type Listing = {
   id: number;
   type: ListingType;
@@ -42,6 +49,7 @@ export type Listing = {
   featured: boolean;
   labels: Label[];
   commands: Command[];
+  bullets: ListingBullet[];
   createdAt: string;
   updatedAt: string;
 };
