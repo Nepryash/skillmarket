@@ -12,8 +12,13 @@ import telegram from "@iconify/icons-simple-icons/telegram";
 import box from "@iconify/icons-tabler/box";
 import brain from "@iconify/icons-tabler/brain";
 import brush from "@iconify/icons-tabler/brush";
+import article from "@iconify/icons-tabler/article";
+import category from "@iconify/icons-tabler/category";
+import checklist from "@iconify/icons-tabler/checklist";
+import code from "@iconify/icons-tabler/code";
 import palette from "@iconify/icons-tabler/palette";
 import layoutDashboard from "@iconify/icons-tabler/layout-dashboard";
+import robot from "@iconify/icons-tabler/robot";
 import template from "@iconify/icons-tabler/template";
 import route from "@iconify/icons-tabler/route";
 import video from "@iconify/icons-tabler/video";
@@ -30,8 +35,13 @@ const icons: Record<string, IconifyIcon> = {
   "tabler:box": box,
   "tabler:brain": brain,
   "tabler:brush": brush,
+  "tabler:article": article,
+  "tabler:category": category,
+  "tabler:checklist": checklist,
+  "tabler:code": code,
   "tabler:palette": palette,
   "tabler:layout-dashboard": layoutDashboard,
+  "tabler:robot": robot,
   "tabler:route": route,
   "tabler:template": template,
   "tabler:video": video,

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, CornerDownLeft, Search, Sparkles } from "lucide-react";
 import { ListingCard } from "@/components/listing-card";
+import { ListingIcon } from "@/components/listing-icon";
 import { recordAnalyticsEvent, trackedUrl } from "@/lib/analytics";
 import { getCategories, getFeaturedListings } from "@/lib/marketplace";
 import { telegramStartUrl } from "@/lib/telegram";
@@ -8,11 +9,11 @@ import { telegramStartUrl } from "@/lib/telegram";
 export const dynamic = "force-dynamic";
 
 const useCaseLinks = [
-  { name: "Coding", slug: "coding" },
-  { name: "Creativity", slug: "creativity" },
-  { name: "Productivity", slug: "productivity" },
-  { name: "Automation", slug: "automation" },
-  { name: "Content", slug: "content" }
+  { name: "Coding", slug: "coding", icon: "tabler:code", description: "Build, review, debug, and ship software." },
+  { name: "Creativity", slug: "creativity", icon: "tabler:palette", description: "Design, prototype, animate, and explore visuals." },
+  { name: "Productivity", slug: "productivity", icon: "tabler:checklist", description: "Plan work, manage context, and move faster." },
+  { name: "Automation", slug: "automation", icon: "tabler:robot", description: "Connect workflows, agents, tools, and services." },
+  { name: "Content", slug: "content", icon: "tabler:article", description: "Draft prompts, copy, docs, scripts, and media." }
 ];
 
 export default async function HomePage() {
@@ -81,20 +82,20 @@ export default async function HomePage() {
 
       <section className="page-shell section scroll-scene" id="categories">
         <div className="section-heading scroll-reveal">
-          <h2>What you can find</h2>
-          <p>Browse by asset type first, then narrow by use case once you know what kind of resource you need.</p>
+          <h2>Tools</h2>
+          <p>Start with the kind of resource you need, then narrow by use case in the marketplace.</p>
         </div>
-        <div className="listing-grid category-grid reveal-grid">
+        <div className="tools-grid reveal-grid">
           {categories.map((category) => (
-            <Link className="listing-card" href={`/marketplace?category=${category.slug}`} key={category.id}>
-              <div>
-                <span className="chip accent">Category</span>
+            <Link className="tool-card" href={`/marketplace?category=${category.slug}`} key={category.id}>
+              <div className="tool-card-copy">
+                <span>Tool type</span>
                 <h3>{category.name}</h3>
                 <p>{category.description}</p>
-                <p className="category-prompt">{category.prompt}</p>
               </div>
-              <div className="card-actions">
-                <span className="button">Browse</span>
+              <div className="tool-card-bottom">
+                <p>{category.prompt}</p>
+                <span>Browse</span>
               </div>
             </Link>
           ))}
@@ -103,13 +104,16 @@ export default async function HomePage() {
 
       <section className="page-shell section compact-section scroll-scene" id="use-cases">
         <div className="section-heading scroll-reveal">
-          <h2>Browse by use case</h2>
-          <p>Use these filters when you know what job the tool should help with.</p>
+          <h2>Categories</h2>
+          <p>Filter the marketplace by the kind of work you want the tool to support.</p>
         </div>
-        <div className="use-case-strip reveal-grid">
+        <div className="use-case-grid reveal-grid">
           {useCaseLinks.map((useCase) => (
             <Link className="use-case-card" href={`/marketplace?label=${useCase.slug}`} key={useCase.slug}>
-              {useCase.name}
+              <ListingIcon icon={useCase.icon} title={`${useCase.name} category`} />
+              <span>{useCase.name}</span>
+              <p>{useCase.description}</p>
+              <strong>Explore</strong>
             </Link>
           ))}
         </div>
