@@ -172,6 +172,7 @@ export async function upsertCategoryAction(formData: FormData) {
     name: value(formData, "name"),
     slug: value(formData, "slug"),
     description: value(formData, "description"),
+    prompt: value(formData, "prompt"),
     sort_order: Number(value(formData, "sortOrder"))
   };
 

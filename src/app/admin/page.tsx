@@ -69,6 +69,7 @@ export default async function AdminPage() {
               <input name="name" defaultValue={category.name} />
               <input name="slug" defaultValue={category.slug} />
               <input name="description" defaultValue={category.description} />
+              <input name="prompt" defaultValue={category.prompt} />
               <input name="sortOrder" type="number" defaultValue={category.sortOrder} />
               <button className="button" type="submit">Save</button>
             </form>
@@ -78,6 +79,7 @@ export default async function AdminPage() {
             <input name="name" placeholder="New category" required />
             <input name="slug" placeholder="slug" required />
             <input name="description" placeholder="Description" required />
+            <input name="prompt" placeholder="Prompt" required />
             <input name="sortOrder" type="number" placeholder="Order" defaultValue={categories.length + 1} />
             <button className="button primary" type="submit">Add</button>
           </form>

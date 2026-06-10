@@ -8,6 +8,7 @@ type CategoryRow = {
   name: string;
   slug: string;
   description: string;
+  prompt: string;
   sort_order: number;
 };
 
@@ -210,6 +211,7 @@ export async function getCategories(): Promise<Category[]> {
       name: row.name,
       slug: row.slug,
       description: row.description,
+      prompt: row.prompt ?? "",
       sortOrder: row.sort_order
     }));
 }

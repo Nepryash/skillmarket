@@ -7,6 +7,7 @@ type SeedCategory = {
   name: string;
   slug: string;
   description: string;
+  prompt: string;
   sortOrder: number;
 };
 
@@ -32,11 +33,34 @@ type SeedListing = {
 };
 
 const categories: SeedCategory[] = [
-  { name: "Frontend", slug: "frontend", description: "UI, web apps, visual polish, and frontend workflows", sortOrder: 1 },
-  { name: "Automation", slug: "automation", description: "Repeatable agent workflows and productivity shortcuts", sortOrder: 2 },
-  { name: "Design", slug: "design", description: "Figma, UI review, visual systems, and design execution", sortOrder: 3 },
-  { name: "DevOps", slug: "devops", description: "Deployment, CI, release, and hosting workflows", sortOrder: 4 },
-  { name: "Local Models", slug: "local-models", description: "Downloadable local LMs for offline coding, chat, and agent workflows", sortOrder: 5 }
+  {
+    name: "Coding",
+    slug: "coding",
+    description: "Building apps, components, tools, and reusable workflows",
+    prompt: "Build, refactor, test, and ship code faster.",
+    sortOrder: 1
+  },
+  {
+    name: "Design",
+    slug: "design",
+    description: "Figma, UI review, visual systems, and design execution",
+    prompt: "Turn rough screens into clear, production-ready UI.",
+    sortOrder: 2
+  },
+  {
+    name: "Productivity",
+    slug: "productivity",
+    description: "Planning, automation, research, and daily workflow shortcuts",
+    prompt: "Plan work, automate steps, and remove busywork.",
+    sortOrder: 3
+  },
+  {
+    name: "Local Models",
+    slug: "local-models",
+    description: "Downloadable local LMs for offline coding, chat, and agent workflows",
+    prompt: "Run models locally for private or offline workflows.",
+    sortOrder: 4
+  }
 ];
 
 const labels: SeedLabel[] = [
@@ -385,6 +409,7 @@ async function main() {
       name: category.name,
       slug: category.slug,
       description: category.description,
+      prompt: category.prompt,
       sort_order: category.sortOrder
     }))
   ).select("id, slug");

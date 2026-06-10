@@ -8,7 +8,7 @@ import { telegramStartUrl } from "@/lib/telegram";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const [featuredListings, categories] = await Promise.all([getFeaturedListings(3), getCategories()]);
+  const [featuredListings, categories] = await Promise.all([getFeaturedListings(6), getCategories()]);
   void recordAnalyticsEvent({ eventType: "page_view", path: "/" }).catch((error) => {
     console.error("Failed to record homepage analytics event", error);
   });
@@ -95,6 +95,7 @@ export default async function HomePage() {
                 <span className="chip accent">Category</span>
                 <h3>{category.name}</h3>
                 <p>{category.description}</p>
+                <p className="category-prompt">{category.prompt}</p>
               </div>
               <div className="card-actions">
                 <span className="button">Explore</span>

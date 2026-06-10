@@ -7,6 +7,7 @@ export type Category = {
   name: string;
   slug: string;
   description: string;
+  prompt: string;
   sortOrder: number;
 };
 
