@@ -7,6 +7,14 @@ import { telegramStartUrl } from "@/lib/telegram";
 
 export const dynamic = "force-dynamic";
 
+const useCaseLinks = [
+  { name: "Coding", slug: "coding" },
+  { name: "Creativity", slug: "creativity" },
+  { name: "Productivity", slug: "productivity" },
+  { name: "Automation", slug: "automation" },
+  { name: "Content", slug: "content" }
+];
+
 export default async function HomePage() {
   const [featuredListings, categories] = await Promise.all([getFeaturedListings(6), getCategories()]);
   void recordAnalyticsEvent({ eventType: "page_view", path: "/" }).catch((error) => {
@@ -21,13 +29,13 @@ export default async function HomePage() {
     <main>
       <section className="page-shell hero scroll-scene entrance-scene">
         <div className="hero-copy scroll-reveal">
-          <h1>Claude Code, Codex, and local LMs, ready to install.</h1>
+          <h1>Find agent tools worth using.</h1>
           <p>
-            Browse curated skills, plugin packs, and downloadable local models. Filter by workflow, then send the exact install links and commands to Telegram.
+            SkillMarket is a curated directory of skills, plugins, MCP servers, prompts, local models, and useful GitHub repositories for Claude Code, Codex, and local AI workflows.
           </p>
           <form className="hero-search" action="/marketplace">
             <Search size={18} aria-hidden="true" />
-            <input name="q" placeholder="Search skills, plugins, local models..." aria-label="Search marketplace" />
+            <input name="q" placeholder="Search skills, MCP, prompts, repos..." aria-label="Search marketplace" />
             <button type="submit">
               <span>Search</span>
               <CornerDownLeft size={15} aria-hidden="true" />
@@ -71,22 +79,10 @@ export default async function HomePage() {
         ))}
       </nav>
 
-      <section className="page-shell section scroll-scene" id="featured">
-        <div className="section-heading scroll-reveal">
-          <h2>Featured</h2>
-          <p>Start with practical workflows, plugin packs, and local models for planning, frontend builds, design operations, and offline experiments.</p>
-        </div>
-        <div className="listing-grid reveal-grid">
-          {featuredListings.map((listing) => (
-            <ListingCard key={listing.id} listing={listing} />
-          ))}
-        </div>
-      </section>
-
       <section className="page-shell section scroll-scene" id="categories">
         <div className="section-heading scroll-reveal">
-          <h2>Categories</h2>
-          <p>Browse by domain first, then narrow by Codex, Claude Code, local LM, listing type, and label.</p>
+          <h2>What you can find</h2>
+          <p>Browse by asset type first, then narrow by use case once you know what kind of resource you need.</p>
         </div>
         <div className="listing-grid category-grid reveal-grid">
           {categories.map((category) => (
@@ -98,9 +94,35 @@ export default async function HomePage() {
                 <p className="category-prompt">{category.prompt}</p>
               </div>
               <div className="card-actions">
-                <span className="button">Explore</span>
+                <span className="button">Browse</span>
               </div>
             </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="page-shell section compact-section scroll-scene" id="use-cases">
+        <div className="section-heading scroll-reveal">
+          <h2>Browse by use case</h2>
+          <p>Use these filters when you know what job the tool should help with.</p>
+        </div>
+        <div className="use-case-strip reveal-grid">
+          {useCaseLinks.map((useCase) => (
+            <Link className="use-case-card" href={`/marketplace?label=${useCase.slug}`} key={useCase.slug}>
+              {useCase.name}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="page-shell section scroll-scene" id="featured">
+        <div className="section-heading scroll-reveal">
+          <h2>Featured</h2>
+          <p>Start with practical resources for coding, design, planning, automation, local models, and reusable prompts.</p>
+        </div>
+        <div className="listing-grid reveal-grid">
+          {featuredListings.map((listing) => (
+            <ListingCard key={listing.id} listing={listing} />
           ))}
         </div>
       </section>

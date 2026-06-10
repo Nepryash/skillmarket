@@ -70,15 +70,15 @@ export default async function MarketplacePage({ searchParams }: MarketplacePageP
         <div className="scroll-reveal">
           <span className="section-kicker">Curated catalog</span>
           <h1>Marketplace</h1>
-          <p>Search curated skills, plugin packs, and downloadable local LMs for Claude Code, Codex, and offline agent workflows.</p>
+          <p>Search curated local models, MCP servers, plugins, skills, prompts, and useful GitHub repositories for agent workflows.</p>
         </div>
         <div className="market-summary scroll-reveal" aria-label="Marketplace summary">
           <span>{listings.length} matching listings</span>
           <div className="chip-row">
-            <Link className="chip accent" href="/marketplace?type=skill">Skills</Link>
-            <Link className="chip accent" href="/marketplace?type=plugin">Plugins</Link>
-            <Link className="chip accent" href="/marketplace?type=model">Models</Link>
-            <Link className="chip" href="/marketplace?compatibility=both">Both agents</Link>
+            <Link className="chip accent" href="/marketplace?category=skills">Skills</Link>
+            <Link className="chip accent" href="/marketplace?category=plugins">Plugins</Link>
+            <Link className="chip accent" href="/marketplace?category=mcp">MCP</Link>
+            <Link className="chip" href="/marketplace?category=prompts">Prompts</Link>
           </div>
         </div>
       </section>

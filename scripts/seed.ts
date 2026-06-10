@@ -34,39 +34,57 @@ type SeedListing = {
 
 const categories: SeedCategory[] = [
   {
-    name: "Coding",
-    slug: "coding",
-    description: "Building apps, components, tools, and reusable workflows",
-    prompt: "Build, refactor, test, and ship code faster.",
-    sortOrder: 1
-  },
-  {
-    name: "Design",
-    slug: "design",
-    description: "Figma, UI review, visual systems, and design execution",
-    prompt: "Turn rough screens into clear, production-ready UI.",
-    sortOrder: 2
-  },
-  {
-    name: "Productivity",
-    slug: "productivity",
-    description: "Planning, automation, research, and daily workflow shortcuts",
-    prompt: "Plan work, automate steps, and remove busywork.",
-    sortOrder: 3
-  },
-  {
     name: "Local Models",
     slug: "local-models",
     description: "Downloadable local LMs for offline coding, chat, and agent workflows",
     prompt: "Run models locally for private or offline workflows.",
+    sortOrder: 1
+  },
+  {
+    name: "MCP",
+    slug: "mcp",
+    description: "Model Context Protocol servers, connectors, and tool bridges",
+    prompt: "Connect agents to tools, apps, files, and services.",
+    sortOrder: 2
+  },
+  {
+    name: "Plugins",
+    slug: "plugins",
+    description: "Installable plugin packs and extensions for agent workflows",
+    prompt: "Add new capabilities to your coding environment.",
+    sortOrder: 3
+  },
+  {
+    name: "Skills",
+    slug: "skills",
+    description: "Reusable agent skills for planning, coding, design, and delivery",
+    prompt: "Trigger focused workflows when you need expert help.",
     sortOrder: 4
+  },
+  {
+    name: "Prompts",
+    slug: "prompts",
+    description: "Reusable prompt packs, templates, and practical instructions",
+    prompt: "Start from copyable prompts instead of a blank page.",
+    sortOrder: 5
+  },
+  {
+    name: "Useful GitHub Repos",
+    slug: "github-repos",
+    description: "Repos worth bookmarking, installing, or studying for agent work",
+    prompt: "Find source projects that are useful beyond one command.",
+    sortOrder: 6
   }
 ];
 
 const labels: SeedLabel[] = [
+  { name: "Coding", slug: "coding", color: "#FBFF12" },
+  { name: "Creativity", slug: "creativity", color: "#FFFFFF" },
+  { name: "Productivity", slug: "productivity", color: "#80727B" },
+  { name: "Automation", slug: "automation", color: "#FBFF12" },
+  { name: "Content", slug: "content", color: "#FFFFFF" },
   { name: "MVP", slug: "mvp", color: "#FBFF12" },
   { name: "Planning", slug: "planning", color: "#FFFFFF" },
-  { name: "Automation", slug: "automation", color: "#80727B" },
   { name: "UI", slug: "ui", color: "#80727B" },
   { name: "Design System", slug: "design-system", color: "#FBFF12" },
   { name: "React", slug: "react", color: "#80727B" },
@@ -98,7 +116,7 @@ const listings: SeedListing[] = [
     installUrl: "https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct",
     githubUrl: "https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct",
     featured: 1,
-    labels: ["huggingface", "local-lm", "code-model"],
+    labels: ["coding", "huggingface", "local-lm", "code-model"],
     commands: [
       ["Install CLI", "pip install -U huggingface_hub transformers"],
       ["Download", "huggingface-cli download Qwen/Qwen2.5-Coder-7B-Instruct --local-dir models/qwen2.5-coder-7b"],
@@ -116,7 +134,7 @@ const listings: SeedListing[] = [
     installUrl: "https://huggingface.co/microsoft/Phi-3.5-mini-instruct",
     githubUrl: "https://huggingface.co/microsoft/Phi-3.5-mini-instruct",
     featured: 0,
-    labels: ["huggingface", "local-lm", "small-model"],
+    labels: ["productivity", "huggingface", "local-lm", "small-model"],
     commands: [
       ["Install CLI", "pip install -U huggingface_hub transformers"],
       ["Download", "huggingface-cli download microsoft/Phi-3.5-mini-instruct --local-dir models/phi-3.5-mini"],
@@ -134,7 +152,7 @@ const listings: SeedListing[] = [
     installUrl: "https://huggingface.co/google/gemma-2-2b-it",
     githubUrl: "https://huggingface.co/google/gemma-2-2b-it",
     featured: 0,
-    labels: ["huggingface", "local-lm", "small-model"],
+    labels: ["content", "huggingface", "local-lm", "small-model"],
     commands: [
       ["Install CLI", "pip install -U huggingface_hub transformers"],
       ["Download", "huggingface-cli download google/gemma-2-2b-it --local-dir models/gemma-2-2b-it"],
@@ -147,12 +165,12 @@ const listings: SeedListing[] = [
     slug: "frontend-app-builder",
     icon: "tabler:layout-dashboard",
     description: "Build polished frontend applications, dashboards, landing pages, and visually driven product screens.",
-    category: "frontend",
+    category: "skills",
     compatibility: "codex",
     installUrl: "https://github.com/openai/codex",
     githubUrl: "https://github.com/openai/codex",
     featured: 1,
-    labels: ["ui", "nextjs", "mvp"],
+    labels: ["coding", "creativity", "ui", "nextjs", "mvp"],
     commands: [
       ["Use Skill", "$frontend-app-builder"],
       ["Run App", "npm run dev"]
@@ -164,12 +182,12 @@ const listings: SeedListing[] = [
     slug: "figma-plugin-pack",
     icon: "simple-icons:figma",
     description: "Design-to-code, diagram generation, Code Connect, and Figma asset workflows for agentic builds.",
-    category: "design",
+    category: "plugins",
     compatibility: "codex",
     installUrl: "https://www.figma.com/",
     githubUrl: "https://github.com/figma",
     featured: 1,
-    labels: ["ui", "planning"],
+    labels: ["creativity", "ui", "planning"],
     commands: [
       ["Get Design Context", "Use figma:get_design_context"],
       ["Generate Diagram", "Use figma:generate_diagram"]
@@ -181,12 +199,12 @@ const listings: SeedListing[] = [
     slug: "3d-web-experience",
     icon: "tabler:box",
     description: "Plan and build immersive Three.js experiences with strong browser verification.",
-    category: "frontend",
+    category: "skills",
     compatibility: "both",
     installUrl: "https://threejs.org/",
     githubUrl: "https://github.com/mrdoob/three.js",
     featured: 0,
-    labels: ["3d", "ui"],
+    labels: ["coding", "creativity", "3d", "ui"],
     commands: [
       ["Use Skill", "$3d-web-experience"],
       ["Install Three", "npm install three"]
@@ -198,12 +216,12 @@ const listings: SeedListing[] = [
     slug: "netlify-deploy-toolkit",
     icon: "simple-icons:netlify",
     description: "Deploy and configure modern web apps on Netlify with framework-specific guidance.",
-    category: "devops",
+    category: "plugins",
     compatibility: "codex",
     installUrl: "https://docs.netlify.com/",
     githubUrl: "https://github.com/netlify",
     featured: 0,
-    labels: ["vercel", "github"],
+    labels: ["coding", "automation", "vercel", "github"],
     commands: [
       ["Deploy", "netlify deploy"],
       ["Production", "netlify deploy --prod"]
@@ -215,12 +233,12 @@ const listings: SeedListing[] = [
     slug: "ui-ux-pro-max",
     icon: "tabler:palette",
     description: "AI design intelligence for UI/UX planning, color systems, typography, accessibility, and chart guidance.",
-    category: "design",
+    category: "skills",
     compatibility: "both",
     installUrl: "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
     githubUrl: "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
     featured: 0,
-    labels: ["design-system", "ui", "planning"],
+    labels: ["creativity", "design-system", "ui", "planning"],
     commands: [
       ["Install CLI", "npm install -g uipro-cli"],
       ["Claude", "uipro init --ai claude"],
@@ -233,12 +251,12 @@ const listings: SeedListing[] = [
     slug: "remotion",
     icon: "tabler:video",
     description: "Build videos programmatically with React, then render them through a CLI-first workflow.",
-    category: "frontend",
+    category: "plugins",
     compatibility: "both",
     installUrl: "https://remotion.dev/docs",
     githubUrl: "https://github.com/remotion-dev/remotion",
     featured: 0,
-    labels: ["react", "video", "workflow"],
+    labels: ["content", "creativity", "react", "video", "workflow"],
     commands: [
       ["Create Project", "npx create-video@latest"],
       ["Render", "npx remotion render"]
@@ -250,12 +268,12 @@ const listings: SeedListing[] = [
     slug: "blender-mcp",
     icon: "simple-icons:blender",
     description: "Connect Blender to MCP clients for natural-language 3D scene and automation workflows.",
-    category: "design",
+    category: "mcp",
     compatibility: "both",
     installUrl: "https://github.com/ahujasid/blender-mcp",
     githubUrl: "https://github.com/ahujasid/blender-mcp",
     featured: 0,
-    labels: ["3d", "mcp", "automation"],
+    labels: ["automation", "creativity", "3d", "mcp"],
     commands: [
       ["Install", "uv tool install -U blender-mcp"],
       ["Run", "blender-mcp"],
@@ -268,12 +286,12 @@ const listings: SeedListing[] = [
     slug: "impeccable",
     icon: "tabler:brush",
     description: "A frontend design skill for turning rough interfaces into polished, accessible UI.",
-    category: "design",
+    category: "skills",
     compatibility: "both",
     installUrl: "https://impeccable.style",
     githubUrl: "https://github.com/pbakaus/impeccable",
     featured: 0,
-    labels: ["design-system", "ui", "workflow"],
+    labels: ["creativity", "design-system", "ui", "workflow"],
     commands: [
       ["Install", "npx impeccable skills install"],
       ["Claude", "/plugin marketplace add pbakaus/impeccable"]
@@ -285,12 +303,12 @@ const listings: SeedListing[] = [
     slug: "claude-code-templates",
     icon: "tabler:template",
     description: "A template hub for Claude Code with ready-made agents, commands, settings, hooks, and MCP integrations.",
-    category: "automation",
+    category: "github-repos",
     compatibility: "both",
     installUrl: "https://github.com/davila7/claude-code-templates",
     githubUrl: "https://github.com/davila7/claude-code-templates",
     featured: 0,
-    labels: ["templates", "workflow", "brainstorming"],
+    labels: ["content", "productivity", "templates", "workflow", "brainstorming", "github"],
     commands: [
       ["Browse", "npx claude-code-templates@latest"],
       ["Scroll Skill", "npx claude-code-templates@latest --skill creative-design/scroll-experience --yes"],
@@ -299,16 +317,34 @@ const listings: SeedListing[] = [
   },
   {
     type: "skill",
+    title: "Launch Prompt Pack",
+    slug: "launch-prompt-pack",
+    icon: "tabler:message-2",
+    description: "A compact prompt set for shaping product ideas, website copy, implementation plans, and launch checklists.",
+    category: "prompts",
+    compatibility: "both",
+    installUrl: "https://github.com/openai/codex",
+    githubUrl: "https://github.com/openai/codex",
+    featured: 1,
+    labels: ["content", "productivity", "templates", "planning"],
+    commands: [
+      ["Product Brief", "Write a concise product brief for: <idea>. Include audience, pain, promise, and launch scope."],
+      ["Landing Copy", "Turn this product brief into homepage copy with hero text, category cards, and calls to action."],
+      ["Implementation Plan", "Create a phased implementation plan with acceptance criteria for: <feature>."]
+    ]
+  },
+  {
+    type: "skill",
     title: "React Best Practices",
     slug: "react-best-practices",
     icon: "simple-icons:react",
     description: "A focused React skill for component structure, performance, maintainability, and modern frontend patterns.",
-    category: "frontend",
+    category: "skills",
     compatibility: "both",
     installUrl: "https://aitmpl.com/component/skill/web-development/react-best-practices",
     githubUrl: "https://aitmpl.com/component/skill/web-development/react-best-practices",
-    featured: 0,
-    labels: ["react", "ui", "workflow"],
+    featured: 1,
+    labels: ["coding", "react", "ui", "workflow"],
     commands: [
       ["Use Skill", "npx claude-code-templates@latest --skill web-development/react-best-practices --yes"],
       ["Browse", "npx claude-code-templates@latest"]
@@ -320,12 +356,12 @@ const listings: SeedListing[] = [
     slug: "superpowers",
     icon: "tabler:brain",
     description: "An agentic skills framework for planning, execution, review, and clean delivery.",
-    category: "automation",
+    category: "skills",
     compatibility: "both",
     installUrl: "https://github.com/obra/superpowers",
     githubUrl: "https://github.com/obra/superpowers",
-    featured: 0,
-    labels: ["planning", "workflow", "brainstorming"],
+    featured: 1,
+    labels: ["productivity", "planning", "workflow", "brainstorming"],
     commands: [
       ["Install", "/plugin marketplace add obra/superpowers"],
       ["Gemini", "gemini extensions install https://github.com/obra/superpowers"]
@@ -337,12 +373,12 @@ const listings: SeedListing[] = [
     slug: "takopi",
     icon: "simple-icons:telegram",
     description: "A Telegram bridge for AI coding agents with remote task execution, progress streaming, and session resume.",
-    category: "automation",
+    category: "skills",
     compatibility: "both",
     installUrl: "https://github.com/banteg/takopi",
     githubUrl: "https://github.com/banteg/takopi",
     featured: 0,
-    labels: ["telegram", "workflow", "automation"],
+    labels: ["automation", "productivity", "telegram", "workflow"],
     commands: [
       ["Install", "uv tool install -U takopi"],
       ["Onboard", "takopi --onboard"],
@@ -355,12 +391,12 @@ const listings: SeedListing[] = [
     slug: "get-shit-done",
     icon: "tabler:route",
     description: "A spec-driven workflow for planning, researching, executing, verifying, and shipping software phases.",
-    category: "automation",
+    category: "skills",
     compatibility: "both",
     installUrl: "https://github.com/gsd-build/get-shit-done",
     githubUrl: "https://github.com/gsd-build/get-shit-done",
     featured: 0,
-    labels: ["planning", "workflow", "mvp"],
+    labels: ["productivity", "automation", "planning", "workflow", "mvp"],
     commands: [
       ["New Project", "/gsd:new-project"],
       ["Plan Phase", "/gsd:plan-phase 1"],
