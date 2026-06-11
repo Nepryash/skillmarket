@@ -21,6 +21,7 @@ export function MarketplaceFilters({ categories, labels, filters }: MarketplaceF
           <option value="skill">Skills</option>
           <option value="plugin">Plugins</option>
           <option value="model">Local models</option>
+          <option value="mcp">MCP</option>
           <option value="prompt">Prompts</option>
           <option value="github_repo">GitHub repos</option>
         </select>

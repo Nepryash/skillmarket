@@ -3,18 +3,11 @@ import { ArrowRight, CornerDownLeft, Search, Sparkles } from "lucide-react";
 import { ListingCard } from "@/components/listing-card";
 import { ListingIcon } from "@/components/listing-icon";
 import { recordAnalyticsEvent, trackedUrl } from "@/lib/analytics";
+import { landingCategories } from "@/lib/landing-categories";
 import { getCategories, getFeaturedListings } from "@/lib/marketplace";
 import { telegramStartUrl } from "@/lib/telegram";
 
 export const dynamic = "force-dynamic";
-
-const useCaseLinks = [
-  { name: "Coding", slug: "coding", icon: "tabler:code", description: "Build, review, debug, and ship software." },
-  { name: "Creativity", slug: "creativity", icon: "tabler:palette", description: "Design, prototype, animate, and explore visuals." },
-  { name: "Productivity", slug: "productivity", icon: "tabler:checklist", description: "Plan work, manage context, and move faster." },
-  { name: "Automation", slug: "automation", icon: "tabler:robot", description: "Connect workflows, agents, tools, and services." },
-  { name: "Content", slug: "content", icon: "tabler:article", description: "Draft prompts, copy, docs, scripts, and media." }
-];
 
 export default async function HomePage() {
   const [featuredListings, categories] = await Promise.all([getFeaturedListings(6), getCategories()]);
@@ -108,7 +101,7 @@ export default async function HomePage() {
           <p>Filter the marketplace by the kind of work you want the tool to support.</p>
         </div>
         <div className="use-case-grid reveal-grid">
-          {useCaseLinks.map((useCase) => (
+          {landingCategories.map((useCase) => (
             <Link className="use-case-card" href={`/marketplace?label=${useCase.slug}`} key={useCase.slug}>
               <ListingIcon icon={useCase.icon} title={`${useCase.name} category`} />
               <span>{useCase.name}</span>

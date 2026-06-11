@@ -22,7 +22,7 @@ function parseFilters(params: Record<string, string | string[] | undefined>): Li
   return {
     query: firstParam(params.q) || undefined,
     type:
-      type === "skill" || type === "plugin" || type === "model" || type === "prompt" || type === "github_repo"
+      type === "skill" || type === "plugin" || type === "model" || type === "mcp" || type === "prompt" || type === "github_repo"
         ? (type as ListingType)
         : "all",
     compatibility:

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Space_Grotesk, Work_Sans } from "next/font/google";
 import Link from "next/link";
 import { Github, Search, Send } from "lucide-react";
@@ -29,7 +30,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <header className="header-shell">
           <div className="site-header">
             <Link href="/" className="brand" aria-label="SkillMarket home">
-              <span className="brand-mark">SM</span>
+              <span className="brand-mark brand-image" aria-hidden="true">
+                <Image src="/logoskillhub.png" alt="" fill sizes="42px" priority />
+              </span>
               <span className="brand-copy">
                 <span>SkillMarket</span>
                 <small>Skills, plugins, models</small>

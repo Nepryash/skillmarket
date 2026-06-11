@@ -18,7 +18,7 @@ type SeedLabel = {
 };
 
 type SeedListing = {
-  type: "skill" | "plugin" | "model" | "prompt" | "github_repo";
+  type: "skill" | "plugin" | "model" | "mcp" | "prompt" | "github_repo";
   title: string;
   slug: string;
   icon: string;

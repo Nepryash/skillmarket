@@ -4,6 +4,7 @@ export function formatListingType(type: ListingType) {
   if (type === "skill") return "Skill";
   if (type === "plugin") return "Plugin";
   if (type === "model") return "Model";
+  if (type === "mcp") return "MCP";
   if (type === "prompt") return "Prompt";
   return "GitHub Repo";
 }

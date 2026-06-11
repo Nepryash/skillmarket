@@ -13,7 +13,7 @@ type AdminListingFormProps = {
   listing?: Listing | null;
 };
 
-const listingTypes: Array<ListingType> = ["skill", "plugin", "model", "prompt", "github_repo"];
+const listingTypes: Array<ListingType> = ["skill", "plugin", "model", "mcp", "prompt", "github_repo"];
 const compatibilities: Array<Compatibility> = ["claude_code", "codex", "both", "local_lm", "not_applicable"];
 const statuses = ["draft", "published", "archived"] as const;
 

@@ -117,6 +117,17 @@ textarea {
   transition: background 200ms ease, color 200ms ease, transform 200ms var(--ease-out);
 }
 
+.brand-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.brand-image img {
+  object-fit: cover;
+}
+
 .brand:hover .brand-mark {
   background: var(--accent);
   color: var(--background);

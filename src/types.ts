@@ -1,4 +1,4 @@
-export type ListingType = "skill" | "plugin" | "model" | "prompt" | "github_repo";
+export type ListingType = "skill" | "plugin" | "model" | "mcp" | "prompt" | "github_repo";
 export type Compatibility = "claude_code" | "codex" | "both" | "local_lm" | "not_applicable";
 export type ListingStatus = "draft" | "published" | "archived";
 
