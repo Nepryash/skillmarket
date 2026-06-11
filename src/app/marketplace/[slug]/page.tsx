@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ExternalLink, Send } from "lucide-react";
+import { CopyButton } from "@/components/copy-button";
 import { ListingIcon } from "@/components/listing-icon";
 import { recordAnalyticsEvent, trackedUrl } from "@/lib/analytics";
 import { formatCompatibility, formatListingType } from "@/lib/format";
@@ -44,11 +45,13 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
   const telegramUrl = trackedUrl("telegram_click", telegramStartUrl(listing.slug), listing.slug);
   const compatibilityLabel = formatCompatibility(listing.compatibility);
   const promptText = listing.prompt?.trim() ?? "";
-  const panelTitle = listing.type === "prompt" ? "Prompt" : "Install";
+  const panelTitle = listing.type === "prompt" ? "Prompt" : listing.type === "github_repo" ? "Repository" : "Install";
   const panelCopy =
     listing.type === "prompt"
       ? "Copy the prompt directly, or send this listing to Telegram for quick reference."
-      : "Use the available links directly, or send this listing to Telegram for quick reference.";
+      : listing.type === "github_repo"
+        ? "Use the repository link directly, or send this listing to Telegram for quick reference."
+        : "Use the available links directly, or send this listing to Telegram for quick reference.";
 
   return (
     <main className="page-shell detail-page">
@@ -99,10 +102,16 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
         </div>
       </section>
 
-      <aside className="side-panel" aria-label="Install actions">
+      <aside className="side-panel" aria-label="Listing actions">
         <h2>{panelTitle}</h2>
         <p className="detail-copy">{panelCopy}</p>
-        {installUrl ? (
+        {listing.type === "prompt" && promptText ? (
+          <CopyButton text={promptText} label="Copy prompt" className="button primary" />
+        ) : listing.type === "github_repo" && sourceUrl ? (
+          <a className="button primary" href={sourceUrl} target="_blank" rel="noreferrer">
+            Repository link <ExternalLink size={16} aria-hidden="true" />
+          </a>
+        ) : installUrl ? (
           <a className="button primary" href={installUrl} target="_blank" rel="noreferrer">
             Install link <ExternalLink size={16} aria-hidden="true" />
           </a>
@@ -112,9 +121,9 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
             <code>{listing.installUrl}</code>
           </div>
         ) : null}
-        {sourceUrl ? (
+        {listing.type !== "github_repo" && sourceUrl ? (
           <a className="button" href={sourceUrl} target="_blank" rel="noreferrer">
-            {listing.type === "github_repo" ? "Repository" : "Source"} <ExternalLink size={16} aria-hidden="true" />
+            Source <ExternalLink size={16} aria-hidden="true" />
           </a>
         ) : null}
         <a className="button" href={telegramUrl} target="_blank" rel="noreferrer">

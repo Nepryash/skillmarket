@@ -31,7 +31,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <div className="site-header">
             <Link href="/" className="brand" aria-label="SkillMarket home">
               <span className="brand-mark brand-image" aria-hidden="true">
-                <Image src="/logoskillhub.png" alt="" fill sizes="42px" priority />
+                <Image src="/logoskillhub.svg" alt="" width={40} height={40} priority />
               </span>
               <span className="brand-copy">
                 <span>SkillMarket</span>

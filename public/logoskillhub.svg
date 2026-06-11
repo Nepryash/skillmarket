@@ -1,0 +1,38 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SkillHub logo">
+  <defs>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="10" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <linearGradient id="yellow" x1="156" y1="128" x2="356" y2="384" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF45A" />
+      <stop offset="1" stop-color="#FFD800" />
+    </linearGradient>
+  </defs>
+  <g filter="url(#glow)" stroke="url(#yellow)" stroke-linecap="round">
+    <path d="M156 177C168 148 201 129 237 128C275 127 304 140 322 165C339 187 336 217 317 236C296 257 267 263 236 272C198 283 170 299 170 334C170 369 204 391 248 391C284 391 320 378 350 353" stroke-width="44" />
+    <path d="M206 96V156" stroke-width="28" />
+    <path d="M246 82V156" stroke-width="28" />
+    <path d="M286 92V163" stroke-width="28" />
+    <path d="M326 114V178" stroke-width="28" />
+    <path d="M360 147V209" stroke-width="28" />
+    <path d="M382 187V238" stroke-width="28" />
+    <path d="M146 196V245" stroke-width="28" />
+    <path d="M132 244V282" stroke-width="28" />
+    <path d="M125 296V332" stroke-width="28" />
+    <path d="M174 366V427" stroke-width="28" />
+    <path d="M214 382V438" stroke-width="28" />
+    <path d="M255 389V444" stroke-width="28" />
+    <path d="M298 382V433" stroke-width="28" />
+    <path d="M338 363V416" stroke-width="28" />
+    <path d="M376 335V381" stroke-width="28" />
+    <path d="M402 297V338" stroke-width="28" />
+    <path d="M414 258V293" stroke-width="28" />
+    <circle cx="256" cy="256" r="12" fill="#FFF45A" stroke="none" />
+    <circle cx="226" cy="286" r="10" fill="#FFF45A" stroke="none" />
+    <circle cx="289" cy="286" r="10" fill="#FFF45A" stroke="none" />
+  </g>
+</svg>
