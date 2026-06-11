@@ -18,13 +18,14 @@ type SeedLabel = {
 };
 
 type SeedListing = {
-  type: "skill" | "plugin" | "model";
+  type: "skill" | "plugin" | "model" | "prompt" | "github_repo";
   title: string;
   slug: string;
   icon: string;
   description: string;
+  prompt?: string;
   category: string;
-  compatibility: "claude_code" | "codex" | "both" | "local_lm";
+  compatibility: "claude_code" | "codex" | "both" | "local_lm" | "not_applicable";
   installUrl: string;
   githubUrl: string;
   featured: number;
@@ -34,46 +35,67 @@ type SeedListing = {
 
 const categories: SeedCategory[] = [
   {
+    name: "Coding",
+    slug: "coding",
+    description: "Practical tools and workflows for building software",
+    prompt: "Use when the work is code-heavy and implementation focused.",
+    sortOrder: 1
+  },
+  {
+    name: "Productivity",
+    slug: "productivity",
+    description: "Planning, execution, automation, and workflow helpers",
+    prompt: "Use when the work is about staying organized and moving faster.",
+    sortOrder: 2
+  },
+  {
+    name: "Creativity",
+    slug: "creativity",
+    description: "Design, prototyping, media, and exploratory creative tools",
+    prompt: "Use when the work is visual, expressive, or experimental.",
+    sortOrder: 3
+  },
+  {
     name: "Local Models",
     slug: "local-models",
     description: "Downloadable local LMs for offline coding, chat, and agent workflows",
     prompt: "Run models locally for private or offline workflows.",
-    sortOrder: 1
+    sortOrder: 4
   },
   {
     name: "MCP",
     slug: "mcp",
     description: "Model Context Protocol servers, connectors, and tool bridges",
     prompt: "Connect agents to tools, apps, files, and services.",
-    sortOrder: 2
+    sortOrder: 5
   },
   {
     name: "Plugins",
     slug: "plugins",
     description: "Installable plugin packs and extensions for agent workflows",
     prompt: "Add new capabilities to your coding environment.",
-    sortOrder: 3
+    sortOrder: 6
   },
   {
     name: "Skills",
     slug: "skills",
     description: "Reusable agent skills for planning, coding, design, and delivery",
     prompt: "Trigger focused workflows when you need expert help.",
-    sortOrder: 4
+    sortOrder: 7
   },
   {
     name: "Prompts",
     slug: "prompts",
     description: "Reusable prompt packs, templates, and practical instructions",
     prompt: "Start from copyable prompts instead of a blank page.",
-    sortOrder: 5
+    sortOrder: 8
   },
   {
     name: "Useful GitHub Repos",
     slug: "github-repos",
     description: "Repos worth bookmarking, installing, or studying for agent work",
     prompt: "Find source projects that are useful beyond one command.",
-    sortOrder: 6
+    sortOrder: 9
   }
 ];
 
@@ -304,9 +326,10 @@ const listings: SeedListing[] = [
     icon: "tabler:template",
     description: "A template hub for Claude Code with ready-made agents, commands, settings, hooks, and MCP integrations.",
     category: "github-repos",
-    compatibility: "both",
-    installUrl: "https://github.com/davila7/claude-code-templates",
+    compatibility: "not_applicable",
+    installUrl: "",
     githubUrl: "https://github.com/davila7/claude-code-templates",
+    prompt: "",
     featured: 0,
     labels: ["content", "productivity", "templates", "workflow", "brainstorming", "github"],
     commands: [
@@ -316,15 +339,16 @@ const listings: SeedListing[] = [
     ]
   },
   {
-    type: "skill",
+    type: "prompt",
     title: "Launch Prompt Pack",
     slug: "launch-prompt-pack",
     icon: "tabler:message-2",
     description: "A compact prompt set for shaping product ideas, website copy, implementation plans, and launch checklists.",
     category: "prompts",
-    compatibility: "both",
-    installUrl: "https://github.com/openai/codex",
-    githubUrl: "https://github.com/openai/codex",
+    prompt: "Create a concise product brief for: <idea>. Include audience, pain, promise, and launch scope.\n\nThen turn that brief into homepage copy with hero text, category cards, and calls to action.\n\nFinally, create a phased implementation plan with acceptance criteria for: <feature>.",
+    compatibility: "not_applicable",
+    installUrl: "",
+    githubUrl: "",
     featured: 1,
     labels: ["content", "productivity", "templates", "planning"],
     commands: [

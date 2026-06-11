@@ -1,8 +1,11 @@
+"use client";
+
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Save } from "lucide-react";
 import { upsertListingAction } from "@/app/admin/actions";
-import type { Category, Label, Listing } from "@/types";
-import { formatCompatibility, formatListingType } from "@/lib/format";
+import type { Category, Label, Listing, ListingType, Compatibility } from "@/types";
+import { formatListingType } from "@/lib/format";
 
 type AdminListingFormProps = {
   categories: Category[];
@@ -10,12 +13,18 @@ type AdminListingFormProps = {
   listing?: Listing | null;
 };
 
-const listingTypes = ["skill", "plugin", "model"] as const;
-const compatibilities = ["claude_code", "codex", "both", "local_lm"] as const;
+const listingTypes: Array<ListingType> = ["skill", "plugin", "model", "prompt", "github_repo"];
+const compatibilities: Array<Compatibility> = ["claude_code", "codex", "both", "local_lm", "not_applicable"];
 const statuses = ["draft", "published", "archived"] as const;
 
 export function AdminListingForm({ categories, labels, listing }: AdminListingFormProps) {
-  const selectedLabelIds = new Set(listing?.labels.map((label) => label.id) ?? []);
+  const initialType = listing?.type ?? "skill";
+  const [selectedType, setSelectedType] = useState<ListingType>(initialType);
+  const selectedLabelIds = useMemo(() => new Set(listing?.labels.map((label) => label.id) ?? []), [listing]);
+
+  const showPromptField = selectedType === "prompt";
+  const showInstallField = selectedType !== "prompt" && selectedType !== "github_repo";
+  const showSourceField = selectedType !== "prompt";
 
   return (
     <form className="admin-form" action={upsertListingAction}>
@@ -35,7 +44,11 @@ export function AdminListingForm({ categories, labels, listing }: AdminListingFo
         </label>
         <label>
           Type
-          <select name="type" defaultValue={listing?.type ?? "skill"}>
+          <select
+            name="type"
+            defaultValue={initialType}
+            onChange={(event) => setSelectedType(event.target.value as ListingType)}
+          >
             {listingTypes.map((type) => (
               <option key={type} value={type}>
                 {formatListingType(type)}
@@ -45,10 +58,13 @@ export function AdminListingForm({ categories, labels, listing }: AdminListingFo
         </label>
         <label>
           Compatibility
-          <select name="compatibility" defaultValue={listing?.compatibility ?? "codex"}>
+          <select
+            name="compatibility"
+            defaultValue={listing?.compatibility ?? (initialType === "prompt" ? "not_applicable" : "codex")}
+          >
             {compatibilities.map((compatibility) => (
               <option key={compatibility} value={compatibility}>
-                {formatCompatibility(compatibility)}
+                {compatibility === "not_applicable" ? "Not applicable" : compatibility === "claude_code" ? "Claude Code" : compatibility === "codex" ? "Codex" : compatibility === "local_lm" ? "Local LM" : "Claude Code + Codex"}
               </option>
             ))}
           </select>
@@ -84,15 +100,42 @@ export function AdminListingForm({ categories, labels, listing }: AdminListingFo
         <textarea name="description" required defaultValue={listing?.description} />
       </label>
 
+      {showPromptField ? (
+        <label>
+          Prompt
+          <textarea
+            name="prompt"
+            required
+            rows={7}
+            placeholder="Paste the prompt text here"
+            defaultValue={listing?.prompt}
+          />
+        </label>
+      ) : null}
+
       <div className="admin-form-grid">
-        <label>
-          Install URL or command
-          <input name="installUrl" required defaultValue={listing?.installUrl} />
-        </label>
-        <label>
-          Source URL
-          <input name="githubUrl" type="url" required defaultValue={listing?.githubUrl} />
-        </label>
+        {showInstallField ? (
+          <label>
+            Install URL or command
+            <input
+              name="installUrl"
+              required={showInstallField}
+              defaultValue={listing?.installUrl}
+              placeholder="https://..."
+            />
+          </label>
+        ) : null}
+        {showSourceField ? (
+          <label>
+            {selectedType === "github_repo" ? "Repository URL" : "Source URL"}
+            <input
+              name="githubUrl"
+              required={selectedType === "github_repo" || selectedType === "skill" || selectedType === "plugin" || selectedType === "model"}
+              defaultValue={listing?.githubUrl}
+              placeholder="https://github.com/..."
+            />
+          </label>
+        ) : null}
       </div>
 
       <fieldset>

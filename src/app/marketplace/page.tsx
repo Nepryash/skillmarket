@@ -21,9 +21,16 @@ function parseFilters(params: Record<string, string | string[] | undefined>): Li
 
   return {
     query: firstParam(params.q) || undefined,
-    type: type === "skill" || type === "plugin" || type === "model" ? (type as ListingType) : "all",
+    type:
+      type === "skill" || type === "plugin" || type === "model" || type === "prompt" || type === "github_repo"
+        ? (type as ListingType)
+        : "all",
     compatibility:
-      compatibility === "claude_code" || compatibility === "codex" || compatibility === "both" || compatibility === "local_lm"
+      compatibility === "claude_code" ||
+      compatibility === "codex" ||
+      compatibility === "both" ||
+      compatibility === "local_lm" ||
+      compatibility === "not_applicable"
         ? (compatibility as Compatibility)
         : "all",
     category: firstParam(params.category) || "all",

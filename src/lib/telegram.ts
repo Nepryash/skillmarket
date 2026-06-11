@@ -54,25 +54,35 @@ export function listingTelegramMessage(listing: Listing) {
   const labels = listing.labels.map((label) => label.name).join(", ");
   const downloadCommand = findDownloadCommand(listing);
   const commands = listing.commands.map((command) => `- ${command.label}: ${command.command}`).join("\n");
+  const promptText = listing.prompt?.trim() ?? "";
+  const installLine = listing.installUrl ? `Install: ${listing.installUrl}` : "";
+  const sourceLine = listing.githubUrl ? `Source: ${listing.githubUrl}` : "";
+  const compatibilityLine = compatibility ? `Compatibility: ${compatibility}` : "";
+  const workflowText = compatibility ? `${compatibility} workflows` : "general workflows";
+  const bestForText =
+    listing.type === "prompt"
+      ? "Developers who want a ready-to-copy prompt and practical command list in one Telegram message."
+      : labels
+        ? `Developers working with ${labels}, especially when they need a quick, copyable setup path from SkillMarket.`
+        : "Developers who want the install link, source link, and practical command list in one Telegram message.";
+  const downloadFallback = listing.type === "prompt" ? "Use the prompt above." : "Use the install link above.";
 
   return [
     `${listing.title}`,
     "",
     "What it is:",
-    `${listing.title} is a ${listingType} in ${listing.categoryName} for ${compatibility} workflows. ${listing.description}`,
+    `${listing.title} is a ${listingType} in ${listing.categoryName} for ${workflowText}. ${listing.description}`,
     `Category: ${listing.categoryName}`,
-    `Compatibility: ${compatibility}`,
+    compatibilityLine,
     labels ? `Tags: ${labels}` : "",
+    promptText ? `Prompt:\n${promptText}` : "",
     "",
     "Best for:",
-    labels
-      ? `Developers working with ${labels}, especially when they need a quick, copyable setup path from SkillMarket.`
-      : "Developers who want the install link, source link, and practical command list in one Telegram message.",
+    bestForText,
+    installLine,
+    sourceLine,
     "",
-    `Install: ${listing.installUrl}`,
-    `Source: ${listing.githubUrl}`,
-    "",
-    downloadCommand ? `Download command:\n${downloadCommand.command}` : "Download command:\nUse the install link above.",
+    downloadCommand ? `Download command:\n${downloadCommand.command}` : `Download command:\n${downloadFallback}`,
     commands ? `\nAll commands:\n${commands}` : ""
   ]
     .filter(Boolean)

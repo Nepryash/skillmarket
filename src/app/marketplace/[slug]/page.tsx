@@ -40,15 +40,22 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
   });
 
   const installUrl = isHttpUrl(listing.installUrl) ? trackedUrl("install_click", listing.installUrl, listing.slug) : null;
-  const sourceUrl = trackedUrl("install_click", listing.githubUrl, listing.slug);
+  const sourceUrl = isHttpUrl(listing.githubUrl) ? trackedUrl("install_click", listing.githubUrl, listing.slug) : null;
   const telegramUrl = trackedUrl("telegram_click", telegramStartUrl(listing.slug), listing.slug);
+  const compatibilityLabel = formatCompatibility(listing.compatibility);
+  const promptText = listing.prompt?.trim() ?? "";
+  const panelTitle = listing.type === "prompt" ? "Prompt" : "Install";
+  const panelCopy =
+    listing.type === "prompt"
+      ? "Copy the prompt directly, or send this listing to Telegram for quick reference."
+      : "Use the available links directly, or send this listing to Telegram for quick reference.";
 
   return (
     <main className="page-shell detail-page">
       <section>
         <div className="chip-row">
           <span className="chip accent">{formatListingType(listing.type)}</span>
-          <span className="chip">{formatCompatibility(listing.compatibility)}</span>
+          {compatibilityLabel ? <span className="chip">{compatibilityLabel}</span> : null}
           <span className="chip">{listing.categoryName}</span>
         </div>
         <div className="detail-title-row">
@@ -64,6 +71,13 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
             </span>
           ))}
         </div>
+
+        {promptText ? (
+          <section className="install-command" aria-label="Prompt">
+            <span>Prompt</span>
+            <code>{promptText}</code>
+          </section>
+        ) : null}
 
         {listing.bullets.length > 0 ? (
           <section className="capability-list" aria-label="Listing capabilities">
@@ -86,21 +100,23 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
       </section>
 
       <aside className="side-panel" aria-label="Install actions">
-        <h2>Install</h2>
-        <p className="detail-copy">Use the source link directly, or send this listing to Telegram for quick reference.</p>
+        <h2>{panelTitle}</h2>
+        <p className="detail-copy">{panelCopy}</p>
         {installUrl ? (
           <a className="button primary" href={installUrl} target="_blank" rel="noreferrer">
             Install link <ExternalLink size={16} aria-hidden="true" />
           </a>
-        ) : (
+        ) : listing.installUrl ? (
           <div className="install-command">
             <span>Install command</span>
             <code>{listing.installUrl}</code>
           </div>
-        )}
-        <a className="button" href={sourceUrl} target="_blank" rel="noreferrer">
-          Source <ExternalLink size={16} aria-hidden="true" />
-        </a>
+        ) : null}
+        {sourceUrl ? (
+          <a className="button" href={sourceUrl} target="_blank" rel="noreferrer">
+            {listing.type === "github_repo" ? "Repository" : "Source"} <ExternalLink size={16} aria-hidden="true" />
+          </a>
+        ) : null}
         <a className="button" href={telegramUrl} target="_blank" rel="noreferrer">
           Get via Telegram <Send size={16} aria-hidden="true" />
         </a>

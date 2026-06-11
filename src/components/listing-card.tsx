@@ -12,6 +12,7 @@ type ListingCardProps = {
 
 export function ListingCard({ listing }: ListingCardProps) {
   const telegramUrl = trackedUrl("telegram_click", telegramStartUrl(listing.slug), listing.slug);
+  const compatibilityLabel = formatCompatibility(listing.compatibility);
 
   return (
     <article className={`listing-card scroll-card${listing.featured ? " is-featured" : ""}`}>
@@ -22,7 +23,7 @@ export function ListingCard({ listing }: ListingCardProps) {
             <ListingIcon icon={listing.icon} title={`${listing.title} icon`} />
             <span className="chip accent">{formatListingType(listing.type)}</span>
           </div>
-          <span className="chip">{formatCompatibility(listing.compatibility)}</span>
+          {compatibilityLabel ? <span className="chip">{compatibilityLabel}</span> : null}
         </div>
         <h3>
           <Link href={`/marketplace/${listing.slug}`}>{listing.title}</Link>

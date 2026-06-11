@@ -1,5 +1,5 @@
-export type ListingType = "skill" | "plugin" | "model";
-export type Compatibility = "claude_code" | "codex" | "both" | "local_lm";
+export type ListingType = "skill" | "plugin" | "model" | "prompt" | "github_repo";
+export type Compatibility = "claude_code" | "codex" | "both" | "local_lm" | "not_applicable";
 export type ListingStatus = "draft" | "published" | "archived";
 
 export type Category = {
@@ -40,6 +40,7 @@ export type Listing = {
   slug: string;
   icon: string;
   description: string;
+  prompt: string;
   categoryId: number;
   categoryName: string;
   categorySlug: string;

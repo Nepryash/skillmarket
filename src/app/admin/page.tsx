@@ -37,27 +37,32 @@ export default async function AdminPage() {
       </section>
 
       <section className="admin-table" aria-label="Listings">
-        {listings.map((listing) => (
-          <article className="admin-row" key={listing.id}>
-            <div>
-              <h2>{listing.title}</h2>
-              <p>
-                {formatListingType(listing.type)} / {formatCompatibility(listing.compatibility)} / {listing.status}
-              </p>
-            </div>
-            <div className="admin-row-actions">
-              <Link className="button" href={`/admin/listings/${listing.id}`}>
-                Edit <Edit size={16} aria-hidden="true" />
-              </Link>
-              <form action={archiveListingAction}>
-                <input type="hidden" name="id" value={listing.id} />
-                <button className="button" type="submit">
-                  Archive <Archive size={16} aria-hidden="true" />
-                </button>
-              </form>
-            </div>
-          </article>
-        ))}
+        {listings.map((listing) => {
+          const compatibilityLabel = formatCompatibility(listing.compatibility);
+
+          return (
+            <article className="admin-row" key={listing.id}>
+              <div>
+                <h2>{listing.title}</h2>
+                <p>
+                  {formatListingType(listing.type)}
+                  {compatibilityLabel ? ` / ${compatibilityLabel}` : ""} / {listing.status}
+                </p>
+              </div>
+              <div className="admin-row-actions">
+                <Link className="button" href={`/admin/listings/${listing.id}`}>
+                  Edit <Edit size={16} aria-hidden="true" />
+                </Link>
+                <form action={archiveListingAction}>
+                  <input type="hidden" name="id" value={listing.id} />
+                  <button className="button" type="submit">
+                    Archive <Archive size={16} aria-hidden="true" />
+                  </button>
+                </form>
+              </div>
+            </article>
+          );
+        })}
       </section>
 
       <section className="admin-split">

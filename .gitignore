@@ -2,6 +2,12 @@
 node_modules/
 .next/
 data/*.db
+*.db
+*.sqlite
+*.sqlite3
+*.db-wal
+*.db-shm
+supabase/.temp/
 *.log
 .env
 .env*.local

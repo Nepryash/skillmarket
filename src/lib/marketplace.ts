@@ -41,6 +41,7 @@ type ListingRow = {
   slug: string;
   icon: string;
   description: string;
+  prompt: string;
   category_id: number;
   compatibility: Listing["compatibility"];
   install_url: string;
@@ -120,6 +121,7 @@ function toListing(
     slug: row.slug,
     icon: row.icon,
     description: row.description,
+    prompt: row.prompt ?? "",
     categoryId: category.id,
     categoryName: category.name,
     categorySlug: category.slug,
@@ -236,7 +238,9 @@ export async function getListings(filters: ListingFilters = {}): Promise<Listing
     }
 
     if (filters.compatibility && filters.compatibility !== "all") {
-      if (filters.compatibility === "local_lm") {
+      if (filters.compatibility === "not_applicable") {
+        if (row.compatibility !== filters.compatibility) return false;
+      } else if (filters.compatibility === "local_lm") {
         if (row.compatibility !== filters.compatibility) return false;
       } else if (row.compatibility !== filters.compatibility && row.compatibility !== "both") {
         return false;

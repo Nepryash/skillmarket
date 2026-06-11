@@ -59,16 +59,40 @@ export async function upsertListingAction(formData: FormData) {
   const db = getSupabaseAdminClient();
   const listingId = Number(value(formData, "id"));
   const timestamp = now();
+  const type = value(formData, "type") as ListingType;
+  const prompt = value(formData, "prompt");
+  const installUrl = value(formData, "installUrl");
+  const githubUrl = value(formData, "githubUrl");
+  const compatibilityValue = value(formData, "compatibility") as Compatibility;
+  const compatibility = type === "prompt" ? "not_applicable" : compatibilityValue || "not_applicable";
+
+  if (type === "prompt" && !prompt) {
+    throw new Error("Prompt listings require prompt text");
+  }
+
+  if (type === "github_repo" && !githubUrl) {
+    throw new Error("GitHub repo listings require a source URL");
+  }
+
+  if (type !== "prompt" && type !== "github_repo" && !installUrl) {
+    throw new Error("Listings require an install URL or command");
+  }
+
+  if (type !== "prompt" && !githubUrl) {
+    throw new Error("Listings require a source URL");
+  }
+
   const payload = {
-    type: value(formData, "type") as ListingType,
+    type,
     title: value(formData, "title"),
     slug: value(formData, "slug"),
     icon: value(formData, "icon") || "tabler:box",
     description: value(formData, "description"),
+    prompt,
     category_id: Number(value(formData, "categoryId")),
-    compatibility: value(formData, "compatibility") as Compatibility,
-    install_url: value(formData, "installUrl"),
-    github_url: value(formData, "githubUrl"),
+    compatibility,
+    install_url: type === "prompt" ? "" : type === "github_repo" ? "" : installUrl,
+    github_url: type === "prompt" ? "" : githubUrl,
     status: value(formData, "status") as ListingStatus,
     featured: Boolean(formData.get("featured")),
     updated_at: timestamp
