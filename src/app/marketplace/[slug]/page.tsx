@@ -77,7 +77,10 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
 
         {promptText ? (
           <section className="install-command" aria-label="Prompt">
-            <span>Prompt</span>
+            <div className="copyable-block-header">
+              <span>Prompt</span>
+              <CopyButton text={promptText} className="button copy-inline" />
+            </div>
             <code>{promptText}</code>
           </section>
         ) : null}
@@ -95,7 +98,10 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
         <div className="command-list">
           {listing.commands.map((command) => (
             <div className="command-item" key={command.id}>
-              <span>{command.label}</span>
+              <div className="copyable-block-header">
+                <span>{command.label}</span>
+                <CopyButton text={command.command} className="button copy-inline" />
+              </div>
               <code>{command.command}</code>
             </div>
           ))}
@@ -106,7 +112,7 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
         <h2>{panelTitle}</h2>
         <p className="detail-copy">{panelCopy}</p>
         {listing.type === "prompt" && promptText ? (
-          <CopyButton text={promptText} label="Copy prompt" className="button primary" />
+          <CopyButton text={promptText} className="button primary" />
         ) : listing.type === "github_repo" && sourceUrl ? (
           <a className="button primary" href={sourceUrl} target="_blank" rel="noreferrer">
             Repository link <ExternalLink size={16} aria-hidden="true" />
@@ -117,7 +123,10 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
           </a>
         ) : listing.installUrl ? (
           <div className="install-command">
-            <span>Install command</span>
+            <div className="copyable-block-header">
+              <span>Install command</span>
+              <CopyButton text={listing.installUrl} className="button copy-inline" />
+            </div>
             <code>{listing.installUrl}</code>
           </div>
         ) : null}

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, CornerDownLeft, Search, Sparkles } from "lucide-react";
+import { HeroFocusCarousel } from "@/components/hero-focus-carousel";
 import { ListingCard } from "@/components/listing-card";
 import { ListingIcon } from "@/components/listing-icon";
 import { recordAnalyticsEvent, trackedUrl } from "@/lib/analytics";
@@ -21,48 +21,7 @@ export default async function HomePage() {
 
   return (
     <main>
-      <section className="page-shell hero scroll-scene entrance-scene">
-        <div className="hero-copy scroll-reveal">
-          <h1>Find agent tools worth using.</h1>
-          <p>
-            SkillMarket is a curated directory of skills, plugins, MCP servers, prompts, local models, and useful GitHub repositories for Claude Code, Codex, and local AI workflows.
-          </p>
-          <form className="hero-search" action="/marketplace">
-            <Search size={18} aria-hidden="true" />
-            <input name="q" placeholder="Search skills, MCP, prompts, repos..." aria-label="Search marketplace" />
-            <button type="submit">
-              <span>Search</span>
-              <CornerDownLeft size={15} aria-hidden="true" />
-            </button>
-          </form>
-          <div className="hero-actions">
-            <Link className="button primary" href="/marketplace">
-              Browse marketplace <ArrowRight size={18} aria-hidden="true" />
-            </Link>
-            <a className="button" href={telegramUrl} target="_blank" rel="noreferrer">
-              Open Telegram <Sparkles size={18} aria-hidden="true" />
-            </a>
-          </div>
-        </div>
-
-        <div className="hero-visual parallax-stage" aria-hidden="true">
-          <div className="hero-orbit" />
-          <div className="terminal-card">
-            <div className="terminal-line">
-              <strong>$</strong>
-              <span>gsd-plan-phase 1 --mvp</span>
-            </div>
-            <div className="terminal-line">
-              <strong>$</strong>
-              <span>frontend-app-builder</span>
-            </div>
-            <div className="terminal-line">
-              <strong>$</strong>
-              <span>huggingface-cli download Qwen/Qwen2.5-Coder-7B-Instruct</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroFocusCarousel telegramUrl={telegramUrl} />
 
       <nav className="page-shell category-strip scroll-reveal" aria-label="Featured categories">
         <Link className="chip accent" href="/marketplace">All</Link>

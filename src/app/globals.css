@@ -12,6 +12,9 @@
   --radius: 8px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-slow: 7.5s;
+  --motion-medium: 4.8s;
+  --motion-stagger: 120ms;
 }
 
 * {
@@ -353,6 +356,19 @@ textarea {
   letter-spacing: 0;
 }
 
+.carousel-headline {
+  display: grid;
+  justify-items: center;
+  min-height: 1.92em;
+}
+
+.hero-changing-text {
+  display: block;
+  color: var(--accent);
+  text-wrap: balance;
+  animation: headline-change 520ms var(--ease-soft) both;
+}
+
 .hero p {
   max-width: 660px;
   margin: 1.4rem auto 0;
@@ -489,6 +505,229 @@ textarea {
   overflow: hidden;
 }
 
+.ambient-console {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  align-items: stretch;
+  gap: 1rem;
+  isolation: isolate;
+  padding: 1.25rem;
+}
+
+.ambient-console::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, transparent 0 48%, rgba(251, 255, 18, 0.14) 50%, transparent 54%),
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 8px);
+  content: "";
+  opacity: 0.28;
+  pointer-events: none;
+  transform: translateY(-24%);
+  animation: console-scan var(--motion-slow) linear infinite;
+}
+
+.ambient-console .terminal-card,
+.focus-carousel-track,
+.console-chip-row {
+  position: relative;
+  z-index: 2;
+}
+
+.focus-carousel-track {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.35fr) minmax(0, 0.72fr);
+  align-items: center;
+  gap: 0.8rem;
+  min-height: 170px;
+  perspective: 900px;
+}
+
+.focus-task-card {
+  position: relative;
+  display: grid;
+  align-content: center;
+  gap: 0.5rem;
+  min-width: 0;
+  min-height: 132px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius);
+  background: rgba(12, 15, 10, 0.82);
+  padding: 0.9rem;
+  color: var(--foreground);
+  text-align: left;
+  cursor: pointer;
+  opacity: 0.48;
+  transform: scale(0.88) rotateY(4deg);
+  transition:
+    opacity 420ms var(--ease-soft),
+    transform 520ms var(--ease-soft),
+    border-color 240ms ease,
+    background 240ms ease,
+    box-shadow 420ms var(--ease-soft);
+}
+
+.focus-task-card.next {
+  transform: scale(0.88) rotateY(-4deg);
+}
+
+.focus-task-card:hover {
+  opacity: 0.78;
+  border-color: rgba(251, 255, 18, 0.48);
+  transform: scale(0.92) rotateY(0);
+}
+
+.focus-task-card.active {
+  min-height: 164px;
+  border-color: rgba(251, 255, 18, 0.7);
+  background:
+    linear-gradient(135deg, rgba(251, 255, 18, 0.14), rgba(255, 255, 255, 0.035)),
+    rgba(12, 15, 10, 0.94);
+  box-shadow: 0 20px 52px rgba(0, 0, 0, 0.4), 0 0 30px rgba(251, 255, 18, 0.08);
+  opacity: 1;
+  transform: translateY(-5px) scale(1);
+}
+
+.focus-task-card span {
+  width: fit-content;
+  border: 1px solid rgba(251, 255, 18, 0.38);
+  border-radius: 999px;
+  color: var(--accent);
+  padding: 0.22rem 0.48rem;
+  font-size: 0.68rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.focus-task-card strong {
+  color: var(--foreground);
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.1;
+}
+
+.focus-task-card.active strong {
+  font-size: 1.18rem;
+}
+
+.focus-task-card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.focus-task-card:not(.active) p {
+  display: none;
+}
+
+.console-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.console-chip-row span {
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 999px;
+  background: rgba(12, 15, 10, 0.72);
+  color: rgba(255, 255, 255, 0.72);
+  padding: 0.32rem 0.58rem;
+  font-size: 0.72rem;
+  font-weight: 760;
+  animation: chip-signal var(--motion-medium) ease-in-out infinite;
+}
+
+.console-chip-row span.active {
+  border-color: rgba(251, 255, 18, 0.72);
+  background: rgba(251, 255, 18, 0.12);
+  color: var(--accent);
+}
+
+.console-chip-row span:nth-child(2) {
+  animation-delay: calc(var(--motion-stagger) * 2);
+}
+
+.console-chip-row span:nth-child(3) {
+  animation-delay: calc(var(--motion-stagger) * 4);
+}
+
+.console-chip-row span:nth-child(4) {
+  animation-delay: calc(var(--motion-stagger) * 6);
+}
+
+.console-chip-row span:nth-child(5) {
+  animation-delay: calc(var(--motion-stagger) * 8);
+}
+
+.carousel-commands {
+  overflow: hidden;
+}
+
+.carousel-command {
+  opacity: 0;
+  animation: command-arrive 560ms var(--ease-soft) forwards;
+  animation-delay: calc(var(--command-index) * 360ms + 120ms);
+}
+
+.carousel-command strong {
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes headline-change {
+  from {
+    opacity: 0;
+    transform: translateY(0.28em);
+    filter: blur(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes command-arrive {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes chip-signal {
+  0%,
+  100% {
+    border-color: rgba(255, 255, 255, 0.13);
+    color: rgba(255, 255, 255, 0.72);
+    transform: translateY(0);
+  }
+
+  35% {
+    border-color: rgba(251, 255, 18, 0.56);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes console-scan {
+  from {
+    transform: translateY(-24%);
+  }
+
+  to {
+    transform: translateY(78%);
+  }
+}
+
 .parallax-stage {
   animation: hero-depth linear both;
   animation-timeline: view();
@@ -565,6 +804,16 @@ textarea {
   animation-timeline: view();
   animation-range: entry 0% exit 80%;
   transition: border-color 220ms ease, background 220ms ease, transform 220ms var(--ease-out);
+}
+
+.ambient-console .terminal-card {
+  position: relative;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  align-self: end;
+  margin: 0;
+  background: rgba(12, 15, 10, 0.88);
 }
 
 .hero-visual:hover .terminal-card {
@@ -1233,10 +1482,39 @@ textarea {
   font-weight: 700;
 }
 
+.copyable-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.copyable-block-header span {
+  min-width: 0;
+}
+
+.copy-inline {
+  flex: 0 0 auto;
+  min-height: 2rem;
+  padding: 0.35rem 0.55rem;
+  font-size: 0.78rem;
+}
+
+.copyable-block-header .copy-inline {
+  width: auto;
+  margin-top: 0;
+}
+
 .command-item code {
   display: block;
-  margin-top: 0.45rem;
+  margin-top: 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  background: rgba(12, 15, 10, 0.72);
+  padding: 0.7rem 0.75rem;
   color: var(--foreground);
+  font-size: 0.9rem;
+  line-height: 1.55;
   white-space: pre-wrap;
   word-break: break-word;
 }
@@ -1263,12 +1541,14 @@ textarea {
 
 .install-command {
   display: grid;
-  gap: 0.45rem;
+  gap: 0.75rem;
   margin-top: 0.7rem;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.035);
-  padding: 0.85rem;
+  background:
+    linear-gradient(135deg, rgba(251, 255, 18, 0.035), transparent 64%),
+    rgba(255, 255, 255, 0.035);
+  padding: 1rem;
   transition: border-color 180ms ease, background 180ms ease;
 }
 
@@ -1284,7 +1564,14 @@ textarea {
 }
 
 .install-command code {
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  background: rgba(12, 15, 10, 0.76);
+  padding: 0.78rem 0.85rem;
   color: var(--foreground);
+  font-size: 0.9rem;
+  line-height: 1.55;
   white-space: pre-wrap;
   word-break: break-word;
 }
@@ -1713,6 +2000,10 @@ textarea {
     min-height: 320px;
   }
 
+  .focus-task-card {
+    padding: 0.72rem;
+  }
+
   .listing-grid {
     grid-template-columns: 1fr;
   }
@@ -1786,6 +2077,12 @@ textarea {
   .metric-row,
   .footer-grid,
   .parallax-stage,
+  .ambient-console,
+  .ambient-console::before,
+  .focus-task-card,
+  .hero-changing-text,
+  .carousel-command,
+  .console-chip-row span,
   .hero-orbit,
   .terminal-card,
   .section::before,
@@ -1836,6 +2133,45 @@ textarea {
 
   .footer-bottom {
     flex-direction: column;
+  }
+
+  .hero-visual {
+    min-height: 360px;
+  }
+
+  .carousel-headline {
+    min-height: 2.15em;
+  }
+
+  .focus-carousel-track {
+    grid-template-columns: 0.58fr minmax(0, 1.8fr) 0.58fr;
+    gap: 0.42rem;
+    min-height: 150px;
+  }
+
+  .focus-task-card {
+    min-height: 106px;
+    padding: 0.58rem;
+  }
+
+  .focus-task-card.active {
+    min-height: 142px;
+  }
+
+  .focus-task-card:not(.active) span,
+  .focus-task-card:not(.active) p {
+    display: none;
+  }
+
+  .focus-task-card:not(.active) strong {
+    overflow: hidden;
+    font-size: 0.68rem;
+    text-overflow: ellipsis;
+  }
+
+  .console-chip-row span {
+    padding: 0.28rem 0.42rem;
+    font-size: 0.66rem;
   }
 
   .admin-hero,

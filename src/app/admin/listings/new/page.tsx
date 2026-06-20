@@ -1,6 +1,6 @@
 import { AdminListingForm } from "@/components/admin-listing-form";
 import { requireAdmin } from "@/lib/admin-auth";
-import { landingCategories } from "@/lib/landing-categories";
+import { listingCategoryOptions } from "@/lib/admin-categories";
 import { getCategories, getLabels } from "@/lib/marketplace";
 
 export const dynamic = "force-dynamic";
@@ -8,9 +8,7 @@ export const dynamic = "force-dynamic";
 export default async function NewListingPage() {
   await requireAdmin();
   const [categories, labels] = await Promise.all([getCategories(), getLabels()]);
-  const landingCategorySlugs = new Set<string>(landingCategories.map((category) => category.slug));
-  const landingPageCategories = categories.filter((category) => landingCategorySlugs.has(category.slug));
-  const categoryOptions = landingPageCategories.length > 0 ? landingPageCategories : categories;
+  const categoryOptions = listingCategoryOptions(categories);
 
   return (
     <main className="page-shell admin-page">

@@ -5,11 +5,11 @@ import { Check, Copy } from "lucide-react";
 
 type CopyButtonProps = {
   text: string;
-  label: string;
+  label?: string;
   className?: string;
 };
 
-export function CopyButton({ text, label, className = "button" }: CopyButtonProps) {
+export function CopyButton({ text, label = "Copy", className = "button" }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export function CopyButton({ text, label, className = "button" }: CopyButtonProp
   }
 
   return (
-    <button className={className} type="button" onClick={handleCopy}>
+    <button className={className} type="button" onClick={handleCopy} aria-live="polite">
       {copied ? "Copied" : label} {copied ? <Check size={16} aria-hidden="true" /> : <Copy size={16} aria-hidden="true" />}
     </button>
   );

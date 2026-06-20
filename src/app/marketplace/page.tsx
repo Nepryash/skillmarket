@@ -110,7 +110,12 @@ export default async function MarketplacePage({ searchParams }: MarketplacePageP
             </div>
           ) : (
             <div className="empty-state">
-              No listings match these filters yet. Try a broader query or category.
+              No listings match these filters yet. Try a broader search term, clear one filter, or browse all listings.
+              <div className="card-actions">
+                <Link className="button primary" href="/marketplace">
+                  Browse all
+                </Link>
+              </div>
             </div>
           )}
         </div>

@@ -1,6 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { getSupabaseClient } from "@/lib/supabase";
 import { getSupabaseAdminClient } from "@/lib/supabase-server";
+import { rankListingsBySearch } from "@/lib/search";
 import type { Category, Command, Label, Listing, ListingBullet, ListingFilters } from "@/types";
 
 type CategoryRow = {
@@ -252,13 +253,6 @@ export async function getListings(filters: ListingFilters = {}): Promise<Listing
       if (!category || row.category_id !== category.id) return false;
     }
 
-    if (filters.query) {
-      const query = filters.query.toLowerCase();
-      if (!row.title.toLowerCase().includes(query) && !row.description.toLowerCase().includes(query)) {
-        return false;
-      }
-    }
-
     if (filters.label && filters.label !== "all") {
       const label = labelBySlug.get(filters.label);
       if (!label) return false;
@@ -277,7 +271,8 @@ export async function getListings(filters: ListingFilters = {}): Promise<Listing
     return left.title.localeCompare(right.title);
   });
 
-  return hydrateListings(sorted, catalog);
+  const hydratedListings = hydrateListings(sorted, catalog);
+  return rankListingsBySearch(hydratedListings, filters.query);
 }
 
 export async function getFeaturedListings(limit = 4): Promise<Listing[]> {

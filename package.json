@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "test": "node --import tsx --test tests/*.test.ts",
+    "test": "node --import tsx --test \"tests/*.test.ts\" \"tests/*.test.tsx\"",
     "start": "next start",
     "lint": "next lint",
     "db:seed": "tsx scripts/seed.ts"
