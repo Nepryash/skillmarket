@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { BarChart3, ArrowLeft } from "lucide-react";
+import { setAnalyticsOptOutAction } from "@/app/admin/actions";
 import { requireAdmin } from "@/lib/admin-auth";
+import { isAnalyticsOptedOut } from "@/lib/analytics-cookie";
 import { getAnalyticsSummary } from "@/lib/analytics";
 
 export const dynamic = "force-dynamic";
@@ -28,6 +30,7 @@ function MetricList({ title, items }: { title: string; items: Array<{ label: str
 export default async function AdminAnalyticsPage() {
   await requireAdmin();
   const summary = await getAnalyticsSummary();
+  const analyticsOptedOut = await isAnalyticsOptedOut();
 
   return (
     <main className="page-shell admin-page">
@@ -46,6 +49,13 @@ export default async function AdminAnalyticsPage() {
         <span>
           <BarChart3 size={16} aria-hidden="true" /> Marketplace telemetry
         </span>
+        <form action={setAnalyticsOptOutAction}>
+          <input type="hidden" name="returnTo" value="/admin/analytics" />
+          <input type="hidden" name="enabled" value={analyticsOptedOut ? "0" : "1"} />
+          <button className="button" type="submit">
+            {analyticsOptedOut ? "Include my visits" : "Hide my visits"}
+          </button>
+        </form>
       </section>
 
       <section className="admin-split analytics-grid">

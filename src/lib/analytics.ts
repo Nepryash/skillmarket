@@ -1,6 +1,7 @@
 import { getSupabaseAdminClient } from "@/lib/supabase-server";
 import { getAdminListings } from "@/lib/marketplace";
 import { checkRateLimit } from "@/lib/rate-limit";
+import { isAnalyticsOptedOut } from "@/lib/analytics-cookie";
 
 export type AnalyticsEventType =
   | "page_view"
@@ -63,6 +64,8 @@ function truncate(value: string | undefined, maxLength: number) {
 }
 
 export async function recordAnalyticsEvent(input: RecordEventInput) {
+  if (await isAnalyticsOptedOut()) return;
+
   const rateLimitKey = [
     "analytics",
     input.eventType,

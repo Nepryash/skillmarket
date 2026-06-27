@@ -1,0 +1,860 @@
+[
+  {
+    "type": "skill",
+    "title": "Senior Copywriting",
+    "slug": "senior-copywriting",
+    "icon": "tabler:typography",
+    "description": "Writes copy that is nearly indistinguishable from a human. Four styles, an iteration loop, and niche knowledge base support. Works in browser-based Claude without a CC subscription.",
+    "prompt": "",
+    "category": "skills",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$25",
+    "status": "archived"
+  },
+  {
+    "type": "skill",
+    "title": "Marketing Machine",
+    "slug": "marketing-machine",
+    "icon": "tabler:target-arrow",
+    "description": "Generates concrete promotion paths for your product: which channel to use, in what order, and what the first step should be today. Includes playbooks, tactics, and a task tracker.",
+    "prompt": "",
+    "category": "skills",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$25",
+    "status": "archived"
+  },
+  {
+    "type": "skill",
+    "title": "Decision Engine",
+    "slug": "decision-engine",
+    "icon": "tabler:scale",
+    "description": "Helps make a well-reasoned decision with criteria, pros and cons, method-based scoring, and an honest verdict with confidence level. Includes a web tool.",
+    "prompt": "",
+    "category": "skills",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$15",
+    "status": "archived"
+  },
+  {
+    "type": "skill",
+    "title": "Research Harvester",
+    "slug": "research-harvester",
+    "icon": "tabler:search",
+    "description": "Collects information on a topic from the web, YouTube, Reddit, and your files, checks facts from multiple angles, and returns a source-backed report.",
+    "prompt": "",
+    "category": "skills",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$15",
+    "status": "archived"
+  },
+  {
+    "type": "mcp",
+    "title": "After Effects MCP",
+    "slug": "after-effects-mcp",
+    "icon": "simple-icons:adobeaftereffects",
+    "description": "Controls Adobe After Effects through an AI agent. The MCP bridge turns requests into real actions: compositions, layers, keyframes, effects, and exports.",
+    "prompt": "",
+    "category": "mcp",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "skill",
+    "title": "Cloud Octopus",
+    "slug": "cloud-octopus",
+    "icon": "tabler:cloud-cog",
+    "description": "Connects up to 8 AI models to Claude Code. Gemini, Codex, Copilot, and Qwen review your code at the same time. Includes 32 personas and 47 commands.",
+    "prompt": "",
+    "category": "skills",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "mcp",
+    "title": "PAL MCP Server",
+    "slug": "pal-mcp-server",
+    "icon": "tabler:shield-network",
+    "description": "A multi-AI proxy through MCP. Claude discusses code with GPT, Gemini, and Grok at the same time. Runs model debates and auto-selects the best answer.",
+    "prompt": "",
+    "category": "mcp",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "skill",
+    "title": "Context7",
+    "slug": "context7",
+    "icon": "tabler:books",
+    "description": "Pulls current documentation for any library directly into Claude context and removes hallucinations from outdated APIs.",
+    "prompt": "",
+    "category": "skills",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "skill",
+    "title": "Excalidraw Diagram",
+    "slug": "excalidraw-diagram",
+    "icon": "tabler:diagram-2",
+    "description": "Generates architecture, process, and visualization diagrams. Claude checks the result and fixes mistakes automatically.",
+    "prompt": "",
+    "category": "skills",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "skill",
+    "title": "Feature Dev",
+    "slug": "feature-dev",
+    "icon": "tabler:code-circle",
+    "description": "Official Anthropic skill. Uses 7 phases of feature development: discovery, architecture, code, review, and more. Spawns sub-agents at each stage.",
+    "prompt": "",
+    "category": "skills",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "skill",
+    "title": "Firecrawl",
+    "slug": "firecrawl",
+    "icon": "tabler:flame",
+    "description": "Advanced site scraping with JS rendering, subpage crawling, anti-bot handling, and structured output. Includes a free monthly page allowance.",
+    "prompt": "",
+    "category": "skills",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "skill",
+    "title": "Understand Anything",
+    "slug": "understand-anything",
+    "icon": "tabler:graph",
+    "description": "Turns any codebase into a knowledge graph with visualization. Builds connections between files, functions, and classes.",
+    "prompt": "",
+    "category": "skills",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "skill",
+    "title": "Dev Browser",
+    "slug": "dev-browser",
+    "icon": "tabler:browser",
+    "description": "Gives Claude a real browser with cookies, localStorage, and authenticated sessions so it can test behind logins like a user.",
+    "prompt": "",
+    "category": "skills",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "skill",
+    "title": "Claude SEO",
+    "slug": "claude-seo",
+    "icon": "tabler:seo",
+    "description": "Runs SEO audits from Claude: technical checks, page analysis, schema, and sitemaps. Finds issues that block indexing.",
+    "prompt": "",
+    "category": "skills",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "skill",
+    "title": "Prompt Master",
+    "slug": "prompt-master",
+    "icon": "tabler:wand",
+    "description": "Optimizes prompts for any AI tool by analyzing weak spots and rewriting them for stronger results.",
+    "prompt": "",
+    "category": "skills",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "skill",
+    "title": "Obsidian Skills",
+    "slug": "obsidian-skills",
+    "icon": "simple-icons:obsidian",
+    "description": "An assistant for Obsidian vaults with auto-tags, auto-links, clean structure, and note search.",
+    "prompt": "",
+    "category": "skills",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "skill",
+    "title": "Learning Opportunities",
+    "slug": "learning-opportunities",
+    "icon": "tabler:brain",
+    "description": "Exercises after coding sessions based on cognitive psychology: spaced repetition, active recall, and progress tracking.",
+    "prompt": "",
+    "category": "skills",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "skill",
+    "title": "Security Scan",
+    "slug": "security-scan",
+    "icon": "tabler:shield-search",
+    "description": "An OWASP scanner for SQL injection, XSS, CSRF, auth bypasses, and secrets in code. Finds vulnerabilities before deploy.",
+    "prompt": "",
+    "category": "skills",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "skill",
+    "title": "Oh My Mermaid",
+    "slug": "oh-my-mermaid",
+    "icon": "tabler:layout-grid",
+    "description": "Turns a codebase into Mermaid architecture diagrams. Run /omm-scan and you are done.",
+    "prompt": "",
+    "category": "skills",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "skill",
+    "title": "AI Agent Team",
+    "slug": "ai-agent-team",
+    "icon": "tabler:users",
+    "description": "A full team of PM, frontend, backend, QA, and DevOps roles with persistent memory via SQLite and auto-git workflows.",
+    "prompt": "",
+    "category": "skills",
+    "compatibility": "both",
+    "installUrl": "https://claudeskillsmarket.online/",
+    "githubUrl": "https://claudeskillsmarket.online/",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Open source",
+        "https://claudeskillsmarket.online/"
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "Job Interviewer",
+    "slug": "job-interviewer",
+    "icon": "tabler:briefcase",
+    "description": "Runs a live interview for your role and level, asking questions one by one with rising difficulty and ending with strengths and growth areas.",
+    "prompt": "Runs a live interview for your role and level, asking questions one by one with rising difficulty and ending with strengths and growth areas.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "Runs a live interview for your role and level, asking questions one by one with rising difficulty and ending with strengths and growth areas."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "Advertiser",
+    "slug": "advertiser",
+    "icon": "tabler:megaphone",
+    "description": "A creative director with 15+ years of experience. Gathers product and audience context, then builds positioning, core messaging, slogans, channel plans, and success metrics.",
+    "prompt": "A creative director with 15+ years of experience. Gathers product and audience context, then builds positioning, core messaging, slogans, channel plans, and success metrics.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "A creative director with 15+ years of experience. Gathers product and audience context, then builds positioning, core messaging, slogans, channel plans, and success metrics."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "Storyteller",
+    "slug": "storyteller",
+    "icon": "tabler:book",
+    "description": "A master storyteller for your audience and goal. Builds a full narrative with setup, climax, resolution, vivid characters, and an integrated moral.",
+    "prompt": "A master storyteller for your audience and goal. Builds a full narrative with setup, climax, resolution, vivid characters, and an integrated moral.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "A master storyteller for your audience and goal. Builds a full narrative with setup, climax, resolution, vivid characters, and an integrated moral."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "Debater",
+    "slug": "debater",
+    "icon": "tabler:messages",
+    "description": "Analyzes a controversial topic fairly from both sides, presents evidence-based arguments for and against, and gives a balanced conclusion without bias.",
+    "prompt": "Analyzes a controversial topic fairly from both sides, presents evidence-based arguments for and against, and gives a balanced conclusion without bias.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "Analyzes a controversial topic fairly from both sides, presents evidence-based arguments for and against, and gives a balanced conclusion without bias."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "Screenwriter",
+    "slug": "screenwriter",
+    "icon": "tabler:script",
+    "description": "A professional screenwriter for your genre and format. Develops characters, world, and act structure, then writes loglines and scenes with natural dialogue.",
+    "prompt": "A professional screenwriter for your genre and format. Develops characters, world, and act structure, then writes loglines and scenes with natural dialogue.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "A professional screenwriter for your genre and format. Develops characters, world, and act structure, then writes loglines and scenes with natural dialogue."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "Novelist",
+    "slug": "novelist",
+    "icon": "tabler:book-2",
+    "description": "A novelist for your genre and setting. Builds the story spine, layered characters, and arc, then writes chapter-by-chapter prose that holds the tension.",
+    "prompt": "A novelist for your genre and setting. Builds the story spine, layered characters, and arc, then writes chapter-by-chapter prose that holds the tension.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "A novelist for your genre and setting. Builds the story spine, layered characters, and arc, then writes chapter-by-chapter prose that holds the tension."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "Recruiter",
+    "slug": "recruiter",
+    "icon": "tabler:users",
+    "description": "An IT and business recruiter with 12+ years of experience. Improves resumes for ATS and hiring teams, finds candidates, and builds a hiring funnel.",
+    "prompt": "An IT and business recruiter with 12+ years of experience. Improves resumes for ATS and hiring teams, finds candidates, and builds a hiring funnel.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "An IT and business recruiter with 12+ years of experience. Improves resumes for ATS and hiring teams, finds candidates, and builds a hiring funnel."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "Life Coach",
+    "slug": "life-coach",
+    "icon": "tabler:heart-handshake",
+    "description": "A certified life coach based on CBT and habit psychology. Gathers context, breaks the goal into steps, works on root causes, and gives a small next step for the next 24 hours.",
+    "prompt": "A certified life coach based on CBT and habit psychology. Gathers context, breaks the goal into steps, works on root causes, and gives a small next step for the next 24 hours.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "A certified life coach based on CBT and habit psychology. Gathers context, breaks the goal into steps, works on root causes, and gives a small next step for the next 24 hours."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "Personal Trainer",
+    "slug": "personal-trainer",
+    "icon": "tabler:dumbbell",
+    "description": "A personal trainer and nutritionist with 12+ years of experience. Gathers goals and data, then builds a weekly training, nutrition, and recovery plan with progress tracking.",
+    "prompt": "A personal trainer and nutritionist with 12+ years of experience. Gathers goals and data, then builds a weekly training, nutrition, and recovery plan with progress tracking.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "A personal trainer and nutritionist with 12+ years of experience. Gathers goals and data, then builds a weekly training, nutrition, and recovery plan with progress tracking."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "Web Design Consultant",
+    "slug": "web-design-consultant",
+    "icon": "tabler:layout-dashboard",
+    "description": "A web design and UX consultant with 12+ years of experience. Connects the solution to business goals, maps pages and user journeys, and gives priorities and next steps.",
+    "prompt": "A web design and UX consultant with 12+ years of experience. Connects the solution to business goals, maps pages and user journeys, and gives priorities and next steps.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "A web design and UX consultant with 12+ years of experience. Connects the solution to business goals, maps pages and user journeys, and gives priorities and next steps."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "Chef",
+    "slug": "chef",
+    "icon": "tabler:chef-hat",
+    "description": "A chef and cooking consultant for busy people. Chooses a recipe based on your time, ingredients, and constraints with taste, nutrition, cost, substitutions, and step-by-step guidance.",
+    "prompt": "A chef and cooking consultant for busy people. Chooses a recipe based on your time, ingredients, and constraints with taste, nutrition, cost, substitutions, and step-by-step guidance.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "A chef and cooking consultant for busy people. Chooses a recipe based on your time, ingredients, and constraints with taste, nutrition, cost, substitutions, and step-by-step guidance."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "Financial Analyst",
+    "slug": "financial-analyst",
+    "icon": "tabler:chart-line",
+    "description": "A financial analyst with 12+ years of experience. Reads charts through technical analysis, connects them to macro trends, and gives a weighed conclusion across scenarios and risks.",
+    "prompt": "A financial analyst with 12+ years of experience. Reads charts through technical analysis, connects them to macro trends, and gives a weighed conclusion across scenarios and risks.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "A financial analyst with 12+ years of experience. Reads charts through technical analysis, connects them to macro trends, and gives a weighed conclusion across scenarios and risks."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "Tea Taster",
+    "slug": "tea-taster",
+    "icon": "tabler:leaf",
+    "description": "A tea taster and sommelier with 15+ years of experience. Breaks tea down through professional tasting stages, evaluates quality, and suggests how to brew it to bring out the flavor.",
+    "prompt": "A tea taster and sommelier with 15+ years of experience. Breaks tea down through professional tasting stages, evaluates quality, and suggests how to brew it to bring out the flavor.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "A tea taster and sommelier with 15+ years of experience. Breaks tea down through professional tasting stages, evaluates quality, and suggests how to brew it to bring out the flavor."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "Florist",
+    "slug": "florist",
+    "icon": "tabler:flower",
+    "description": "A florist and decorator with 15+ years of experience. Proposes 2-3 bouquet options based on occasion, budget, and style with seasonal and symbolic choices, plus care tips.",
+    "prompt": "A florist and decorator with 15+ years of experience. Proposes 2-3 bouquet options based on occasion, budget, and style with seasonal and symbolic choices, plus care tips.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "A florist and decorator with 15+ years of experience. Proposes 2-3 bouquet options based on occasion, budget, and style with seasonal and symbolic choices, plus care tips."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "Text Based Adventure Game",
+    "slug": "text-based-adventure-game",
+    "icon": "tabler:device-gamepad",
+    "description": "A text adventure engine and story master that describes an atmospheric world, responds to your commands with logical consequences, and remembers inventory and choices.",
+    "prompt": "A text adventure engine and story master that describes an atmospheric world, responds to your commands with logical consequences, and remembers inventory and choices.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "A text adventure engine and story master that describes an atmospheric world, responds to your commands with logical consequences, and remembers inventory and choices."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "Smart Domain Name Generator",
+    "slug": "smart-domain-name-generator",
+    "icon": "tabler:world",
+    "description": "A smart domain name generator with startup naming experience. Given an idea, it produces short, memorable names, usually in the .com zone.",
+    "prompt": "A smart domain name generator with startup naming experience. Given an idea, it produces short, memorable names, usually in the .com zone.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "A smart domain name generator with startup naming experience. Given an idea, it produces short, memorable names, usually in the .com zone."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "Essay Writer",
+    "slug": "essay-writer",
+    "icon": "tabler:pencil",
+    "description": "A professional essay writer for academic and editorial writing. Builds a strong thesis and structure with arguments, counterarguments, and a conclusion, with sources when needed.",
+    "prompt": "A professional essay writer for academic and editorial writing. Builds a strong thesis and structure with arguments, counterarguments, and a conclusion, with sources when needed.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "A professional essay writer for academic and editorial writing. Builds a strong thesis and structure with arguments, counterarguments, and a conclusion, with sources when needed."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "ASCII Artist",
+    "slug": "ascii-artist",
+    "icon": "tabler:terminal-2",
+    "description": "An ASCII artist: give it an object in quotes and it returns a recognizable, clean ASCII art block with no extra commentary.",
+    "prompt": "An ASCII artist: give it an object in quotes and it returns a recognizable, clean ASCII art block with no extra commentary.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "An ASCII artist: give it an object in quotes and it returns a recognizable, clean ASCII art block with no extra commentary."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  },
+  {
+    "type": "prompt",
+    "title": "Personal Chef",
+    "slug": "personal-chef",
+    "icon": "tabler:chef-hat",
+    "description": "A personal chef for your diet and allergies. Describe your constraints and ingredients, and it returns ready-to-cook recipes with ingredients, steps, timing, and servings.",
+    "prompt": "A personal chef for your diet and allergies. Describe your constraints and ingredients, and it returns ready-to-cook recipes with ingredients, steps, timing, and servings.",
+    "category": "prompts",
+    "compatibility": "not_applicable",
+    "installUrl": "",
+    "githubUrl": "",
+    "featured": 0,
+    "labels": [],
+    "commands": [
+      [
+        "Copy prompt",
+        "A personal chef for your diet and allergies. Describe your constraints and ingredients, and it returns ready-to-cook recipes with ingredients, steps, timing, and servings."
+      ]
+    ],
+    "sourcePrice": "$0",
+    "status": "archived"
+  }
+]

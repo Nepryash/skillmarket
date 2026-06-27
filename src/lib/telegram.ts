@@ -1,5 +1,6 @@
 import type { Listing } from "@/types";
 import { formatCompatibility, formatListingType } from "@/lib/format";
+import { normalizeSlug } from "@/lib/slugs";
 
 export function telegramBotUsername() {
   return process.env.TELEGRAM_BOT_USERNAME || "skillmarket_bot";
@@ -39,13 +40,12 @@ export function parseTelegramListingSlug(input: string) {
   const text = input.trim();
   if (!text) return "";
 
-  const startMatch = text.match(/^\/start(?:@\w+)?(?:\s+([A-Za-z0-9_-]{1,64}))?$/);
+  const startMatch = text.match(/^\/start(?:@\w+)?(?:\s+(.+))?$/);
   if (startMatch) {
-    return startMatch[1] ?? "";
+    return normalizeSlug(startMatch[1] ?? "");
   }
 
-  const slugMatch = text.match(/^([a-z0-9]+(?:-[a-z0-9]+)*)$/);
-  return slugMatch ? slugMatch[1] : "";
+  return normalizeSlug(text);
 }
 
 export function listingTelegramMessage(listing: Listing) {

@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { AdminListingForm } from "@/components/admin-listing-form";
+import { deleteListingAction } from "@/app/admin/actions";
 import { requireAdmin } from "@/lib/admin-auth";
+import { listingCategoryOptions } from "@/lib/admin-categories";
 import { getAdminListingById, getCategories, getLabels } from "@/lib/marketplace";
 
 type EditListingPageProps = {
@@ -30,8 +32,16 @@ export default async function EditListingPage({ params }: EditListingPageProps) 
           <span className="section-kicker">Admin</span>
           <h1>Edit listing</h1>
         </div>
+        <form action={deleteListingAction}>
+          <input type="hidden" name="id" value={listing.id} />
+          <button className="button danger" type="submit">
+            Delete listing
+          </button>
+        </form>
       </section>
-      <AdminListingForm categories={categories} labels={labels} listing={listing} />
+      <AdminListingForm categories={listingCategoryOptions(categories)} labels={labels} listing={listing} />
     </main>
   );
 }
+
+

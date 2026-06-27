@@ -1,5 +1,6 @@
 import { loadEnvConfig } from "@next/env";
 import { createClient } from "@supabase/supabase-js";
+import importedListings from "../data/claudeskillsmarket-import.json";
 
 loadEnvConfig(process.cwd());
 
@@ -31,6 +32,7 @@ type SeedListing = {
   featured: number;
   labels: string[];
   commands: Array<[label: string, command: string]>;
+  status?: "published" | "archived";
 };
 
 const categories: SeedCategory[] = [
@@ -426,7 +428,8 @@ const listings: SeedListing[] = [
       ["Plan Phase", "/gsd:plan-phase 1"],
       ["Execute Phase", "/gsd:execute-phase 1"]
     ]
-  }
+  },
+  ...(importedListings as unknown as SeedListing[])
 ];
 
 function createSupabaseClient() {
@@ -506,7 +509,7 @@ async function main() {
         compatibility: listing.compatibility,
         install_url: listing.installUrl,
         github_url: listing.githubUrl,
-        status: "published",
+        status: listing.status ?? "published",
         featured: listing.featured,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()

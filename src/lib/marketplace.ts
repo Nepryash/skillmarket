@@ -2,6 +2,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { getSupabaseClient } from "@/lib/supabase";
 import { getSupabaseAdminClient } from "@/lib/supabase-server";
 import { rankListingsBySearch } from "@/lib/search";
+import { findBySlug } from "@/lib/slugs";
 import type { Category, Command, Label, Listing, ListingBullet, ListingFilters } from "@/types";
 
 type CategoryRow = {
@@ -282,7 +283,7 @@ export async function getFeaturedListings(limit = 4): Promise<Listing[]> {
 
 export async function getListingBySlug(slug: string): Promise<Listing | null> {
   const listings = await getListings();
-  return listings.find((listing) => listing.slug === slug) ?? null;
+  return findBySlug(listings, slug);
 }
 
 export async function getAdminListings(): Promise<Listing[]> {

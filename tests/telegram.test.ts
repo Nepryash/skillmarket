@@ -72,6 +72,10 @@ test("parseTelegramListingSlug accepts a raw listing slug fallback", () => {
   assert.equal(parseTelegramListingSlug("qwen25-coder-7b-instruct"), "qwen25-coder-7b-instruct");
 });
 
+test("parseTelegramListingSlug normalizes spaced listing slugs from deep links", () => {
+  assert.equal(parseTelegramListingSlug("/start personal helper"), "personal-helper");
+});
+
 test("telegramBotToken ignores placeholder values", () => {
   const previous = process.env.TELEGRAM_BOT_TOKEN;
   process.env.TELEGRAM_BOT_TOKEN = "replace-with-your-telegram-bot-token";

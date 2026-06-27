@@ -1,15 +1,17 @@
 import Link from "next/link";
-import { BarChart3, Edit, LogOut, Plus, Archive } from "lucide-react";
-import { archiveListingAction, logoutAction, upsertCategoryAction, upsertLabelAction } from "@/app/admin/actions";
+import { BarChart3, Edit, LogOut, Plus, Archive, Trash2 } from "lucide-react";
+import { archiveListingAction, deleteListingAction, logoutAction, setAnalyticsOptOutAction, upsertCategoryAction, upsertLabelAction } from "@/app/admin/actions";
 import { requireAdmin } from "@/lib/admin-auth";
 import { getAdminListings, getCategories, getLabels } from "@/lib/marketplace";
 import { formatCompatibility, formatListingType } from "@/lib/format";
+import { isAnalyticsOptedOut } from "@/lib/analytics-cookie";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
   await requireAdmin();
   const [listings, categories, labels] = await Promise.all([getAdminListings(), getCategories(), getLabels()]);
+  const analyticsOptedOut = await isAnalyticsOptedOut();
 
   return (
     <main className="page-shell admin-page">
@@ -33,6 +35,13 @@ export default async function AdminPage() {
         <Link className="button" href="/admin/analytics">
           Analytics <BarChart3 size={16} aria-hidden="true" />
         </Link>
+        <form action={setAnalyticsOptOutAction}>
+          <input type="hidden" name="returnTo" value="/admin" />
+          <input type="hidden" name="enabled" value={analyticsOptedOut ? "0" : "1"} />
+          <button className="button" type="submit">
+            {analyticsOptedOut ? "Include my visits" : "Hide my visits"}
+          </button>
+        </form>
         <span>{listings.length} total listings</span>
       </section>
 
@@ -57,6 +66,12 @@ export default async function AdminPage() {
                   <input type="hidden" name="id" value={listing.id} />
                   <button className="button" type="submit">
                     Archive <Archive size={16} aria-hidden="true" />
+                  </button>
+                </form>
+                <form action={deleteListingAction}>
+                  <input type="hidden" name="id" value={listing.id} />
+                  <button className="button danger" type="submit">
+                    Delete <Trash2 size={16} aria-hidden="true" />
                   </button>
                 </form>
               </div>
@@ -113,3 +128,4 @@ export default async function AdminPage() {
     </main>
   );
 }
+

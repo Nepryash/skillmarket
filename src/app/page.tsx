@@ -11,6 +11,7 @@ export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const [featuredListings, categories] = await Promise.all([getFeaturedListings(6), getCategories()]);
+  const toolCategories = categories.filter((category) => !["coding", "creativity", "productivity"].includes(category.slug));
   void recordAnalyticsEvent({ eventType: "page_view", path: "/" }).catch((error) => {
     console.error("Failed to record homepage analytics event", error);
   });
@@ -38,7 +39,7 @@ export default async function HomePage() {
           <p>Start with the kind of resource you need, then narrow by use case in the marketplace.</p>
         </div>
         <div className="tools-grid reveal-grid">
-          {categories.map((category) => (
+          {toolCategories.map((category) => (
             <Link className="tool-card" href={`/marketplace?category=${category.slug}`} key={category.id}>
               <div className="tool-card-copy">
                 <span>Tool type</span>

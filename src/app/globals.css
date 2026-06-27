@@ -492,6 +492,18 @@ textarea {
   color: var(--background);
 }
 
+.button.danger {
+  border-color: rgba(255, 98, 98, 0.58);
+  background: rgba(255, 98, 98, 0.08);
+  color: #ffb1b1;
+}
+
+.button.danger:hover {
+  border-color: rgba(255, 98, 98, 0.82);
+  background: rgba(255, 98, 98, 0.16);
+  color: #ffd1d1;
+}
+
 .hero-visual {
   position: relative;
   width: min(760px, 100%);
@@ -2180,3 +2192,4 @@ textarea {
     flex-direction: column;
   }
 }
+

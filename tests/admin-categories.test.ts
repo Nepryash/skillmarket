@@ -22,27 +22,43 @@ const categories: Category[] = [
   },
   {
     id: 3,
-    name: "MCP",
-    slug: "mcp",
-    description: "Protocol servers",
-    prompt: "Use for MCP.",
+    name: "Creativity",
+    slug: "creativity",
+    description: "Creative resources",
+    prompt: "Use for creativity.",
     sortOrder: 3
   },
   {
     id: 4,
-    name: "Prompts",
-    slug: "prompts",
-    description: "Prompt packs",
-    prompt: "Use for prompts.",
+    name: "Automation",
+    slug: "automation",
+    description: "Automation resources",
+    prompt: "Use for automation.",
     sortOrder: 4
+  },
+  {
+    id: 5,
+    name: "Content",
+    slug: "content",
+    description: "Content resources",
+    prompt: "Use for content.",
+    sortOrder: 5
+  },
+  {
+    id: 6,
+    name: "MCP",
+    slug: "mcp",
+    description: "Protocol servers",
+    prompt: "Use for MCP.",
+    sortOrder: 6
   }
 ];
 
-test("listingCategoryOptions includes every available category", () => {
+test("listingCategoryOptions follows the landing page category order", () => {
   const options = listingCategoryOptions(categories);
 
   assert.deepEqual(
     options.map((category) => category.slug),
-    ["coding", "productivity", "mcp", "prompts"]
+    ["coding", "productivity", "creativity", "automation", "content"]
   );
 });

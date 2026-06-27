@@ -1,0 +1,816 @@
+```json
+[
+  {
+    "title": "Senior Copywriting",
+    "description": "пишет текста почти неотличимо от человека. 4 стиля, нерф-цикл, база знаний ниши. работает в браузерном Claude без подписки на CC.",
+    "price": "$25",
+    "iconAlt": "✍️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Marketing Machine",
+    "description": "конкретные пути продвижения под твой продукт: какой канал, в каком порядке, первый шаг сегодня. плейбуки, тактики, трекер задач.",
+    "price": "$25",
+    "iconAlt": "🎯",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Decision Engine",
+    "description": "помогает принять взвешенное решение: критерии, за/против, баллы по методикам и честный вердикт с уровнем уверенности. + веб-инструмент.",
+    "price": "$15",
+    "iconAlt": "⚙️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Research Harvester",
+    "description": "собирает инфу по теме из веба, youtube, reddit и твоих файлов, проверяет факты в несколько голосов и выдаёт отчёт с источниками.",
+    "price": "$15",
+    "iconAlt": "🔎",
+    "typeHint": "skill"
+  },
+  {
+    "title": "After Effects MCP",
+    "description": "управляй adobe after effects через ИИ-агента. MCP-мост превращает запросы в реальные действия: композиции, слои, кейфреймы, эффекты, экспорт.",
+    "price": "$0",
+    "iconAlt": "🎬",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Remotion",
+    "description": "создавай видео кодом на react. футажи, анимации, шорты — рендер прямо из терминала.",
+    "price": "$0",
+    "iconAlt": "🎬",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Takopi",
+    "description": "мост между telegram и claude code. пиши агенту в чат как человеку — он отвечает, помнит контекст, понимает голосовые.",
+    "price": "$0",
+    "iconAlt": "💬",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Superpowers",
+    "description": "набор скиллов: code-review, brainstorming, TDD, дебаг, планирование, git worktrees. превращает claude в senior-разработчика.",
+    "price": "$0",
+    "iconAlt": "⚡",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Cloud Octopus",
+    "description": "подключи до 8 AI моделей к Claude Code. Gemini, Codex, Copilot, Qwen — все проверяют твой код одновременно. 32 персоны, 47 команд.",
+    "price": "$0",
+    "iconAlt": "🐙",
+    "typeHint": "skill"
+  },
+  {
+    "title": "PAL MCP Server",
+    "description": "мульти-AI прокси через MCP. claude обсуждает код с GPT, Gemini, Grok одновременно. дебаты между моделями, автовыбор лучшей.",
+    "price": "$0",
+    "iconAlt": "🤝",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Frontend Design",
+    "description": "официальный скилл Anthropic. красивые сайты вместо генерик-слопа. 11 стилей, уникальные шрифты, анимации.",
+    "price": "$0",
+    "iconAlt": "🎨",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Context7",
+    "description": "подтягивает актуальную документацию любых библиотек прямо в контекст claude. убирает галлюцинации устаревших API. must-have.",
+    "price": "$0",
+    "iconAlt": "📚",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Excalidraw Diagram",
+    "description": "генерирует диаграммы архитектуры, процессов, визуализаций. claude сам проверяет результат и исправляет ошибки.",
+    "price": "$0",
+    "iconAlt": "✏️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Feature Dev",
+    "description": "официальный скилл Anthropic. 7 фаз разработки фичи: discovery → архитектура → код → ревью. спавнит суб-агентов на каждом этапе.",
+    "price": "$0",
+    "iconAlt": "🏗️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Firecrawl",
+    "description": "продвинутый скрейпинг сайтов с JS-рендерингом. crawl подстраниц, anti-bot, структурированный вывод. 500 страниц/мес бесплатно.",
+    "price": "$0",
+    "iconAlt": "🔥",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Impeccable",
+    "description": "дизайн-аудит для любого UI. типографика, цвета, отступы, контраст, адаптивность. 20 команд: /audit, /spacing, /contrast и др.",
+    "price": "$0",
+    "iconAlt": "🎯",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Understand Anything",
+    "description": "конвертирует любой кодбейз в граф знаний с визуализацией. строит связи между файлами, функциями, классами. 7.2k+ звёзд.",
+    "price": "$0",
+    "iconAlt": "🗺️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Dev Browser",
+    "description": "даёт claude реальный браузер с куки, localStorage и авторизацией. заходит на сайты как пользователь, тестирует за логином.",
+    "price": "$0",
+    "iconAlt": "🌐",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Claude SEO",
+    "description": "SEO-аудит сайта прямо из claude. техничка, анализ страниц, schema, сайтмапы. находит проблемы которые мешают индексации.",
+    "price": "$0",
+    "iconAlt": "🔍",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Prompt Master",
+    "description": "оптимизирует промпты для любых AI-инструментов. анализирует слабые места и переписывает для максимального результата. 4k+ звёзд.",
+    "price": "$0",
+    "iconAlt": "✨",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Obsidian Skills",
+    "description": "ассистент для Obsidian vault. авто-теги, авто-ссылки, правильная структура, поиск по заметкам.",
+    "price": "$0",
+    "iconAlt": "📓",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Learning Opportunities",
+    "description": "упражнения после код-сессий на основе когнитивной психологии. spaced repetition, активное вспоминание, трекинг прогресса.",
+    "price": "$0",
+    "iconAlt": "🧠",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Security Scan",
+    "description": "OWASP-сканер: SQL injection, XSS, CSRF, auth bypass, секреты в коде. находит уязвимости до деплоя.",
+    "price": "$0",
+    "iconAlt": "🔒",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Oh My Mermaid",
+    "description": "превращает кодовую базу в архитектурные диаграммы Mermaid. /omm-scan — и готово.",
+    "price": "$0",
+    "iconAlt": "🧜",
+    "typeHint": "skill"
+  },
+  {
+    "title": "AI Agent Team",
+    "description": "полноценная команда: PM, фронтенд, бэкенд, QA, DevOps. персистентная память через SQLite, автогит.",
+    "price": "$0",
+    "iconAlt": "👥",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Developer Kit",
+    "description": "116 скиллов + 43 агента для Java, TypeScript, Python, PHP, AWS. модульный — ставишь только нужное.",
+    "price": "$0",
+    "iconAlt": "🛠️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "PDF Skill",
+    "description": "официальный скилл Anthropic. читает PDF, извлекает таблицы, OCR, создаёт документы через reportlab.",
+    "price": "$0",
+    "iconAlt": "📄",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Notion Skills",
+    "description": "claude как ассистент для Notion: meeting notes, research-документы, конвертация спеков в таски.",
+    "price": "$0",
+    "iconAlt": "📓",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Ruflo",
+    "description": "платформа оркестрации агентов: multi-agent swarms, RAG, распределённый интеллект, 60+ скиллов.",
+    "price": "$0",
+    "iconAlt": "🌊",
+    "typeHint": "skill"
+  },
+  {
+    "title": "UI UX Pro Max",
+    "description": "161 тип продукта, 84 UI-стиля, 13 стеков, BM25-поиск. дизайн-интеллект для любого проекта.",
+    "price": "$0",
+    "iconAlt": "🎨",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Autoresearch",
+    "description": "автономный цикл: даёшь цель + метрику → claude итерирует бесконечно, оставляет лучшее. любая задача.",
+    "price": "$0",
+    "iconAlt": "🔬",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Google Fonts Skill",
+    "description": "поиск по 1923 шрифтам, 100 готовых пейрингов, генерация CSS/Tailwind type scale. MCP + CLI.",
+    "price": "$0",
+    "iconAlt": "🔤",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Graphify",
+    "description": "код, статьи, заметки → knowledge graph с community detection. 71x меньше токенов. 100% локально.",
+    "price": "$0",
+    "iconAlt": "🕸️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Blender MCP",
+    "description": "управляй Blender через промпты: 3D-объекты, сцены, анимации. пишешь — Blender делает",
+    "price": "$0",
+    "iconAlt": "🎨",
+    "typeHint": "skill"
+  },
+  {
+    "title": "DaVinci Resolve MCP",
+    "description": "монтируй видео в DaVinci Resolve через Claude: таймлайн, цвет, медиапул, рендер",
+    "price": "$0",
+    "iconAlt": "🎬",
+    "typeHint": "skill"
+  },
+  {
+    "title": "VoiceMode MCP",
+    "description": "говоришь с Claude Code голосом — отвечает голосом. STT + TTS прямо в терминале",
+    "price": "$0",
+    "iconAlt": "🎙️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "GPT Researcher",
+    "description": "задаёшь тему — агент сам ищет, анализирует источники, пишет детальный отчёт",
+    "price": "$0",
+    "iconAlt": "🔍",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Khoj",
+    "description": "второй мозг: поиск по документам, Obsidian, Gmail + веб через Claude",
+    "price": "$0",
+    "iconAlt": "🧠",
+    "typeHint": "skill"
+  },
+  {
+    "title": "MCP Obsidian",
+    "description": "Claude читает и пишет в Obsidian vault: заметки, связи, поиск",
+    "price": "$0",
+    "iconAlt": "📓",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Open Deep Research",
+    "description": "глубокий ресёрч: анализ десятков источников → дерево знаний → отчёт",
+    "price": "$0",
+    "iconAlt": "📊",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Letta",
+    "description": "AI-агенты с долгосрочной памятью: помнит всё между сессиями, учится на опыте",
+    "price": "$0",
+    "iconAlt": "🤖",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Mem0",
+    "description": "слой памяти для агентов: запоминает предпочтения, экономит токены 10x",
+    "price": "$0",
+    "iconAlt": "💾",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Notion MCP",
+    "description": "официальный MCP Notion: Claude читает и пишет страницы, задачи, базы данных",
+    "price": "$0",
+    "iconAlt": "📝",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Canvas Design",
+    "description": "создавай постеры и арт в PNG/PDF. форма, пространство, цвет, композиция — оригинальный визуал из промпта.",
+    "price": "$0",
+    "iconAlt": "🖼️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Theme Factory",
+    "description": "стилизует слайды, документы и лендинги через 10 профессиональных тем с подобранными цветами и шрифтами.",
+    "price": "$0",
+    "iconAlt": "🎨",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Interactive Portfolio",
+    "description": "портфолио, которое конвертирует посетителей в возможности. не просто показывает работы — продаёт тебя.",
+    "price": "$0",
+    "iconAlt": "🗂️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Scroll Experience",
+    "description": "иммерсивные scroll-driven анимации: параллакс, sticky-эффекты, нарратив через скролл. скроллинг как инструмент storytelling.",
+    "price": "$0",
+    "iconAlt": "🌀",
+    "typeHint": "skill"
+  },
+  {
+    "title": "3D Web",
+    "description": "3D-контент в браузере через Three.js и React Three Fiber. иммерсивные сайты, интерактивные сцены, WebGL без боли.",
+    "price": "$0",
+    "iconAlt": "🧊",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Launch Strategy",
+    "description": "планирование запусков продуктов и анонсов фич. создаёт momentum, конвертирует интерес в пользователей с первого дня.",
+    "price": "$0",
+    "iconAlt": "📣",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Code Reviewer",
+    "description": "ревью кода на TS/JS/Python/Swift/Kotlin/Go — качество, безопасность, best practices.",
+    "price": "$0",
+    "iconAlt": "🔍",
+    "typeHint": "skill"
+  },
+  {
+    "title": "React Best Practices",
+    "description": "40+ правил для React — устраняет waterfalls, оптимизирует bundle и рендеринг.",
+    "price": "$0",
+    "iconAlt": "⚛️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Brainstorming",
+    "description": "создаёт спецификации и планирует реализацию перед написанием кода.",
+    "price": "$0",
+    "iconAlt": "💡",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Senior Prompt Engineer",
+    "description": "оптимизация промптов для LLM, RAG-систем и AI-агентов.",
+    "price": "$0",
+    "iconAlt": "🧠",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Senior Security",
+    "description": "pentest, threat modeling, cryptography и compliance аудит.",
+    "price": "$0",
+    "iconAlt": "🔐",
+    "typeHint": "skill"
+  },
+  {
+    "title": "File Organizer",
+    "description": "организует и структурирует файлы проекта по best practices.",
+    "price": "$0",
+    "iconAlt": "📁",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Mobile Design",
+    "description": "профессиональный дизайн мобильных приложений — iOS и Android.",
+    "price": "$0",
+    "iconAlt": "📱",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Vercel React Best Practices",
+    "description": "69 проверок React/Next.js кода от команды Vercel.",
+    "price": "$0",
+    "iconAlt": "▲",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Web Design Guidelines",
+    "description": "аудит UI на стандарты веб-дизайна и доступности.",
+    "price": "$0",
+    "iconAlt": "🎨",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Pricing Strategy",
+    "description": "структурирование цен и монетизации для SaaS продуктов.",
+    "price": "$0",
+    "iconAlt": "💰",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Competitor Alternatives",
+    "description": "генерация страниц сравнения с конкурентами для SEO и конверсии.",
+    "price": "$0",
+    "iconAlt": "⚔️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Critique",
+    "description": "дизайн-ревью по Nielsen heuristics — UX-проблемы и AI-клише.",
+    "price": "$0",
+    "iconAlt": "🔬",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Polish",
+    "description": "финальная полировка любого UI перед релизом.",
+    "price": "$0",
+    "iconAlt": "✨",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Adapt",
+    "description": "адаптирует дизайн под разные устройства и экраны.",
+    "price": "$0",
+    "iconAlt": "📐",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Animate",
+    "description": "добавляет целенаправленную анимацию и micro-interactions.",
+    "price": "$0",
+    "iconAlt": "🎭",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Clarify",
+    "description": "улучшает UX writing — чёткость и ясность текстов в интерфейсе.",
+    "price": "$0",
+    "iconAlt": "✏️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Colorize",
+    "description": "добавляет цвет с семантической стратегией — не ради красоты, а со смыслом.",
+    "price": "$0",
+    "iconAlt": "🖌️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Normalize",
+    "description": "приводит код в соответствие с design system — убирает хардкод и несоответствия.",
+    "price": "$0",
+    "iconAlt": "📏",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Bolder",
+    "description": "усиливает дизайн — убирает AI-клише и добавляет характер.",
+    "price": "$0",
+    "iconAlt": "💪",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Distill",
+    "description": "упрощает визуальный интерфейс — убирает лишнее, оставляет суть.",
+    "price": "$0",
+    "iconAlt": "🧪",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Delight",
+    "description": "добавляет personality и polish — делает интерфейс запоминающимся.",
+    "price": "$0",
+    "iconAlt": "🌟",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Harden",
+    "description": "защищает интерфейс от edge cases — ошибки, пустые состояния, загрузка.",
+    "price": "$0",
+    "iconAlt": "🛡️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Onboard",
+    "description": "проектирует welcome flows и empty states — первое впечатление которое конвертирует.",
+    "price": "$0",
+    "iconAlt": "🚀",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Audit Website",
+    "description": "230+ проверок сайта — SEO, перформанс, доступность, структура.",
+    "price": "$0",
+    "iconAlt": "🔍",
+    "typeHint": "skill"
+  },
+  {
+    "title": "RTK",
+    "description": "cli-прокси для claude code: сжимает вывод команд перед отправкой в контекст. экономия 60-90% токенов.",
+    "price": "$0",
+    "iconAlt": "⚡",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Brand Guidelines",
+    "description": "официальный скилл Anthropic. применяет фирменный стиль и tone-of-voice бренда ко всем текстам и материалам.",
+    "price": "$0",
+    "iconAlt": "🎨",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Productivity Plugin",
+    "description": "официальный плагин Anthropic. задачи, встречи, почта, Slack, Notion, Asana, Linear, Jira — всё в одном интерфейсе.",
+    "price": "$0",
+    "iconAlt": "📅",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Sales Plugin",
+    "description": "официальный плагин Anthropic. ресёрч клиентов, подготовка к звонкам, управление pipeline и автоматизация аутрича.",
+    "price": "$0",
+    "iconAlt": "💼",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Customer Support Plugin",
+    "description": "официальный плагин Anthropic. трекинг тикетов, ответы на обращения, создание KB-статей. Intercom, HubSpot.",
+    "price": "$0",
+    "iconAlt": "🎧",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Product Management Plugin",
+    "description": "официальный плагин Anthropic. спеки, роадмапы, synthesis пользовательских интервью. Figma, Amplitude, Linear.",
+    "price": "$0",
+    "iconAlt": "🗺️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Legal Plugin",
+    "description": "официальный плагин Anthropic. ревью контрактов, NDA-трекинг, compliance-чеклисты. Box, Microsoft 365.",
+    "price": "$0",
+    "iconAlt": "⚖️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Bio Research Plugin",
+    "description": "официальный плагин Anthropic для биомедицины. работает с PubMed, ClinicalTrials.gov, ChEMBL и базами геномики.",
+    "price": "$0",
+    "iconAlt": "🔬",
+    "typeHint": "skill"
+  },
+  {
+    "title": "CC Usage",
+    "description": "cli-инструмент для анализа потребления токенов Claude Code. покажет стоимость и burn rate по сессиям и проектам.",
+    "price": "$0",
+    "iconAlt": "📊",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Recall",
+    "description": "полнотекстовый поиск по всем сессиям Claude Code с удобным TUI. находит любой прошлый диалог за секунды.",
+    "price": "$0",
+    "iconAlt": "🔍",
+    "typeHint": "skill"
+  },
+  {
+    "title": "TweakCC",
+    "description": "кастомизация внешнего вида и поведения Claude Code через CLI. цвета, шрифты, стили интерфейса одной командой.",
+    "price": "$0",
+    "iconAlt": "🎛️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "HyperFrames",
+    "description": "hyperframes — open source от heygen для генерации видео из текстовых сцен. задаёшь камеру, свет, переходы — получаешь видео.",
+    "price": "$0",
+    "iconAlt": "🎞️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Video Use",
+    "description": "video use — ai-агент от browser-use: управляет браузером через видеопоток, кликает и заполняет формы автономно.",
+    "price": "$0",
+    "iconAlt": "📺",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Clean Code",
+    "description": "clean code — рефакторинг по SOLID: улучшение именования, устранение code smells, снижение сложности кода.",
+    "price": "$0",
+    "iconAlt": "🧹",
+    "typeHint": "skill"
+  },
+  {
+    "title": "3D Web Experience",
+    "description": "3d web experience — интерактивный 3d на вебе: three.js, webgl шейдеры, react-three-fiber, анимации.",
+    "price": "$0",
+    "iconAlt": "🌐",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Lead Research Assistant",
+    "description": "lead research assistant — b2b-разведка: поиск компаний, анализ лпр, icp-профилирование, стратегия outreach.",
+    "price": "$0",
+    "iconAlt": "🎯",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Writing Plans",
+    "description": "writing plans — детальные планы реализации перед кодингом: фазы, зависимости, риски, критерии приёмки.",
+    "price": "$0",
+    "iconAlt": "📐",
+    "typeHint": "skill"
+  },
+  {
+    "title": "CEO Advisor",
+    "description": "ceo advisor — стратегический советник: финмоделирование, pitch deck, масштабирование, pmf-анализ.",
+    "price": "$0",
+    "iconAlt": "👔",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Product Manager Toolkit",
+    "description": "product manager toolkit — prd, user stories, приоритизация rice/moscow, roadmap и метрики продукта.",
+    "price": "$0",
+    "iconAlt": "📋",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Marketing Psychology",
+    "description": "marketing psychology — поведенческие триггеры и фреймворки убеждения cialdini для копирайтинга и конверсий.",
+    "price": "$0",
+    "iconAlt": "🧠",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Product Strategist",
+    "description": "product strategist — продуктовая стратегия от pmf до gtm: позиционирование, growth loops, монетизация.",
+    "price": "$0",
+    "iconAlt": "📊",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Marketing Ideas",
+    "description": "marketing ideas — генератор идей: growth hacking, вирусные механики, контент-стратегии под продукт.",
+    "price": "$0",
+    "iconAlt": "💡",
+    "typeHint": "skill"
+  },
+  {
+    "title": "CTO Advisor",
+    "description": "cto advisor — технический советник: выбор стека, архитектура, devops, управление техдолгом и командой.",
+    "price": "$0",
+    "iconAlt": "💼",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Video Downloader",
+    "description": "video downloader — скачивание видео с youtube, tiktok, twitter: выбор качества, аудио, batch-загрузка.",
+    "price": "$0",
+    "iconAlt": "📹",
+    "typeHint": "skill"
+  },
+  {
+    "title": "NestJS Expert",
+    "description": "nestjs expert — полный стек nestjs: модули, di, guards, graphql/rest api, микросервисы и тесты.",
+    "price": "$0",
+    "iconAlt": "🐈",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Image Enhancer",
+    "description": "image enhancer — обработка изображений: ресайз, сжатие, конвертация форматов, watermark и batch-обработка.",
+    "price": "$0",
+    "iconAlt": "🖼️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Find Bugs",
+    "description": "find bugs — автопоиск багов: статический анализ, null pointer, race conditions, security-уязвимости.",
+    "price": "$0",
+    "iconAlt": "🐛",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Changelog Generator",
+    "description": "changelog generator — changelog из git-коммитов: conventional commits, группировка, semver, линки на pr.",
+    "price": "$0",
+    "iconAlt": "📝",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Game Development",
+    "description": "game development — геймдев-ассистент: дизайн-документы, физика, ai для npc, баланс и мультиплеер.",
+    "price": "$0",
+    "iconAlt": "🎮",
+    "typeHint": "skill"
+  },
+  {
+    "title": "MarkItDown",
+    "description": "markitdown — конвертация pdf, docx, pptx и изображений в markdown с сохранением структуры.",
+    "price": "$0",
+    "iconAlt": "📄",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Draw.io Diagrams",
+    "description": "draw.io diagrams — генерация диаграмм: архитектура, er-схемы, uml, flowcharts, экспорт в svg/png.",
+    "price": "$0",
+    "iconAlt": "✏️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Literature Review",
+    "description": "literature review — систематический обзор литературы: поиск статей, классификация, gap-анализ, цитирование.",
+    "price": "$0",
+    "iconAlt": "📚",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Micro SaaS Launcher",
+    "description": "micro saas launcher — запуск micro-saas с нуля: валидация идеи, mvp, лендинг, первые 100 юзеров.",
+    "price": "$0",
+    "iconAlt": "🚀",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Architecture",
+    "description": "architecture — системная архитектура: microservices vs monolith, trade-off анализ, c4 документация, api design.",
+    "price": "$0",
+    "iconAlt": "🏛️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "App Builder",
+    "description": "app builder — scaffolding приложения с нуля: выбор стека, архитектура, ci/cd, best practices.",
+    "price": "$0",
+    "iconAlt": "🏗️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Invoice Organizer",
+    "description": "invoice organizer — парсинг счетов из pdf: суммы, реквизиты, категоризация расходов, экспорт в csv.",
+    "price": "$0",
+    "iconAlt": "🧾",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Plotly Charts",
+    "description": "plotly charts — интерактивные графики и дашборды: bar, scatter, heatmap, экспорт в html и png.",
+    "price": "$0",
+    "iconAlt": "📈",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Executing Plans",
+    "description": "executing plans — пошаговое выполнение планов: чекпоинты, верификация, обработка блокеров.",
+    "price": "$0",
+    "iconAlt": "▶️",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Performance",
+    "description": "performance — профайлинг и оптимизация: bottleneck, кэширование, lazy loading, code splitting.",
+    "price": "$0",
+    "iconAlt": "⚡",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Obsidian Bases",
+    "description": "obsidian bases — заметки как бд: запросы, фильтры, группировки, формулы, интеграция с dataview.",
+    "price": "$0",
+    "iconAlt": "💎",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Meeting Insights",
+    "description": "meeting insights — анализ встреч: решения, action items, саммари, follow-up задачи с дедлайнами.",
+    "price": "$0",
+    "iconAlt": "🤝",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Planning With Files",
+    "description": "planning with files — планирование через markdown: todo-списки, зависимости, автостатусы, git-трекинг.",
+    "price": "$0",
+    "iconAlt": "📂",
+    "typeHint": "skill"
+  },
+  {
+    "title": "Accessibility",
+    "description": "accessibility — аудит доступности по wcag 2.2: контраст, aria-роли, клавиатура, автофикс проблем.",
+    "price": "$0",
+    "iconAlt": "🌍",
+    "typeHint": "skill"
+  }
+]
+```

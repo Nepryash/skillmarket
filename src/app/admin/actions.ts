@@ -2,10 +2,13 @@
 
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getSupabaseAdminClient } from "@/lib/supabase-server";
 import { requireAdmin, signInAdmin, signOutAdmin } from "@/lib/admin-auth";
 import { checkRateLimit, clientRateLimitKey } from "@/lib/rate-limit";
+import { normalizeSlug } from "@/lib/slugs";
+import { analyticsOptOutCookieName, analyticsOptOutCookieValue } from "@/lib/analytics-cookie";
 import type { Compatibility, ListingStatus, ListingType } from "@/types";
 
 function value(formData: FormData, key: string) {
@@ -54,6 +57,27 @@ export async function logoutAction() {
   redirect("/admin/login");
 }
 
+export async function setAnalyticsOptOutAction(formData: FormData) {
+  await requireAdmin();
+  const cookieStore = await cookies();
+  const enabled = value(formData, "enabled") === "1";
+  const returnTo = value(formData, "returnTo") || "/admin";
+
+  if (enabled) {
+    cookieStore.set(analyticsOptOutCookieName, analyticsOptOutCookieValue, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 365
+    });
+  } else {
+    cookieStore.delete(analyticsOptOutCookieName);
+  }
+
+  redirect(returnTo);
+}
+
 export async function upsertListingAction(formData: FormData) {
   await requireAdmin();
   const db = getSupabaseAdminClient();
@@ -65,6 +89,7 @@ export async function upsertListingAction(formData: FormData) {
   const githubUrl = value(formData, "githubUrl");
   const compatibilityValue = value(formData, "compatibility") as Compatibility;
   const compatibility = type === "prompt" ? "not_applicable" : compatibilityValue || "not_applicable";
+  const slug = normalizeSlug(value(formData, "slug"));
 
   if (type === "prompt" && !prompt) {
     throw new Error("Prompt listings require prompt text");
@@ -82,10 +107,14 @@ export async function upsertListingAction(formData: FormData) {
     throw new Error("Listings require a source URL");
   }
 
+  if (!slug) {
+    throw new Error("Listing slug is required");
+  }
+
   const payload = {
     type,
     title: value(formData, "title"),
-    slug: value(formData, "slug"),
+    slug,
     icon: value(formData, "icon") || "tabler:box",
     description: value(formData, "description"),
     prompt,
@@ -188,6 +217,21 @@ export async function archiveListingAction(formData: FormData) {
   revalidatePath("/admin");
 }
 
+export async function deleteListingAction(formData: FormData) {
+  await requireAdmin();
+  const db = getSupabaseAdminClient();
+  const listingId = parseId(formData, "id");
+
+  await deleteListingRelations(listingId);
+
+  const { error } = await db.from("listings").delete().eq("id", listingId).select("id").single();
+  if (error) throw error;
+
+  revalidatePath("/marketplace");
+  revalidatePath("/admin");
+  redirect("/admin");
+}
+
 export async function upsertCategoryAction(formData: FormData) {
   await requireAdmin();
   const db = getSupabaseAdminClient();
@@ -233,3 +277,4 @@ export async function upsertLabelAction(formData: FormData) {
   revalidatePath("/admin");
   revalidatePath("/marketplace");
 }
+
